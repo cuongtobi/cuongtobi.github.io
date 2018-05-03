@@ -1,25 +1,11 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-title: Your awesome title
-email: your-email@example.com
+title: Cuongtobi blog
+email: cuongvuong299@gmail.com
 description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Cuongtobi blog, IT blog, dev blog, learn ruby, learn ruby on rails, learn javascript,
+  learn mysql
 baseurl: ""
 url: ""
-twitter_username: jekyllrb
-github_username:  jekyll
+github_username: cuongtobi
 paginate: 20
 paginate_path: "/page/:num"
 permalink: "/:categories/:title"
