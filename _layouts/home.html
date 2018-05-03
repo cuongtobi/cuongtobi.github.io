@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+<body>
+  {% include header.html %}
+
+  <div id="wrapper">
+    <div class="container">
+      {% for post in paginator.posts %}
+        {% include article.html %}
+      {% endfor %}
+
+      {% include pagination.html %}
+    </div>
+  </div>
+
+  {% include footer.html %}
+</body>
+</html>
