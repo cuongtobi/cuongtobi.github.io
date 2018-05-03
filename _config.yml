@@ -3,7 +3,7 @@ email: cuongvuong299@gmail.com
 description: >-
   Cuongtobi blog, IT blog, dev blog, learn ruby, learn ruby on rails, learn javascript,
   learn mysql
-baseurl: ""
+baseurl: "cuongtobi.github.io"
 url: ""
 github_username: cuongtobi
 paginate: 20
