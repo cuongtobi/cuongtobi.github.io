@@ -10,7 +10,6 @@
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
     {% endif %}
-
     {% for page in (1..paginator.total_pages) %}
       {% if page == paginator.page %}
         <li class="page-item active">
@@ -26,7 +25,6 @@
         </li>
       {% endif %}
       {% endfor %}
-
       {% if paginator.next_page %}
         <li class="page-item">
           <a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a>
