@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% include head.html %}
-<body>
-  {% include header.html %}
-  <div id="wrapper">
-    <div class="container">
-      {% for post in paginator.posts %}
-        {% include article.html %}
-      {% endfor %}
+{% include header.html %}
 
-      {% include pagination.html %}
-    </div>
+<section>
+  <h2>Bài viết gần đây</h2>
+  <div class="articles">
+    {% for post in paginator.posts %}
+      {% include article.html %}
+    {% endfor %}
   </div>
-  {% include footer.html %}
-</body>
-</html>
+</section>
+
+{% include pagination.html %}
+
+{% include footer.html %}
+

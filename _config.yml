@@ -1,16 +1,15 @@
-title: Cuongtobi blog
+title: cuongtobi blog
 email: cuongvuong299@gmail.com
 description: >-
-  Cuongtobi blog, IT blog, dev blog, learn ruby, learn ruby on rails, learn javascript,
-  learn mysql
+  cuongtobi - blog công nghệ
 baseurl: ""
 url: "https://cuongtobi.github.io"
 github_username: cuongtobi
-paginate: 20
+paginate: 10
 paginate_path: "/page/:num"
 permalink: "/:categories/:title"
 markdown: kramdown
-theme: minima
+theme: cuongtobi
 plugins:
   - jekyll-feed
   - jekyll-paginate

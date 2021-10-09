@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  {% include head.html %}
-</head>
-<body>
-  {% include header.html %}
-  <div class="container" id="wrapper">
-    <div class="text-center">
-      <h1>{{ page.title }}</h1>
-      <h5>{{ page.date | date: "%d/%m/%y" }}</h5>
+{% include header.html %}
+
+<article>
+  <div class="article-header text-center">
+    <h1>{{ page.title }}</h1>
+    <div class="article-metas">
+      <span class="article-date">{{ page.date | date: "%d/%m/%Y" }}</span>
+      <a class="category" href="{{ site.baseurl }}/categories/{{ page.categories | first | downcase }}">
+        {{ page.categories | first | replace: '-', ' ' | upcase }}
+      </a>
     </div>
+  </div>
+  <div class="article-content">
     {{ page.content }}
   </div>
-  {% include footer.html %}
-</body>
-</html>
+</article>
+
+{% include footer.html %}
+

@@ -1,7 +1,10 @@
 <div class="article">
-  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+  <a href="{{ post.url }}">{{ post.title }}</a>
   <div class="date">
-    {{ post.date | date: "%d/%m/%y" }}
+    {{ post.date | date: "%d/%m/%Y" }}
+    <a class="category" href="{{ site.baseurl }}/categories/{{ post.categories | first | downcase }}">
+      {{ post.categories | first | replace: '-', ' ' | capitalize }}
+    </a>
   </div>
   <div class="description">
     {{ post.description }}
