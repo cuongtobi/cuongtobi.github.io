@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Forex lot calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/resources/css/main.css?v=1.0.0"/>
+    <style>
+      .form-group {
+        margin: 20px 0;
+      }
+      .form-group input {
+        width: 150px;
+        height: 25px;
+        display: inline-block;
+      }
+      input[readonly] {
+        background: #cbced1;
+        opacity: 1;
+      }
+      .label {
+        width: 200px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div id="header">
+        <a href="/" class="site-title">cuongtobi<span class="site-title-terminal">></span><span class="blink">_</span></a>
+      </div>
+    </header>
+    <section>
+      <div class="form-group">
+        <div class="label">Giá trị tài khoản(>10) </div>
+        <input type="number" name="value_account" class="data_calculate value_account" min="1" value="1">
+      </div>
+      <div class="form-group">
+        <div class="label">Số % Chịu Rủi Ro (1% - 100%) </div>
+        <input type="number" name="percent_risk" class="data_calculate percent_risk" min="1" max="100" value="1">
+      </div>
+      <div class="form-group">
+        <div class="label">Số Pip Stop Loss (>= 1) </div>
+        <input type="number" name="pip_loss" class="data_calculate pip_loss" min="1" value="1">
+      </div>
+      <div class="form-group">
+        <div class="label">Số Pip Take Profit (>= 1) </div>
+        <input type="number" name="pip_profit" class="data_calculate pip_profit" min="1" value="1">
+      </div>
+      <div class="form-group">
+        <div class="label">Số Lot Nên Dùng </div>
+        <input type="text" name="lot disabled" class="lot" readonly>
+      </div>
+      <div class="form-group">
+        <div class="label">Số Tiền Stop Loss </div>
+        <input type="text" name="money_loss disabled" class="money_loss" readonly>
+      </div>
+      <div class="form-group">
+        <div class="label">Số Tiền Take Profit </div>
+        <input type="text" name="money_profit disabled" class="money_profit" readonly>
+      </div>
+    </section>
+    <footer>
+      <span class="copyright">@2021 by <a href="/">cuongtobi</a></span>
+    </footer>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      $('.data_calculate').change(function(){
+        var valueAccount = parseInt($('.value_account').val());
+        var percentRisk = parseInt($('.percent_risk').val());
+        var stopLoss = parseInt($('.pip_loss').val());
+        var takeProfit = parseInt($('.pip_profit').val());
+        var lotNumber = ((percentRisk * valueAccount) / stopLoss) / 1000;
+        if (lotNumber <= 0.01) {
+            lotNumber = 0.01
+        } else {
+            lotNumber = Math.round(lotNumber * 100) / 100
+        }
+        var moneyLoss = Math.round((stopLoss * lotNumber) * 10 * 100) / 100
+        var moneyTake = Math.round((takeProfit * lotNumber) * 10 * 100) / 100
+        $('.lot').val(lotNumber + " lot");
+        $('.money_loss').val(moneyLoss + " USD");
+        $('.money_profit').val(moneyTake + " USD");
+    });
+    });
+  </script>
+
+</body>
+</html>
