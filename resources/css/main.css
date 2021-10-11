@@ -35,6 +35,12 @@ ul {
   list-style: none;
 }
 
+img, iframe, video {
+  max-width: 95%;
+  display: block;
+  margin: 10px auto;
+}
+
 .wrapper {
   padding-left: 30px;
   padding-right: 30px;
@@ -153,7 +159,9 @@ section, article {
   margin-top: 40px;
 }
 
-article 
+article p {
+  text-align: justify;
+}
 
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
