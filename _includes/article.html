@@ -2,8 +2,8 @@
   <a href="{{ post.url }}">{{ post.title }}</a>
   <div class="date">
     {{ post.date | date: "%d/%m/%Y" }}
-    <a class="category" href="{{ site.baseurl }}/categories/{{ post.categories | first | downcase }}">
-      {{ post.categories | first | replace: '-', ' ' | capitalize }}
+    <a class="tag" href="{{ site.baseurl }}/tags/{{ post.tags | first | downcase }}">
+      {{ post.tags | first | replace: '-', ' ' | capitalize }}
     </a>
   </div>
   <div class="description">

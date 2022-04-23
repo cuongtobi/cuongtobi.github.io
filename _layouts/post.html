@@ -5,8 +5,8 @@
     <h1>{{ page.title }}</h1>
     <div class="article-metas">
       <span class="article-date">{{ page.date | date: "%d/%m/%Y" }}</span>
-      <a class="category" href="{{ site.baseurl }}/categories/{{ page.categories | first | downcase }}">
-        {{ page.categories | first | replace: '-', ' ' | upcase }}
+      <a class="tag" href="{{ site.baseurl }}/tags/{{ page.tags | first | downcase }}">
+        {{ page.tags | first | replace: '-', ' ' | upcase }}
       </a>
     </div>
   </div>

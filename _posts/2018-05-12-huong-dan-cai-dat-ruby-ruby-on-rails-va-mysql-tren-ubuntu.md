@@ -2,7 +2,7 @@
 layout: post
 title:  Hướng dẫn cài đặt ruby, Ruby on Rails và MySQL trên Ubuntu
 date:   2018-05-12
-categories: ruby
+tags: ruby ruby-on-rails
 description: Đầu tiên hãy mở cài đặt trong Terminal bằng cách chọn **Edit -> Profile Preferences -> Title and Command** và tích chọn **Run Command as login shell**...
 ---
 - [1. Setup Terminal](#1-setup-terminal)
