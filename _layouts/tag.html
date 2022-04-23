@@ -2,7 +2,7 @@
 {% include header.html %}
 
 <section>
-  <h1>Tag: {{ page.tag | replace: '-', ' ' | capitalize }}</h1>
+  <h1>Tag: {{ page.tag | replace: '-', ' ' | upcase }}</h1>
   <div class="container">
     {% for post in site.tags[page.tag] %}
       {% include article.html %}
