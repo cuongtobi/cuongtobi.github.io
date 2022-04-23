@@ -7,7 +7,7 @@ url: "https://cuongtobi.github.io"
 github_username: cuongtobi
 paginate: 10
 paginate_path: "/page/:num"
-permalink: "/:categories/:title"
+permalink: "/:title.html"
 markdown: kramdown
 plugins:
   - jekyll-feed
