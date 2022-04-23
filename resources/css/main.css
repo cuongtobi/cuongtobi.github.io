@@ -177,6 +177,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500; 
 }
 
+footer .social {
+  margin-bottom: 10px;
+}
+
 pre, code { font-size: 15px; border-radius: 0.3em; }
 
 pre, code { background-color: #1E2227; color: #DAE4ED; }
