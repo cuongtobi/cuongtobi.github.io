@@ -3,7 +3,7 @@ layout: post
 title: Lorem Ipsum
 date: 2022-04-22
 author: cuongtobi
-categories: ruby
+categories: today-i-learned
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum, est id lobortis luctus, lectus nisi tincidunt velit, id gravida ipsum ipsum et sem. Nam mattis suscipit lacus a varius. In hac habitasse platea dictumst. Nunc gravida posuere sem, vel ullamcorper massa euismod sed. Nam laoreet maximus est ac interdum. Pellentesque sit amet nisl at turpis molestie dictum nec at velit. Nulla euismod tristique ante ut condimentum...
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum, est id lobortis luctus, lectus nisi tincidunt velit, id gravida ipsum ipsum et sem. Nam mattis suscipit lacus a varius. In hac habitasse platea dictumst. Nunc gravida posuere sem, vel ullamcorper massa euismod sed. Nam laoreet maximus est ac interdum. Pellentesque sit amet nisl at turpis molestie dictum nec at velit. Nulla euismod tristique ante ut condimentum.
