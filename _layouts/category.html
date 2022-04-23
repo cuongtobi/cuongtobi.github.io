@@ -2,9 +2,9 @@
 {% include header.html %}
 
 <section>
-  <h1>Tag: {{ page.tag | replace: '-', ' ' | upcase }}</h1>
+  <h1>{{ page.category | replace: '-', ' ' | upcase }}</h1>
   <div class="container">
-    {% for post in site.tags[page.tag] %}
+    {% for post in site.categories[page.category] %}
       {% include article.html %}
     {% endfor %}
     {% include pagination.html %}
