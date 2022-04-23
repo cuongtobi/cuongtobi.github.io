@@ -104,7 +104,7 @@ ul.pagination li {
   display: inline-block;
 }
 
-.tags a.tag {
+.categories a.category {
   color: #50BD6A;
   font-weight: bold;
   padding: 5px 10px;
@@ -118,7 +118,7 @@ ul.pagination li {
   text-transform: capitalize;
 }
 
-.article .date a.tag, .article-metas a.tag {
+.article .date a.category, .article-metas a.category {
   color: #50BD6A;
   font-weight: bold;
   padding: 3px 5px;
@@ -136,7 +136,7 @@ ul.pagination li {
   margin: 5px 0;
 }
 
-.tags a.tag:hover {
+.categories a.category:hover {
   background: #292f35;
 }
 

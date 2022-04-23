@@ -1,8 +1,8 @@
     <section>
-      <h2>Tags</h2>
-      <div class="tags">
-        {% for link in site.tags %}
-          <a class="tag" href="{{ site.baseurl }}/tags/{{ link | first | downcase }}">
+      <h2>Chuyên mục</h2>
+      <div class="categories">
+        {% for link in site.categories %}
+          <a class="category" href="{{ site.baseurl }}/categories/{{ link | first | downcase }}">
             {{ link | first | replace: '-', ' ' | capitalize }}
           </a>
         {% endfor %}
