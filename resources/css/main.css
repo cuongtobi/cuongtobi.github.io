@@ -51,23 +51,22 @@ img, iframe, video {
 }
 
 #header a.site-title {
-  color: #DAE4ED;
+  color: #50BD6A;
   font-weight: 300;
-  font-size: 26px;
+  font-size: 25px;
   text-decoration: none;
 }
 
-a.site-title span {
-  font-size: 24px;
+#header span {
+  font-size: 25px;
 }
 
-.site-title-terminal {
+#header span.ubuntu-path-white {
+  color: #DAE4ED;
+}
+
+#header span.ubuntu-path {
   color: #637AFE;
-}
-
-.blink {
-  animation: blink-animation 1s steps(5, start) infinite;
-  -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }
 
 @media only screen and (max-width: 768px) {
