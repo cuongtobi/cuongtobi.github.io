@@ -69,6 +69,28 @@ img, iframe, video {
   color: #637AFE;
 }
 
+.author-box {
+  margin-top: 20px;
+  text-align: left;
+  min-height: 72px;
+  font-style: italic;
+  display: inline-flex;
+}
+
+.author-box > .author-avatar {
+  margin-right: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 72px;
+  height: 100%;
+  border-radius: 0.3em;
+  flex: 1;
+}
+
+.author-box > .description {
+  flex: 8;
+}
+
 @media only screen and (max-width: 768px) {
   .wrapper {
     padding-left: 10px;

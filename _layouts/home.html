@@ -1,7 +1,15 @@
 {% include header.html %}
 
+<div class="author-box">
+  <img src="apple-touch-icon.png" class="author-avatar" alt="Avatar">
+  <div class="description">
+    Hello! I'm Cuong. Welcome to my Blog. <br>
+    Hope you find it interesting and useful. If you like these posts, you might also like to subscribe to my <a href="/feed.xml">RSS</a>
+  </div>
+</div>
+
 <section>
-  <h2>Bài viết gần đây</h2>
+  <h2>new posts</h2>
   <div class="articles">
     {% for post in paginator.posts %}
       {% include article.html %}
