@@ -17,7 +17,7 @@ $curl = curl_init();
 Thiết lập options cho **cURL**
 {% highlight php %}
 curl_setopt_array($curl, array(
-    CURLOPT_URL => $url,
+    CURLOPT_URL => 'https://example.com',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
