@@ -13,6 +13,13 @@ description: Dành cho stack JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLi
 
 ---
 
+# 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
+
+> Dành cho stack: **JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite**
+> Mục tiêu: code nhanh, tiết kiệm, không dùng API
+
+---
+
 # 🧠 1. Prompt khung chung
 
 ```text
@@ -47,7 +54,38 @@ Task: [điền task ở đây]
 
 ---
 
-# 🧩 2. Tạo feature mới
+# 🧩 2. Chia task (Task Breakdown) — QUAN TRỌNG
+
+```text
+Tôi có yêu cầu sau:
+[ mô tả feature / bài toán ]
+
+Stack:
+- Frontend: [HTML/JS]
+- Backend: [JS/PHP/Python]
+- Database: [MySQL/MongoDB/SQLite]
+
+Hãy chia task để tôi implement nhanh theo dạng MVP:
+
+1. Xác định mục tiêu chính (1–2 câu)
+2. Liệt kê các bước triển khai theo thứ tự (từ dễ → khó)
+3. Mỗi bước phải:
+   - Có output rõ ràng (file / API / UI)
+   - Có tiêu chí hoàn thành (definition of done)
+4. Chỉ ra dependency giữa các bước (nếu có)
+5. Đề xuất thứ tự build tối ưu nhất
+6. Nêu các rủi ro kỹ thuật cần tránh
+
+Yêu cầu:
+- Chia nhỏ tối đa (mỗi task làm trong < 2h)
+- Ưu tiên làm được end-to-end sớm
+- Tránh over-engineering
+- Trả lời dạng checklist dễ follow
+```
+
+---
+
+# 🧩 3. Tạo feature mới (Overview)
 
 ```text
 Tôi đang làm project [mô tả ngắn].
