@@ -4,7 +4,7 @@ title: 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
 date: 2026-04-17
 author: cuongtobi
 categories: today-i-learned
-description: Dành cho stack: JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite
+description: Dành cho stack JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite
 ---
 # 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
 
