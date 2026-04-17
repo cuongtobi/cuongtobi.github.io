@@ -1,0 +1,355 @@
+---
+layout: post
+title: 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
+date: 2026-04-17
+author: cuongtobi
+categories: today-i-learned
+description: Dành cho stack: JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite. Mục tiêu: code nhanh, tiết kiệm, không dùng API...
+---
+# 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
+
+> Dành cho stack: **JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite**
+> Mục tiêu: code nhanh, tiết kiệm, không dùng API
+
+---
+
+# 🧠 1. Prompt khung chung
+
+```text
+Bạn là senior full-stack developer.
+
+Stack của tôi:
+- JavaScript
+- PHP
+- Python
+- HTML
+- MySQL
+- MongoDB
+- SQLite
+
+Khi trả lời:
+1. Chọn cách làm đơn giản, thực dụng
+2. Tránh over-engineering
+3. Code rõ ràng, production-minded
+4. Có validate input + xử lý lỗi cơ bản
+5. Chú ý security cơ bản
+6. Nếu sửa code, ưu tiên sửa tối thiểu
+7. Trả lời theo format:
+
+## Phân tích
+## Cách làm
+## Code
+## Cách chạy/test
+## Lưu ý
+
+Task: [điền task ở đây]
+```
+
+---
+
+# 🧩 2. Tạo feature mới
+
+```text
+Tôi đang làm project [mô tả ngắn].
+
+Stack:
+- Frontend: [HTML/JS]
+- Backend: [JS/PHP/Python]
+- Database: [MySQL/MongoDB/SQLite]
+
+Tôi muốn build feature: [tên feature]
+
+Hãy:
+1. Chia nhỏ task
+2. Đề xuất cấu trúc file
+3. Nêu input/output
+4. Liệt kê rủi ro cần tránh
+5. Đưa kế hoạch implement đơn giản nhất
+```
+
+---
+
+# ⚙️ 3. Sinh code module
+
+```text
+Viết code cho module: [tên module]
+
+Bối cảnh:
+- Project: [mô tả]
+- Stack: [JS/PHP/Python/HTML]
+- Database: [MySQL/MongoDB/SQLite]
+- Mục đích: [mô tả]
+
+Yêu cầu:
+- [chức năng 1]
+- [chức năng 2]
+- [chức năng 3]
+
+Điều kiện:
+- production-ready
+- dễ maintain
+- có validate input
+- có xử lý lỗi cơ bản
+- không dùng thư viện thừa
+
+Trả:
+1. Giải thích ngắn
+2. Code hoàn chỉnh
+3. File nào chứa code nào
+4. Lệnh cài dependency nếu cần
+```
+
+---
+
+# 🐛 4. Debug lỗi
+
+````text
+Tôi gặp lỗi.
+
+Stack:
+- Backend: [JS/PHP/Python]
+- Frontend: [HTML/JS]
+- Database: [MySQL/MongoDB/SQLite]
+
+Code liên quan:
+```[language]
+[paste code]
+````
+
+Lỗi:
+
+```text
+[paste error]
+```
+
+Kết quả mong muốn:
+[mô tả]
+
+Hãy:
+
+1. Tìm nguyên nhân gốc
+2. Chỉ ra đoạn lỗi
+3. Sửa code hoàn chỉnh
+4. Giải thích ngắn
+5. Cách tránh lỗi
+
+````
+
+---
+
+# ♻️ 5. Refactor
+
+```text
+Hãy refactor đoạn code sau:
+
+```[language]
+[paste code]
+````
+
+Mục tiêu:
+
+* clean hơn
+* dễ maintain
+* giữ nguyên chức năng
+
+Yêu cầu:
+
+* không đổi behavior
+* không thêm thư viện
+* trả code hoàn chỉnh
+
+````
+
+---
+
+# 🔍 6. Review code
+
+```text
+Hãy review đoạn code sau:
+
+```[language]
+[paste code]
+````
+
+Đánh giá:
+
+1. Readability
+2. Maintainability
+3. Security
+4. Performance
+5. Bug tiềm ẩn
+
+Trả:
+
+* vấn đề quan trọng
+* mức độ (cao/trung bình/thấp)
+* đề xuất sửa
+
+````
+
+---
+
+# 🧪 7. Viết test
+
+```text
+Hãy viết test cho module sau:
+
+```[language]
+[paste code]
+````
+
+Yêu cầu:
+
+* happy path
+* edge cases
+* error cases
+* code test hoàn chỉnh
+
+````
+
+---
+
+# 🌐 8. Thiết kế API
+
+```text
+Hãy thiết kế API cho chức năng: [tên]
+
+Backend: [JS/PHP/Python]
+Database: [MySQL/MongoDB/SQLite]
+
+Trả:
+1. Endpoint
+2. Method
+3. Input
+4. Body
+5. Response
+6. Validation
+7. Error cases
+````
+
+---
+
+# 🗄️ 9. Database schema
+
+## SQL
+
+```text
+Thiết kế schema cho [chức năng]
+
+Database: [MySQL/SQLite]
+
+Trả:
+1. Tables
+2. Columns
+3. Types
+4. PK/FK
+5. Index
+6. SQL create table
+```
+
+## MongoDB
+
+```text
+Thiết kế schema MongoDB cho [chức năng]
+
+Trả:
+1. Collection
+2. Structure
+3. Field types
+4. Index
+5. Sample document
+```
+
+---
+
+# 🔁 10. CRUD nhanh
+
+```text
+Tạo CRUD cho [module]
+
+Stack:
+- Backend: [JS/PHP/Python]
+- Database: [MySQL/MongoDB/SQLite]
+
+Fields:
+- [field]
+
+Trả:
+1. Schema
+2. API
+3. Code backend
+4. Hướng dẫn test
+```
+
+---
+
+# ⚡ 11. Prompt siêu ngắn
+
+### API
+
+```text
+Tạo API [tên] bằng [stack], dùng [DB], có validate + xử lý lỗi, trả code hoàn chỉnh.
+```
+
+### Form
+
+```text
+Tạo form HTML + JS cho [chức năng], validate + gọi API.
+```
+
+### Query
+
+```text
+Tối ưu query sau: [query], DB: [MySQL/MongoDB].
+```
+
+---
+
+# 📌 12. Nguyên tắc vàng
+
+## ✅ Làm đúng
+
+* chia task nhỏ
+* paste code liên quan
+* nói rõ stack
+* giữ format output
+
+## ❌ Tránh
+
+* paste cả project
+* hỏi chung chung
+* yêu cầu build full hệ thống
+
+---
+
+# 🧠 13. Cách chia thread
+
+* Thread 1: Architect
+* Thread 2: Backend
+* Thread 3: Frontend
+* Thread 4: Debug
+
+---
+
+# 🎯 14. Công thức prompt chuẩn
+
+```text
+[làm gì] + [stack] + [database] + [input/output] + [ràng buộc]
+```
+
+Ví dụ:
+
+```text
+Tạo CRUD sản phẩm bằng PHP + MySQL, validate name + price, dùng PDO.
+```
+
+---
+
+# 💡 Tip cuối
+
+👉 "Chia nhỏ + rõ ràng = rẻ + chính xác"
+
+---
+
+**Use daily. Ship fast. Save money.** 🚀
+
