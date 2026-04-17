@@ -95,9 +95,41 @@ Hãy:
 5. Đưa kế hoạch implement đơn giản nhất
 ```
 
+# 🧩 3. Bảo trì dự án
+
+```text
+Tôi đang bảo trì một project hiện có.
+
+Thay đổi cần làm:
+[ mô tả thay đổi ]
+
+Stack:
+- Frontend: [HTML/JS]
+- Backend: [JS/PHP/Python]
+- Database: [MySQL/MongoDB/SQLite]
+
+Code hiện tại / cấu trúc liên quan:
+[ mô tả ngắn hoặc paste file liên quan ]
+
+Hãy giúp tôi:
+
+1. Phân tích vùng ảnh hưởng của thay đổi này
+2. Liệt kê các file hoặc loại file có thể cần sửa
+3. Chia task triển khai theo thứ tự an toàn
+4. Nêu bug hồi quy có thể xảy ra nếu sót chỗ
+5. Đề xuất checklist test sau khi sửa
+6. Nếu tôi paste code tiếp theo, hãy ưu tiên sửa tối thiểu thay vì viết lại toàn bộ
+
+Yêu cầu:
+- Tập trung vào bảo trì thực tế
+- Không over-engineering
+- Ưu tiên an toàn và dễ rollout
+- Trả lời dạng checklist rõ ràng
+```
+
 ---
 
-# ⚙️ 3. Sinh code module
+# ⚙️ 4. Sinh code module
 
 ```text
 Viết code cho module: [tên module]
@@ -129,7 +161,7 @@ Trả:
 
 ---
 
-# 🐛 4. Debug lỗi
+# 🐛 5. Debug lỗi
 
 ````text
 Tôi gặp lỗi.
@@ -165,7 +197,7 @@ Hãy:
 
 ---
 
-# ♻️ 5. Refactor
+# ♻️ 6. Refactor
 
 ```text
 Hãy refactor đoạn code sau:
@@ -190,7 +222,7 @@ Yêu cầu:
 
 ---
 
-# 🔍 6. Review code
+# 🔍 7. Review code
 
 ```text
 Hãy review đoạn code sau:
@@ -217,7 +249,7 @@ Trả:
 
 ---
 
-# 🧪 7. Viết test
+# 🧪 8. Viết test
 
 ```text
 Hãy viết test cho module sau:
@@ -237,7 +269,7 @@ Yêu cầu:
 
 ---
 
-# 🌐 8. Thiết kế API
+# 🌐 9. Thiết kế API
 
 ```text
 Hãy thiết kế API cho chức năng: [tên]
@@ -257,7 +289,7 @@ Trả:
 
 ---
 
-# 🗄️ 9. Database schema
+# 🗄️ 10. Database schema
 
 ## SQL
 
@@ -290,7 +322,7 @@ Trả:
 
 ---
 
-# 🔁 10. CRUD nhanh
+# 🔁 11. CRUD nhanh
 
 ```text
 Tạo CRUD cho [module]
@@ -311,7 +343,7 @@ Trả:
 
 ---
 
-# ⚡ 11. Prompt siêu ngắn
+# ⚡ 12. Prompt siêu ngắn
 
 ### API
 
@@ -333,7 +365,7 @@ Tối ưu query sau: [query], DB: [MySQL/MongoDB].
 
 ---
 
-# 📌 12. Nguyên tắc vàng
+# 📌 13. Nguyên tắc vàng
 
 ## ✅ Làm đúng
 
@@ -350,7 +382,7 @@ Tối ưu query sau: [query], DB: [MySQL/MongoDB].
 
 ---
 
-# 🧠 13. Cách chia thread
+# 🧠 14. Cách chia thread
 
 * Thread 1: Architect
 * Thread 2: Backend
@@ -359,7 +391,7 @@ Tối ưu query sau: [query], DB: [MySQL/MongoDB].
 
 ---
 
-# 🎯 14. Công thức prompt chuẩn
+# 🎯 15. Công thức prompt chuẩn
 
 ```text
 [làm gì] + [stack] + [database] + [input/output] + [ràng buộc]
