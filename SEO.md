@@ -18,7 +18,7 @@ This repository uses:
 4. Put that token in `_config.yml`:
 
    ```yaml
-   google_site_verification: "YOUR_TOKEN_HERE"
+   google_search_console_verification: "YOUR_TOKEN_HERE"
    ```
 
 5. Push the change and wait for GitHub Pages to deploy.
