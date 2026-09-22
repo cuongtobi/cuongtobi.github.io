@@ -1,15 +1,21 @@
-
 {% include header.html %}
 
-<section>
-  <h1>{{ page.category | replace: '-', ' ' | upcase }}</h1>
-  <div class="container">
+<section class="page-hero compact-page-hero">
+  <p class="section-kicker">// CATEGORY</p>
+  <h1>{{ page.category | replace: '-', ' ' | capitalize }}</h1>
+  <p>Các bài viết thuộc chủ đề <strong>{{ page.category | replace: '-', ' ' }}</strong>.</p>
+</section>
+
+<section class="content-section">
+  <div class="section-heading">
+    <h2>// POSTS</h2>
+    <span>{{ site.categories[page.category].size }} posts</span>
+  </div>
+  <div class="post-card-grid">
     {% for post in site.categories[page.category] %}
       {% include article.html %}
     {% endfor %}
-    {% include pagination.html %}
   </div>
 </section>
 
 {% include footer.html %}
-
