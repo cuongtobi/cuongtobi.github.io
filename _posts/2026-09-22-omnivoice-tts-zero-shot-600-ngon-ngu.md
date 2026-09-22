@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "OmniVoice: TTS zero-shot 600+ ngôn ngữ, voice cloning và voice design"
+title: "OmniVoice: TTS zero-shot hơn 600 ngôn ngữ, có voice cloning và voice design"
 date: 2026-09-22
 author: Cuong Vuong
-description: "Phân tích k2-fsa/OmniVoice — mô hình text-to-speech zero-shot hỗ trợ hơn 600 ngôn ngữ, voice cloning, voice design, diffusion-style iterative decoding, cách cài đặt và ví dụ sử dụng bằng Python/CLI."
+description: "Tìm hiểu k2-fsa/OmniVoice: mô hình TTS zero-shot hỗ trợ hơn 600 ngôn ngữ, voice cloning, voice design và diffusion-style decoding; kèm cách cài đặt và ví dụ Python/CLI."
 image: /assets/images/omnivoice-tts-workflow-cover.svg
 cover_image: /assets/images/omnivoice-tts-workflow-cover.svg
 image_width: 1200
@@ -18,17 +18,15 @@ tags:
   - developer-tools
 ---
 
-Nếu vài năm trước text-to-speech thường gắn với một số ít ngôn ngữ và một tập speaker cố định, các hệ TTS mới đang đi theo hướng khác: **một model duy nhất có thể nói nhiều ngôn ngữ, clone giọng từ vài giây audio tham chiếu và thậm chí tạo giọng theo mô tả**.
+[OmniVoice](https://github.com/k2-fsa/OmniVoice) của nhóm **k2-fsa** gây chú ý trước hết ở độ phủ: cùng một model được giới thiệu là có thể tổng hợp giọng nói cho **hơn 600 ngôn ngữ**, đồng thời hỗ trợ clone giọng từ audio tham chiếu và tạo giọng theo mô tả.
 
-[OmniVoice](https://github.com/k2-fsa/OmniVoice) của nhóm **k2-fsa** là một project theo hướng đó.
-
-Theo README của dự án, OmniVoice là một mô hình **massively multilingual zero-shot text-to-speech** hỗ trợ **hơn 600 ngôn ngữ**, có ba mode sinh giọng chính:
+README chia cách sử dụng thành ba mode chính:
 
 - **Voice Cloning** — bắt chước giọng từ một đoạn audio tham chiếu ngắn.
 - **Voice Design** — mô tả giọng muốn tạo bằng thuộc tính như giới tính, tuổi, pitch, accent hoặc dialect.
 - **Auto Voice** — chỉ đưa text, để model tự chọn giọng.
 
-Project sử dụng một kiến trúc được tác giả mô tả là **diffusion language model-style**, sinh audio token bằng quá trình **iterative unmasking** thay vì autoregressive token-by-token truyền thống.
+Bên dưới API, tác giả mô tả kiến trúc là **diffusion language model-style**: model bắt đầu từ các audio token bị mask rồi mở dần chúng qua nhiều bước, thay vì sinh tuần tự từng token theo kiểu autoregressive.
 
 Tại thời điểm tôi đọc repo cho bài viết này, package đang ở phiên bản **0.2.1**, yêu cầu **Python >= 3.10**, source code dùng giấy phép **Apache-2.0**.
 
@@ -50,15 +48,13 @@ README hiện liệt kê các điểm chính:
 - optional FlashInfer acceleration,
 - training, fine-tuning và LoRA fine-tuning.
 
-Một điểm đáng chú ý là API khá thống nhất.
-
-Dù dùng cloning, design hay auto voice, entry point vẫn là:
+API inference được giữ khá gọn. Dù dùng cloning, design hay auto voice, entry point vẫn là:
 
 ~~~python
 model.generate(...)
 ~~~
 
-Khác biệt chủ yếu nằm ở prompt bạn truyền vào.
+Mode được quyết định chủ yếu bởi những tham số bạn truyền vào:
 
 ~~~text
 text + ref_audio      → Voice Cloning
@@ -66,13 +62,11 @@ text + instruct       → Voice Design
 text only             → Auto Voice
 ~~~
 
-Điều này làm cho project khá dễ thử ở mức application trước khi cần đọc sâu phần training.
-
----
+Nhờ vậy, có thể thử model ở mức ứng dụng trước rồi mới cần đọc sâu phần training. ---
 
 ## Cấu trúc repository
 
-Repo được chia khá rõ giữa inference, data, training và evaluation:
+Repository tách riêng phần inference, data, training và evaluation:
 
 ~~~text
 OmniVoice/
@@ -119,9 +113,9 @@ omnivoice-merge-lora
 
 ---
 
-## Flow tổng quát của OmniVoice
+## OmniVoice xử lý một request TTS như thế nào?
 
-Nếu bỏ qua chi tiết tensor, pipeline inference có thể hình dung như sau:
+Bỏ qua chi tiết tensor, pipeline inference có thể rút gọn như sau:
 
 ~~~text
                  ┌─────────────────────┐
@@ -163,9 +157,7 @@ Reference audio ───────┐    │
                          waveform
 ~~~
 
-Để hiểu kỹ hơn, có thể tách thành từng bước.
-
----
+Các bước bên dưới bám theo implementation trong <code>omnivoice/models/omnivoice.py</code>. ---
 
 ## 1. Load model, text tokenizer và audio tokenizer
 
@@ -175,9 +167,7 @@ Khi gọi:
 OmniVoice.from_pretrained("k2-fsa/OmniVoice")
 ~~~
 
-code sẽ load nhiều thành phần.
-
-Ở mức cao:
+OmniVoice không chỉ load trọng số model; nó còn chuẩn bị các thành phần dùng cho inference. Gồm:
 
 ~~~text
 OmniVoice model
@@ -189,9 +179,7 @@ audio tokenizer
 duration estimator
 ~~~
 
-Audio tokenizer dùng **Higgs Audio V2 tokenizer**.
-
-Trong code, nếu checkpoint local/model snapshot không có thư mục <code>audio_tokenizer</code>, OmniVoice fallback sang:
+Audio tokenizer dùng **Higgs Audio V2 tokenizer**. Trong code, nếu checkpoint local/model snapshot không có thư mục <code>audio_tokenizer</code>, OmniVoice fallback sang:
 
 ~~~text
 eustlb/higgs-audio-v2-tokenizer
@@ -213,11 +201,7 @@ generated audio tokens
 waveform
 ~~~
 
-Model chính không trực tiếp dự đoán từng sample PCM.
-
-Nó làm việc trên **discrete audio token**.
-
----
+Model chính không dự đoán trực tiếp từng sample PCM. Thay vào đó, nó làm việc với **discrete audio token**. ---
 
 ## 2. Chọn mode generation
 
@@ -258,13 +242,11 @@ Chỉ cần:
 text
 ~~~
 
-Không có reference audio và cũng không có <code>instruct</code>.
-
----
+Không có reference audio và cũng không có <code>instruct</code>. ---
 
 ## 3. Voice cloning: reference audio được biến thành prompt như thế nào?
 
-Đây là một flow khá rõ trong <code>create_voice_clone_prompt()</code>.
+<code>create_voice_clone_prompt()</code> cho thấy khá rõ reference audio được xử lý như thế nào:
 
 ~~~text
 ref.wav
@@ -306,17 +288,13 @@ Reference dài hơn có thể làm inference chậm hơn, tốn memory hơn và 
 
 ### Không có transcript thì sao?
 
-Nếu bạn không truyền <code>ref_text</code>, OmniVoice có thể dùng **Whisper ASR** để tự transcribe reference audio.
-
-Default ASR model trong code là:
+Nếu bạn không truyền <code>ref_text</code>, OmniVoice có thể dùng **Whisper ASR** để tự transcribe reference audio. Default ASR model trong code là:
 
 ~~~text
 openai/whisper-large-v3-turbo
 ~~~
 
-ASR chỉ được load khi cần hoặc khi bạn chủ động yêu cầu.
-
-Điều này tiện, nhưng đồng nghĩa lần đầu dùng auto-transcription sẽ cần thêm model và memory.
+ASR chỉ được load khi cần hoặc khi bạn chủ động yêu cầu. Đổi lại, lần đầu dùng auto-transcription sẽ phải tải thêm model ASR và tốn thêm memory.
 
 ### Reference được encode thành discrete token
 
@@ -332,13 +310,11 @@ Kết quả được lưu cùng:
 - RMS volume,
 - audio tokens.
 
-Đó chính là <code>VoiceClonePrompt</code>.
-
----
+Đó chính là <code>VoiceClonePrompt</code>. ---
 
 ## 4. Có thể cache giọng clone để tái sử dụng
 
-Một feature thực dụng là bạn không phải encode lại cùng một reference audio ở mọi session.
+Nếu một giọng được dùng nhiều lần, reference audio chỉ cần encode một lần.
 
 ~~~python
 prompt = model.create_voice_clone_prompt(
@@ -374,15 +350,11 @@ my_voice.pt
 generation
 ~~~
 
-Nếu bạn đang làm app TTS có một tập voice cố định, đây là cách hợp lý hơn việc encode reference audio trên từng request.
-
----
+Với ứng dụng có một tập giọng cố định, lưu prompt sẵn sẽ hợp lý hơn việc encode lại reference audio ở từng request. ---
 
 ## 5. Text, language và voice instruction được đóng gói thành conditioning
 
-Trước khi model sinh audio token, OmniVoice build các token conditioning.
-
-Trong code có các nhóm special token như:
+Trước khi model sinh audio token, OmniVoice build các token conditioning. Trong code có các nhóm special token như:
 
 ~~~text
 <|denoise|>
@@ -400,7 +372,7 @@ Trong code có các nhóm special token như:
 <|text_end|>
 ~~~
 
-Về mặt ý tưởng, sequence sẽ bao gồm:
+Sequence đưa vào model có thể hiểu đơn giản là:
 
 ~~~text
 style tokens
@@ -412,17 +384,11 @@ optional reference audio tokens
 masked target audio tokens
 ~~~
 
-Target audio lúc đầu **chưa có token thật**.
-
-Nó được fill bằng <code>audio_mask_id</code>.
-
----
+Target audio lúc đầu **chưa có token thật**. Nó được fill bằng <code>audio_mask_id</code>. ---
 
 ## 6. Diffusion-style iterative unmasking
 
-Đây là phần thú vị nhất.
-
-OmniVoice không nhất thiết phải sinh audio theo kiểu:
+Phần khác biệt nằm ở cách model điền vùng audio token còn thiếu. OmniVoice không nhất thiết phải sinh audio theo kiểu:
 
 ~~~text
 token 1
@@ -440,9 +406,7 @@ Thay vào đó, output bắt đầu như một vùng token bị mask:
 [MASK] [MASK] [MASK] [MASK] [MASK] ...
 ~~~
 
-Sau đó model chạy nhiều step.
-
-Default hiện tại:
+Sau đó model chạy nhiều step. Default hiện tại:
 
 ~~~text
 num_step = 32
@@ -474,9 +438,7 @@ conditional input
 unconditional input
 ~~~
 
-để thực hiện **classifier-free guidance**.
-
-Default:
+để thực hiện **classifier-free guidance**. Default:
 
 ~~~text
 guidance_scale = 2.0
@@ -489,9 +451,7 @@ Cùng với đó còn có:
 - layer penalty,
 - time-step schedule.
 
-Đây là lý do project gọi kiến trúc của mình là **diffusion language model-style**.
-
----
+Cơ chế mở mask theo nhiều bước này là phần gắn với cách gọi **diffusion language model-style** của project. ---
 
 ## 7. OmniVoice dùng nhiều audio codebook
 
@@ -510,17 +470,13 @@ audio_embeddings
 audio_heads
 ~~~
 
-để đưa discrete audio token vào hidden space của language model và dự đoán token trở lại theo từng codebook layer.
-
-Điểm này giúp nhìn OmniVoice đúng hơn:
-
-Nó không đơn giản là:
+để đưa discrete audio token vào hidden space của language model và dự đoán token trở lại theo từng codebook layer. Vì vậy, pipeline thực tế không phải:
 
 ~~~text
 LLM → waveform
 ~~~
 
-mà gần hơn với:
+Mà gần hơn với:
 
 ~~~text
 text / prompt
@@ -538,9 +494,7 @@ waveform
 
 ## 8. Duration estimator quyết định cần bao nhiêu audio token
 
-Nếu bạn không set duration, OmniVoice dùng <code>RuleDurationEstimator</code> để ước lượng độ dài speech từ text.
-
-Sau đó:
+Nếu bạn không set duration, OmniVoice dùng <code>RuleDurationEstimator</code> để ước lượng độ dài speech từ text. Sau đó:
 
 ~~~text
 estimated duration
@@ -576,17 +530,11 @@ Nếu có cả hai:
 duration > speed
 ~~~
 
-tức <code>duration</code> được ưu tiên.
-
----
+tức <code>duration</code> được ưu tiên. ---
 
 ## 9. Long-form generation
 
-Sinh một đoạn speech dài trong một lần thường làm VRAM tăng mạnh.
-
-OmniVoice xử lý bằng chunking.
-
-Default:
+Sinh một đoạn speech dài trong một lần thường làm VRAM tăng mạnh. OmniVoice xử lý bằng chunking. Default:
 
 ~~~text
 audio_chunk_threshold = 30 giây
@@ -612,17 +560,13 @@ cross-fade
 final waveform
 ~~~
 
-Nếu không có reference voice, output của chunk đầu còn có thể được dùng làm reference cho các chunk tiếp theo để giữ consistency tốt hơn.
-
-Cách này giúp long-form generation giữ mức VRAM gần ổn định hơn thay vì tăng theo toàn bộ độ dài text.
+Nếu không có reference voice, output của chunk đầu còn có thể được dùng làm reference cho các chunk tiếp theo để giữ consistency tốt hơn. Cách này giúp long-form generation giữ mức VRAM gần ổn định hơn thay vì tăng theo toàn bộ độ dài text.
 
 ---
 
 ## 10. Decode token về waveform
 
-Sau iterative decoding, output vẫn là discrete token.
-
-Audio tokenizer sẽ decode:
+Sau iterative decoding, output vẫn là discrete token. Audio tokenizer sẽ decode:
 
 ~~~text
 audio tokens
@@ -632,22 +576,18 @@ Higgs audio tokenizer
 waveform
 ~~~
 
-Nếu là long-form, các chunk waveform được cross-fade trước khi ghép.
-
-Sau đó còn có post-processing:
+Nếu là long-form, các chunk waveform được cross-fade trước khi ghép. Sau đó còn có post-processing:
 
 - remove long silence,
 - restore volume theo reference RMS,
 - fade in/out,
 - padding đầu/cuối.
 
-Kết quả từ <code>generate()</code> là một list NumPy array, với sampling rate theo audio tokenizer; README hiện dùng **24 kHz** trong ví dụ.
+Kết quả từ <code>generate()</code> là một list NumPy array, với sampling rate theo audio tokenizer; README hiện dùng **24 kHz** trong ví dụ. ---
 
----
+## Cài đặt OmniVoice
 
-# Cài đặt OmniVoice
-
-Project hỗ trợ hai flow chính:
+Có hai cách cài chính:
 
 ~~~text
 pip
@@ -655,13 +595,11 @@ hoặc
 uv
 ~~~
 
-Tôi khuyên tạo environment mới để tránh conflict PyTorch/CUDA.
+Nên dùng environment mới để tránh xung đột giữa PyTorch, CUDA và các dependency audio. ---
 
----
+### Cách 1 — pip
 
-## Cách 1 — pip
-
-### Tạo virtual environment
+#### Tạo virtual environment
 
 Linux/macOS:
 
@@ -677,7 +615,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ~~~
 
-### Cài PyTorch
+#### Cài PyTorch
 
 Với NVIDIA, README hiện đưa ví dụ CUDA 12.8:
 
@@ -688,7 +626,7 @@ pip install torch==2.8.0+cu128 torchaudio==2.8.0+cu128 \
 
 Bạn nên chọn build PyTorch đúng với driver/CUDA của máy thay vì copy version một cách máy móc.
 
-### Apple Silicon
+#### Apple Silicon
 
 ~~~bash
 pip install torch==2.8.0 torchaudio==2.8.0
@@ -700,7 +638,7 @@ Sau đó dùng:
 device_map="mps"
 ~~~
 
-### Intel Arc / XPU
+#### Intel Arc / XPU
 
 README cũng có support XPU:
 
@@ -723,7 +661,7 @@ device_map="xpu"
 
 ---
 
-## Cài package OmniVoice
+### Cài package OmniVoice
 
 Stable release từ PyPI:
 
@@ -748,7 +686,7 @@ pip install -e .
 
 ---
 
-## Cách 2 — uv
+### Cách 2 — uv
 
 ~~~bash
 git clone https://github.com/k2-fsa/OmniVoice.git
@@ -757,11 +695,9 @@ cd OmniVoice
 uv sync
 ~~~
 
-Repo hiện pin PyTorch/Torchaudio 2.8.0 trong phần constraint của uv và cấu hình CUDA index cho Linux/Windows.
+Repo hiện pin PyTorch/Torchaudio 2.8.0 trong phần constraint của uv và cấu hình CUDA index cho Linux/Windows. ---
 
----
-
-# Chạy nhanh bằng giao diện web
+## Chạy nhanh bằng giao diện web
 
 Sau khi cài package:
 
@@ -775,13 +711,9 @@ Sau đó mở:
 http://localhost:8001
 ~~~
 
-Gradio demo cho phép thử các mode mà không phải viết Python trước.
+Gradio demo cho phép thử các mode mà không phải viết Python trước. README cũng cung cấp Hugging Face Space và Google Colab. ---
 
-README cũng cung cấp Hugging Face Space và Google Colab.
-
----
-
-# Ví dụ 1 — Auto Voice đơn giản
+## Ví dụ 1 — Auto Voice đơn giản
 
 Nếu chỉ muốn text-to-speech và không quan tâm speaker cụ thể:
 
@@ -827,11 +759,9 @@ auto_voice.wav
 
 ---
 
-# Ví dụ 2 — Voice cloning
+## Ví dụ 2 — Voice cloning
 
-Chỉ nên clone **giọng của chính bạn hoặc giọng mà bạn có quyền/được phép sử dụng**.
-
-Giả sử có file:
+Chỉ nên clone **giọng của chính bạn hoặc giọng mà bạn có quyền/được phép sử dụng**. Giả sử có file:
 
 ~~~text
 ref.wav
@@ -865,11 +795,9 @@ sf.write(
 )
 ~~~
 
-README khuyến nghị reference khoảng **3–10 giây**.
+README khuyến nghị reference khoảng **3–10 giây**. ---
 
----
-
-## Không muốn tự nhập transcript?
+### Không muốn tự nhập transcript?
 
 Có thể bỏ <code>ref_text</code>:
 
@@ -880,9 +808,7 @@ audio = model.generate(
 )
 ~~~
 
-OmniVoice sẽ load Whisper ASR để transcribe reference audio.
-
-Nếu dùng nhiều GPU, bạn còn có thể đặt ASR ở GPU khác:
+OmniVoice sẽ load Whisper ASR để transcribe reference audio. Nếu dùng nhiều GPU, bạn còn có thể đặt ASR ở GPU khác:
 
 ~~~python
 model = OmniVoice.from_pretrained(
@@ -901,7 +827,7 @@ asr_device="cpu"
 
 ---
 
-# Ví dụ 3 — Cache cloned voice
+## Ví dụ 3 — Cache cloned voice
 
 Nếu cùng một speaker được dùng nhiều lần:
 
@@ -927,11 +853,9 @@ audio = model.generate(
 )
 ~~~
 
-Cách này bỏ qua việc load reference audio, silence preprocessing, ASR và audio encoding ở các lần generate sau.
+Cách này bỏ qua việc load reference audio, silence preprocessing, ASR và audio encoding ở các lần generate sau. ---
 
----
-
-# Ví dụ 4 — Voice Design
+## Ví dụ 4 — Voice Design
 
 Không cần reference audio.
 
@@ -963,17 +887,13 @@ hoặc:
 female, high pitch, british accent
 ~~~
 
-### Một giới hạn quan trọng
+### Giới hạn của Voice Design
 
-README nói model chủ yếu được train cho **voice cloning**, nên đây là mode ổn định nhất.
-
-Voice Design được train trên dữ liệu **Chinese và English**.
-
-Nó có thể generalize sang ngôn ngữ khác nhưng kết quả có thể không ổn định, đặc biệt với low-resource language hoặc attribute combination hiếm.
+README nói model chủ yếu được train cho **voice cloning**, nên đây là mode ổn định nhất. Voice Design được train trên dữ liệu **Chinese và English**. Nó có thể generalize sang ngôn ngữ khác nhưng kết quả có thể không ổn định, đặc biệt với low-resource language hoặc attribute combination hiếm.
 
 ---
 
-# Ví dụ 5 — Non-verbal control
+## Ví dụ 5 — Non-verbal control
 
 Bạn có thể chèn control tag trực tiếp vào text.
 
@@ -995,11 +915,9 @@ README hiện liệt kê các tag như:
 ...
 ~~~
 
-Đây là một feature thú vị nếu muốn speech có thêm expression ngoài plain text.
+Các tag này hữu ích khi cần thêm tiếng cười, tiếng thở dài hoặc phản ứng ngắn thay vì chỉ đọc plain text. ---
 
----
-
-# Ví dụ 6 — Pronunciation control
+## Ví dụ 6 — Pronunciation control
 
 ### English
 
@@ -1015,11 +933,9 @@ Hai từ "bass" được ép phát âm khác nhau.
 
 ### Chinese
 
-Repo hỗ trợ pinyin tone number inline để sửa pronunciation cho một ký tự cụ thể.
+Repo hỗ trợ pinyin tone number inline để sửa pronunciation cho một ký tự cụ thể. ---
 
----
-
-# Ví dụ 7 — Text normalization
+## Ví dụ 7 — Text normalization
 
 Để đọc số tự nhiên hơn:
 
@@ -1036,13 +952,9 @@ audio = model.generate(
 )
 ~~~
 
-Chinese và English dùng WeTextProcessing.
+Chinese và English dùng WeTextProcessing. Các language khác fallback về <code>num2words</code> cho integer khi dependency có sẵn. ---
 
-Các language khác fallback về <code>num2words</code> cho integer khi dependency có sẵn.
-
----
-
-# Sử dụng bằng CLI
+## Sử dụng bằng CLI
 
 Nếu không muốn viết Python, <code>omnivoice-infer</code> là cách nhanh nhất.
 
@@ -1078,7 +990,7 @@ omnivoice-infer \
 
 ---
 
-# Batch inference nhiều GPU
+## Batch inference nhiều GPU
 
 Repo có:
 
@@ -1086,9 +998,7 @@ Repo có:
 omnivoice-infer-batch
 ~~~
 
-Input là JSONL.
-
-Ví dụ:
+Input là JSONL. Ví dụ:
 
 ~~~json
 {"id":"sample_001","text":"Hello world","ref_audio":"/data/ref.wav","ref_text":"Reference transcript","language_id":"en","speed":1.0}
@@ -1103,19 +1013,11 @@ omnivoice-infer-batch \
   --res_dir results/
 ~~~
 
-Chỉ <code>id</code> và <code>text</code> là bắt buộc.
+Chỉ <code>id</code> và <code>text</code> là bắt buộc. Các field khác dùng để chuyển mode hoặc control generation. ---
 
-Các field khác dùng để chuyển mode hoặc control generation.
+## FlashInfer acceleration
 
----
-
-# FlashInfer acceleration
-
-Với NVIDIA GPU, project có optional integration FlashInfer.
-
-README hiện nói inference có thể được tăng tốc khoảng **2–2.9x** trong các trường hợp benchmark của họ.
-
-Ví dụ cài cho CUDA 12.8:
+Với NVIDIA GPU, project có optional integration FlashInfer. README hiện nói inference có thể được tăng tốc khoảng **2–2.9x** trong các trường hợp benchmark của họ. Ví dụ cài cho CUDA 12.8:
 
 ~~~bash
 pip install flashinfer-python==0.6.15.post1 \
@@ -1158,17 +1060,11 @@ xuống:
 0.0115
 ~~~
 
-tương đương khoảng **2.6x** trong benchmark đó.
+tương đương khoảng **2.6x** trong benchmark đó. Đây là benchmark trong đúng cấu hình trên; GPU, batch size và workload khác có thể cho kết quả khác. ---
 
-Đây là số đo có điều kiện cụ thể, không nên coi là guarantee cho mọi GPU/workload.
+## Training và fine-tuning
 
----
-
-# Training và fine-tuning
-
-OmniVoice không chỉ publish inference code.
-
-Thư mục <code>examples/</code> có flow:
+Repository cũng chứa pipeline training và fine-tuning, không chỉ phần inference. Thư mục <code>examples/</code> có flow:
 
 ~~~text
 training from scratch
@@ -1196,19 +1092,15 @@ Fine-tuning custom data dùng JSONL kiểu:
 {"id":"sample_001","audio_path":"/data/audio/001.wav","text":"Hello world","language_id":"en"}
 ~~~
 
-Repo cũng có LoRA để giảm chi phí fine-tune so với update toàn bộ model.
+Repo cũng có LoRA để giảm chi phí fine-tune so với update toàn bộ model. ---
 
----
+## Một số giới hạn nên biết trước khi dùng
 
-# Một số giới hạn nên biết trước khi dùng
+### Voice cloning ổn định hơn voice design
 
-## Voice cloning ổn định hơn voice design
+README nói rõ voice cloning là mode được train chính và ổn định hơn voice design. Nếu mục tiêu của bạn là production TTS với speaker cụ thể, nên ưu tiên voice cloning trước.
 
-Đây là chính project tự ghi rõ.
-
-Nếu mục tiêu của bạn là production TTS với speaker cụ thể, nên ưu tiên voice cloning trước.
-
-## Reference audio nên ngắn và sạch
+### Reference audio nên ngắn và sạch
 
 Khuyến nghị:
 
@@ -1218,7 +1110,7 @@ Khuyến nghị:
 
 Reference quá dài có thể chậm, tốn memory và giảm chất lượng.
 
-## Cross-lingual cloning có thể mang accent của reference
+### Cross-lingual cloning có thể mang accent của reference
 
 Ví dụ:
 
@@ -1227,23 +1119,17 @@ reference: English
 target: Vietnamese
 ~~~
 
-voice identity có thể được giữ, nhưng output có thể mang accent từ language của reference.
+voice identity có thể được giữ, nhưng output có thể mang accent từ language của reference. README khuyên nếu muốn pronunciation chuẩn nhất thì reference nên cùng language với target.
 
-README khuyên nếu muốn pronunciation chuẩn nhất thì reference nên cùng language với target.
+### Clip cực ngắn có thể khó hơn
 
-## Clip cực ngắn có thể khó hơn
+Docs ghi rằng output khoảng **1–2 giây**, đặc biệt khi không có reference audio, có thể không ổn định. Nếu cần clip rất ngắn, reference audio có thể giúp.
 
-Docs ghi rằng output khoảng **1–2 giây**, đặc biệt khi không có reference audio, có thể không ổn định.
+### Min Nan / Hokkien có format input riêng
 
-Nếu cần clip rất ngắn, reference audio có thể giúp.
+Ở model version hiện tại, docs nói Min Nan Chinese chỉ support input bằng **Tai-lo romanization**, không phải Chinese character. ---
 
-## Min Nan / Hokkien có format input riêng
-
-Ở model version hiện tại, docs nói Min Nan Chinese chỉ support input bằng **Tai-lo romanization**, không phải Chinese character.
-
----
-
-# So sánh ba mode để chọn nhanh
+## So sánh ba mode để chọn nhanh
 
 | Mode | Input thêm | Ưu điểm | Khi nên dùng |
 |---|---|---|---|
@@ -1251,7 +1137,7 @@ Nếu cần clip rất ngắn, reference audio có thể giúp.
 | Voice Cloning | reference audio | giữ speaker identity | app cần giọng cụ thể |
 | Voice Design | instruct | không cần reference | tạo giọng theo thuộc tính |
 
-Nếu mới bắt đầu, tôi sẽ thử theo thứ tự:
+Nếu mới thử OmniVoice, có thể đi theo thứ tự:
 
 ~~~text
 Auto Voice
@@ -1263,13 +1149,11 @@ Voice Design
 batch / optimization
 ~~~
 
-như vậy dễ tách lỗi environment khỏi lỗi prompt/voice conditioning.
+như vậy dễ tách lỗi environment khỏi lỗi prompt/voice conditioning. ---
 
----
+## Một cách triển khai OmniVoice vào ứng dụng
 
-# Flow triển khai thực tế tôi sẽ dùng
-
-Nếu đưa OmniVoice vào một application, tôi sẽ chia system như sau:
+Nếu đưa OmniVoice vào một ứng dụng, tôi sẽ tách request TTS khỏi phần inference theo kiểu sau:
 
 ~~~text
                     ┌─────────────────┐
@@ -1300,15 +1184,13 @@ Nếu đưa OmniVoice vào một application, tôi sẽ chia system như sau:
                     object storage / CDN
 ~~~
 
-Nếu speaker được dùng lặp lại, tôi sẽ cache <code>VoiceClonePrompt</code> thay vì encode reference trên mỗi request.
-
-Nếu workload lớn, chuyển inference sang worker queue và batch theo GPU thay vì chạy trực tiếp trong HTTP request.
+Với speaker dùng lặp lại, nên cache <code>VoiceClonePrompt</code> thay vì encode reference ở mỗi request. Nếu workload lớn, chuyển inference sang worker queue và batch theo GPU thay vì chạy trực tiếp trong HTTP request.
 
 ---
 
-# OmniVoice phù hợp với ai?
+## OmniVoice phù hợp với ai?
 
-Project đáng thử nếu bạn đang làm:
+OmniVoice phù hợp để thử nếu bạn đang làm:
 
 - multilingual TTS,
 - audiobook / narration,
@@ -1320,15 +1202,11 @@ Project đáng thử nếu bạn đang làm:
 - ứng dụng cần voice cloning hợp pháp,
 - batch speech synthesis.
 
-Đặc biệt, coverage hơn 600 language làm OmniVoice thú vị với những bài toán mà các TTS phổ biến chỉ cover một nhóm language lớn.
+Độ phủ hơn 600 ngôn ngữ đặc biệt hữu ích với những bài toán mà các dịch vụ TTS phổ biến chỉ hỗ trợ một nhóm ngôn ngữ lớn. ---
 
----
+## Lưu ý về voice cloning và sử dụng có trách nhiệm
 
-# Lưu ý về voice cloning và sử dụng có trách nhiệm
-
-Voice cloning là một capability mạnh nhưng cũng dễ bị lạm dụng.
-
-README của OmniVoice có disclaimer rõ: không dùng model cho unauthorized voice cloning, impersonation, fraud, scams hoặc hoạt động trái pháp luật/phi đạo đức.
+Voice cloning rất hữu ích, nhưng cũng là phần dễ bị lạm dụng nhất của một hệ TTS. README của OmniVoice có disclaimer rõ: không dùng model cho unauthorized voice cloning, impersonation, fraud, scams hoặc hoạt động trái pháp luật/phi đạo đức.
 
 Nếu đưa vào sản phẩm thật, ít nhất nên có:
 
@@ -1339,15 +1217,11 @@ Nếu đưa vào sản phẩm thật, ít nhất nên có:
 - policy chống impersonation,
 - quy trình xóa voice data khi được yêu cầu.
 
-Technology không tự giải quyết phần governance này.
+Các biện pháp kỹ thuật không thay thế được phần consent và governance. ---
 
----
+## Kết luận
 
-# Kết luận
-
-Điểm tôi thấy đáng chú ý nhất ở OmniVoice không chỉ là con số **600+ languages**.
-
-Nó là sự kết hợp của nhiều thứ trong một API khá gọn:
+Con số **600+ ngôn ngữ** là điểm dễ thấy nhất, nhưng phần đáng xem hơn nằm ở cách OmniVoice gom nhiều khả năng vào cùng một API:
 
 ~~~text
 text
@@ -1365,7 +1239,7 @@ audio tokenizer decode
 speech waveform
 ~~~
 
-Với developer, entry point rất đơn giản:
+Ở phía developer, entry point vẫn chỉ là:
 
 ~~~python
 model.generate(...)
@@ -1383,7 +1257,7 @@ nhưng bên dưới đã có:
 - batch inference,
 - optional FlashInfer acceleration.
 
-Nếu bạn đang tìm một open-source TTS project để thử multilingual speech, voice cloning hoặc nghiên cứu diffusion-style generation, OmniVoice là một repo đáng đọc sâu.
+Nếu cần một project open-source để thử multilingual TTS, voice cloning hoặc tìm hiểu diffusion-style speech generation, OmniVoice là một repo đáng để đọc source và chạy thử.
 
 **Repository:** [https://github.com/k2-fsa/OmniVoice](https://github.com/k2-fsa/OmniVoice)
 

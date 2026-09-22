@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Superpowers: Workflow có kỷ luật cho AI coding agent"
+title: "Superpowers: Bộ skill giúp coding agent làm việc có quy trình hơn"
 date: 2026-09-22
 author: Cuong Vuong
-description: "Phân tích dự án obra/superpowers: cách hệ thống skill điều khiển coding agent qua brainstorming, planning, worktree, TDD, code review và verification; kèm hướng dẫn cài đặt và ví dụ sử dụng."
+description: "Tìm hiểu obra/superpowers: bộ skill đưa coding agent qua các bước brainstorm, lập kế hoạch, worktree, TDD, review và verification; kèm cách cài đặt và ví dụ sử dụng."
 image: /assets/images/superpowers-coding-agent-workflow.svg
 cover_image: /assets/images/superpowers-coding-agent-workflow.svg
 image_width: 1200
@@ -18,9 +18,7 @@ tags:
   - developer-tools
 ---
 
-Coding agent ngày càng giỏi viết code. Nhưng trên một project thật, vấn đề khó nhất thường không phải là **AI có viết được code hay không**.
-
-Vấn đề là quy trình:
+Coding agent viết code ngày càng tốt. Nhưng khi đưa nó vào một repository thật, phần dễ hỏng thường không nằm ở cú pháp hay tốc độ gõ code. Vấn đề là **cách agent đi từ yêu cầu đến một thay đổi có thể tin được**:
 
 - Agent có hiểu đúng thứ cần xây trước khi code không?
 - Nó có tự ý lao vào implementation quá sớm không?
@@ -29,9 +27,9 @@ Vấn đề là quy trình:
 - Có review từng phần trước khi tiếp tục không?
 - Khi nói "done", nó có evidence thật hay chỉ thấy code có vẻ ổn?
 
-[Superpowers](https://github.com/obra/superpowers) của Jesse Vincent và Prime Radiant cố giải quyết chính lớp vấn đề này.
+[Superpowers](https://github.com/obra/superpowers) của Jesse Vincent và Prime Radiant tập trung vào đúng lớp vấn đề đó.
 
-Thay vì là một model mới hay một IDE mới, Superpowers là **một methodology phát triển phần mềm cho coding agent**, được đóng gói thành các skill có thể kết hợp với nhau và một bootstrap giúp agent tự kích hoạt đúng skill vào đúng thời điểm.
+Nó không phải model mới hay IDE mới. Superpowers là **một phương pháp làm việc cho coding agent**, đóng gói thành các skill và một bootstrap để agent biết lúc nào cần brainstorm, lập kế hoạch, test, review hoặc verify.
 
 Tại thời điểm tôi đọc repo cho bài viết này, plugin manifest đang ở phiên bản **6.4.1**, giấy phép **MIT**, và repository hỗ trợ nhiều coding harness khác nhau như Claude Code, Codex, Antigravity, Cursor, Gemini CLI, Devin CLI, GitHub Copilot CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent và Muse.
 
@@ -41,11 +39,9 @@ Tại thời điểm tôi đọc repo cho bài viết này, plugin manifest đan
 
 ## Superpowers thực chất là gì?
 
-Cách dễ hiểu nhất là xem Superpowers như một **lớp quy trình nằm trên coding agent**.
+Có thể hình dung Superpowers như một **lớp quy trình đặt phía trên coding agent**. Agent vẫn là Claude Code, Codex, Gemini hay một harness khác. Superpowers không thay model và cũng không thay compiler, test runner hay Git.
 
-Agent vẫn là Claude Code, Codex, Gemini hay một harness khác. Superpowers không thay model và cũng không thay compiler, test runner hay Git.
-
-Nó bổ sung một hệ thống skill để ép quá trình phát triển đi qua những bước có kỷ luật hơn:
+Agent vẫn dùng tool của harness hiện tại, nhưng công việc được dẫn qua một chuỗi bước rõ ràng hơn:
 
 ~~~text
 ý tưởng
@@ -90,9 +86,7 @@ skills/
 └── using-superpowers
 ~~~
 
-Điểm quan trọng là đây không chỉ là một thư mục chứa prompt.
-
-Superpowers có một bootstrap tên <code>using-superpowers</code>. Mục đích của bootstrap là làm cho agent **kiểm tra skill trước khi hành động**, thay vì đợi user nhớ và gọi từng skill bằng tay.
+Nhìn qua repository rất dễ nghĩ đây chỉ là một thư mục prompt. Phần làm Superpowers khác đi là bootstrap <code>using-superpowers</code>: nó yêu cầu agent **kiểm tra skill trước khi hành động**, thay vì chờ người dùng nhớ tên skill và gọi thủ công.
 
 Trong tài liệu của repo, một integration được coi là đúng khi bootstrap này được nạp ngay từ đầu session; nếu chỉ copy các file skill vào máy nhưng không khiến agent tự kích hoạt chúng, tác giả coi đó là một integration chưa hoàn chỉnh.
 
@@ -100,11 +94,11 @@ Trong tài liệu của repo, một integration được coi là đúng khi boot
 
 ## Cơ chế hoạt động: skill trước, action sau
 
-Skill <code>using-superpowers</code> đặt ra một rule khá mạnh:
+<code>using-superpowers</code> đặt ra một quy tắc khá cứng:
 
 > Nếu có khả năng một skill liên quan tới task hiện tại, agent phải kiểm tra và dùng skill đó trước khi trả lời hoặc hành động.
 
-Ý nghĩa thực tế là agent không nên làm kiểu:
+Trong thực tế, nó muốn tránh kiểu làm việc này:
 
 ~~~text
 User: thêm feature X
@@ -116,7 +110,7 @@ Agent:
 - báo xong
 ~~~
 
-Flow mong muốn là:
+Thứ tự được khuyến khích là:
 
 ~~~text
 User request
@@ -158,17 +152,13 @@ fix
 verification
 ~~~
 
-Đây là điểm tôi thấy quan trọng nhất của Superpowers: **workflow không phụ thuộc vào việc user nhớ một prompt dài**.
-
-Nếu plugin được tích hợp đúng với harness, agent phải tự biết khi nào cần brainstorm, debug, test, review hoặc verify.
+Phần tôi thích ở cách thiết kế này là **người dùng không phải nhớ một prompt dài để ép agent đi đúng quy trình**. Nếu integration của harness hoạt động đúng, việc chọn skill trở thành trách nhiệm của agent.
 
 ---
 
-## Flow chính của Superpowers
+## Superpowers chạy theo flow nào?
 
-README mô tả một basic workflow gồm brainstorming, worktree, planning, implementation, TDD, review và finish branch.
-
-Khi đọc sâu hơn vào các skill hiện tại, flow có thể hình dung như sau:
+README ghép các skill thành một workflow gồm brainstorming, worktree, planning, implementation, TDD, review và bước kết thúc branch. Đọc theo các skill hiện tại, luồng tổng thể trông như sau:
 
 ~~~text
 SESSION START
@@ -204,9 +194,7 @@ FINISH BRANCH
 
 ### 1. Brainstorming: không code ngay
 
-<code>brainstorming</code> được thiết kế để chạy trước creative work.
-
-Agent trước tiên phải hiểu:
+Khi task có yếu tố thiết kế, <code>brainstorming</code> đi trước phần implementation. Trước khi code, agent cần làm rõ:
 
 - mục tiêu thật sự là gì,
 - ai sẽ dùng,
@@ -228,9 +216,7 @@ Output chính là câu trả lời hoặc kết quả probe, không phải produ
 
 #### Bounded
 
-Dùng cho thay đổi nhỏ, scope rõ, flow cần sửa đã tồn tại trong repo.
-
-Ví dụ:
+Dùng cho thay đổi nhỏ, scope rõ, flow cần sửa đã tồn tại trong repo. Ví dụ:
 
 ~~~text
 "Thêm một flag vào endpoint hiện có."
@@ -240,9 +226,7 @@ Agent đọc context, hỏi những câu cần thiết, trình bày một thiế
 
 #### Architectural
 
-Dùng cho project mới, subsystem mới hoặc thay đổi làm đổi cách các component kết nối với nhau.
-
-Flow đầy đủ hơn:
+Dùng cho project mới, subsystem mới hoặc thay đổi làm đổi cách các component kết nối với nhau. Flow đầy đủ hơn:
 
 ~~~text
 explore context
@@ -270,21 +254,17 @@ Spec mặc định được lưu tại:
 docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md
 ~~~
 
-Điểm này tạo ra một ranh giới khá rõ: **approval cho ý tưởng không đồng nghĩa approval cho implementation**.
-
----
+Ranh giới ở đây khá rõ: **đồng ý với ý tưởng chưa có nghĩa là đã đồng ý cho agent bắt đầu implementation**. ---
 
 ## 2. Writing Plans: biến design thành các task có thể thực thi
 
-Sau khi có spec đủ rõ, <code>writing-plans</code> chuyển thiết kế thành implementation plan.
-
-Plan mặc định nằm tại:
+Sau khi có spec đủ rõ, <code>writing-plans</code> chuyển thiết kế thành implementation plan. Plan mặc định nằm tại:
 
 ~~~text
 docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md
 ~~~
 
-Điểm đáng chú ý là plan của Superpowers không chỉ ghi:
+Plan của Superpowers chi tiết hơn một checklist kiểu:
 
 ~~~text
 1. tạo API
@@ -292,9 +272,7 @@ docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md
 3. update UI
 ~~~
 
-Skill yêu cầu chi tiết hơn nhiều.
-
-Mỗi task phải mô tả:
+Skill yêu cầu chi tiết hơn nhiều. Mỗi task phải mô tả:
 
 - file nào tạo mới,
 - file nào sửa,
@@ -331,9 +309,7 @@ write tests for the above
 implement later
 ~~~
 
-Lý do rất thực dụng: implementation agent có thể không có toàn bộ context của người đã viết plan.
-
-Plan phải đủ rõ để một agent mới mở task lên vẫn biết chính xác phải làm gì.
+Lý do là agent thực thi có thể là một context hoàn toàn mới, không biết những gì planner đã suy nghĩ trước đó. Plan phải đủ rõ để một agent mới mở task lên vẫn biết chính xác phải làm gì.
 
 ---
 
@@ -341,9 +317,7 @@ Plan phải đủ rõ để một agent mới mở task lên vẫn biết chính
 
 <code>using-git-worktrees</code> đảm bảo feature work không vô tình làm bẩn checkout chính.
 
-Skill trước tiên kiểm tra xem agent đã ở trong linked worktree hay chưa. Nếu harness có native worktree tool thì ưu tiên dùng tool đó. Nếu không có, nó fallback về Git worktree.
-
-Ý tưởng:
+Skill trước tiên kiểm tra xem agent đã ở trong linked worktree hay chưa. Nếu harness có native worktree tool thì ưu tiên dùng tool đó. Nếu không có, nó fallback về Git worktree. Ý tưởng:
 
 ~~~text
 main checkout
@@ -361,9 +335,7 @@ Sau khi tạo workspace, Superpowers còn cố gắng:
 2. cài dependency phù hợp,
 3. chạy baseline test.
 
-Nếu baseline đã fail trước khi feature bắt đầu, agent phải báo điều đó thay vì mặc định mọi lỗi sau này là do code mới.
-
-Đây là một chi tiết nhỏ nhưng quan trọng khi dùng agent trên repository đang phát triển thật.
+Nếu baseline đã fail trước khi feature bắt đầu, agent phải báo điều đó thay vì mặc định mọi lỗi sau này là do code mới. Việc chạy baseline trước khi sửa code giúp phân biệt lỗi có sẵn với lỗi do task mới tạo ra.
 
 ---
 
@@ -373,11 +345,7 @@ Superpowers hiện cho phép hai hướng chính.
 
 ### Subagent-driven development
 
-Đây là mode kỹ hơn.
-
-Mỗi task được giao cho một implementer subagent mới. Sau implementation lại có reviewer kiểm tra task đó.
-
-Flow:
+Đây là lựa chọn nhiều bước hơn. Mỗi task được giao cho một implementer subagent mới. Sau implementation lại có reviewer kiểm tra task đó. Flow:
 
 ~~~text
 Task 1
@@ -399,9 +367,7 @@ fresh implementer
 whole-branch review
 ~~~
 
-Mục tiêu của fresh subagent là giảm context pollution.
-
-Thay vì một agent giữ toàn bộ lịch sử dài của session rồi vừa design, vừa implement, vừa tự review chính code của mình, controller chỉ cấp cho worker đúng phần context của task.
+Mỗi task dùng một subagent mới để hạn chế context cũ chen vào quyết định của task hiện tại. Thay vì một agent giữ toàn bộ lịch sử dài của session rồi vừa design, vừa implement, vừa tự review chính code của mình, controller chỉ cấp cho worker đúng phần context của task.
 
 Superpowers còn lưu progress trong một ledger dưới vùng:
 
@@ -409,30 +375,22 @@ Superpowers còn lưu progress trong một ledger dưới vùng:
 .superpowers/sdd/
 ~~~
 
-Ledger được dùng như recovery map nếu session bị compaction hoặc mất context.
-
-Đây là một điểm thiết kế khá đáng chú ý: **progress quan trọng không chỉ nằm trong trí nhớ hội thoại của model**.
+Ledger được dùng như recovery map nếu session bị compaction hoặc mất context. Nhờ ledger, tiến độ không chỉ tồn tại trong trí nhớ hội thoại của model — phần dễ mất khi session bị compact.
 
 ### Executing Plans / native execution
 
-Mode này rẻ và đơn giản hơn.
-
-Một agent thực thi các task trong cùng session, sau đó dùng một reviewer mới cho toàn branch.
-
-Trade-off:
+Mode này rẻ và đơn giản hơn. Một agent thực thi các task trong cùng session, sau đó dùng một reviewer mới cho toàn branch. Trade-off:
 
 | Mode | Ưu điểm | Chi phí |
 |---|---|---|
 | Subagent-driven | context sạch theo task, review từng task | nhiều lượt agent hơn |
 | Native / executing-plans | ít overhead, nhanh và rẻ hơn | ít isolation và review độc lập hơn |
 
-Superpowers không giả định mọi task đều cần mode đắt nhất.
-
----
+Superpowers không giả định mọi task đều cần mode đắt nhất. ---
 
 ## 5. TDD là rule cứng, không phải gợi ý
 
-<code>test-driven-development</code> là một trong những skill mạnh tay nhất của project.
+<code>test-driven-development</code> là một trong những skill có quy tắc chặt nhất của project.
 
 Nguyên tắc:
 
@@ -440,7 +398,7 @@ Nguyên tắc:
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 ~~~
 
-Flow chuẩn:
+Chu trình được yêu cầu:
 
 ~~~text
 RED
@@ -457,13 +415,7 @@ REFACTOR
 clean up while staying green
 ~~~
 
-Điểm quan trọng không chỉ là "có test".
-
-Agent phải **thấy test fail trước**.
-
-Nếu test mới viết đã pass ngay, nó chưa chứng minh được feature mới thực sự được test.
-
-Với bug fix, pattern tốt sẽ là:
+Ở đây, chỉ “có test” là chưa đủ. Agent phải **thấy test fail trước**. Nếu test mới viết đã pass ngay, nó chưa chứng minh được feature mới thực sự được test. Với bug fix, pattern tốt sẽ là:
 
 ~~~text
 reproduce bug
@@ -477,24 +429,16 @@ fix root cause
 confirm test passes
 ~~~
 
-Cách làm này chậm hơn việc patch ngay vài dòng, nhưng giảm khả năng agent tự thuyết phục rằng một thay đổi "có vẻ đúng".
-
----
+Cách làm này chậm hơn việc patch ngay vài dòng, nhưng giảm khả năng agent tự thuyết phục rằng một thay đổi "có vẻ đúng". ---
 
 ## 6. Review không chỉ diễn ra ở cuối
 
-Trong subagent-driven mode, sau mỗi task sẽ có task review.
-
-Reviewer kiểm tra ít nhất hai nhóm vấn đề:
+Trong subagent-driven mode, sau mỗi task sẽ có task review. Reviewer kiểm tra ít nhất hai nhóm vấn đề:
 
 - spec compliance,
 - code quality.
 
-Nếu có finding quan trọng, task đi vào fix loop rồi được scoped re-review.
-
-Sau khi toàn bộ task hoàn thành, branch còn có một whole-branch review nữa.
-
-Điều này tách ba vai trò:
+Nếu có finding quan trọng, task đi vào fix loop rồi được scoped re-review. Sau khi toàn bộ task hoàn thành, branch còn có một whole-branch review nữa. Cách tổ chức này tách ba vai trò:
 
 ~~~text
 planner
@@ -502,9 +446,7 @@ implementer
 reviewer
 ~~~
 
-thay vì để một model vừa quyết định requirement, vừa viết code, vừa tự tuyên bố code của mình đúng.
-
----
+thay vì để một model vừa quyết định requirement, vừa viết code, vừa tự tuyên bố code của mình đúng. ---
 
 ## 7. Verification trước khi nói "done"
 
@@ -537,9 +479,7 @@ agent con nói success
 test đã chạy từ 20 phút trước
 ~~~
 
-Nó cần fresh verification evidence.
-
-Đây là một trong những triết lý xuyên suốt repo:
+Nó cần fresh verification evidence. Có thể tóm gọn tinh thần này bằng câu của repo:
 
 > **Evidence over claims.**
 
@@ -547,20 +487,14 @@ Nó cần fresh verification evidence.
 
 ## 8. Finishing branch: kết thúc cũng có workflow
 
-Khi implementation hoàn tất, <code>finishing-a-development-branch</code> chạy full test suite trước.
-
-Sau khi baseline xanh, agent mới đi tới bước tích hợp và cleanup.
-
-README mô tả các lựa chọn như:
+Khi implementation hoàn tất, <code>finishing-a-development-branch</code> chạy full test suite trước. Sau khi baseline xanh, agent mới đi tới bước tích hợp và cleanup. README mô tả các lựa chọn như:
 
 - merge,
 - mở pull request,
 - giữ branch,
 - discard.
 
-Như vậy Superpowers không coi "viết code xong" là terminal state.
-
-Terminal state nằm sau:
+Như vậy Superpowers không coi "viết code xong" là terminal state. Terminal state nằm sau:
 
 ~~~text
 implementation
@@ -594,9 +528,7 @@ exception biến mất
 done
 ~~~
 
-Thay vào đó, agent phải điều tra evidence và root cause trước khi sửa.
-
-Sau fix vẫn quay lại TDD và verification.
+Thay vào đó, agent phải điều tra evidence và root cause trước khi sửa. Sau fix vẫn quay lại TDD và verification.
 
 Nếu chính Superpowers hoạt động không đúng trong một session — ví dụ skill không trigger, agent bỏ plan hoặc lặp việc — README còn cung cấp skill <code>diagnosing-superpowers</code> để đọc transcript và phân tích session với evidence.
 
@@ -614,9 +546,7 @@ Cách đơn giản nhất là dùng official Claude plugin marketplace:
 /plugin install superpowers@claude-plugins-official
 ~~~
 
-Project cũng có marketplace riêng.
-
-Đăng ký:
+Project cũng có marketplace riêng. Đăng ký:
 
 ~~~bash
 /plugin marketplace add obra/superpowers-marketplace
@@ -672,9 +602,7 @@ Cài trực tiếp từ GitHub:
 agy plugin install https://github.com/obra/superpowers
 ~~~
 
-README cho biết Antigravity chạy session-start hook của plugin, vì vậy Superpowers active từ message đầu tiên.
-
-Muốn update có thể chạy lại cùng command.
+README cho biết Antigravity chạy session-start hook của plugin, vì vậy Superpowers active từ message đầu tiên. Muốn update có thể chạy lại cùng command.
 
 ### Cursor
 
@@ -698,17 +626,11 @@ Update:
 gemini extensions update superpowers
 ~~~
 
-Ngoài ra project còn có hướng dẫn cho Devin CLI, Factory Droid, GitHub Copilot CLI, Grok Build CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent và Muse.
-
----
+Ngoài ra project còn có hướng dẫn cho Devin CLI, Factory Droid, GitHub Copilot CLI, Grok Build CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent và Muse. ---
 
 ## Cài xong thì sử dụng như thế nào?
 
-Điểm thú vị là **không cần một câu lệnh đặc biệt cho mọi task**.
-
-Bạn vẫn nói chuyện với coding agent bình thường.
-
-Ví dụ:
+Sau khi cài xong, bạn **không phải đổi cách viết yêu cầu cho mọi task**. Bạn vẫn nói chuyện với coding agent bình thường. Ví dụ:
 
 ~~~text
 Let's add team invitations to this app.
@@ -719,9 +641,7 @@ The invited user can accept it once.
 Please add tests.
 ~~~
 
-Nếu Superpowers được bootstrap đúng, agent không nên ngay lập tức mở editor và thêm endpoint.
-
-Với một thay đổi đủ lớn, flow kỳ vọng sẽ gần như:
+Nếu Superpowers được bootstrap đúng, agent không nên ngay lập tức mở editor và thêm endpoint. Với một thay đổi đủ lớn, flow kỳ vọng sẽ gần như:
 
 ~~~text
 request
@@ -786,9 +706,7 @@ Superpowers có thể hỏi thêm:
 - target traffic là demo hay production?
 ~~~
 
-Sau khi scope rõ, agent trình bày design và chờ approval.
-
-Với một project mới, đây là architectural path, nên design có thể được lưu thành:
+Sau khi scope rõ, agent trình bày design và chờ approval. Với một project mới, đây là architectural path, nên design có thể được lưu thành:
 
 ~~~text
 docs/superpowers/specs/2026-09-22-url-shortener-design.md
@@ -848,17 +766,13 @@ def test_create_link_returns_short_code(client):
     assert response.json()["code"]
 ~~~
 
-Chạy test.
-
-Expected state:
+Chạy test. Expected state:
 
 ~~~text
 FAIL
 ~~~
 
-Sau đó agent mới viết implementation tối thiểu.
-
-Chạy lại:
+Sau đó agent mới viết implementation tối thiểu. Chạy lại:
 
 ~~~text
 PASS
@@ -892,9 +806,7 @@ Trước khi nói feature hoàn tất, agent chạy command thật, ví dụ:
 pytest -q
 ~~~
 
-Nếu output xác nhận toàn bộ test pass, lúc đó mới được báo success.
-
----
+Nếu output xác nhận toàn bộ test pass, lúc đó mới được báo success. ---
 
 ## Ví dụ với bug fix
 
@@ -905,9 +817,7 @@ The checkout API sometimes creates two orders when the client retries after a ti
 Find the root cause and fix it.
 ~~~
 
-Superpowers nên ưu tiên <code>systematic-debugging</code> thay vì patch ngay.
-
-Flow mong muốn:
+Superpowers nên ưu tiên <code>systematic-debugging</code> thay vì patch ngay. Flow mong muốn:
 
 ~~~text
 reproduce duplicate order
@@ -927,9 +837,7 @@ run affected/full tests
 verification-before-completion
 ~~~
 
-Điểm đáng giá là bug fix có một evidence chain.
-
-Nếu sáu tháng sau bug quay lại, team vẫn có regression test để biết behavior mong muốn là gì.
+Lợi ích là bug fix để lại một chuỗi bằng chứng rõ: cách tái hiện, regression test và kết quả sau khi sửa. Nếu sáu tháng sau bug quay lại, team vẫn có regression test để biết behavior mong muốn là gì.
 
 ---
 
@@ -955,36 +863,26 @@ agent nên làm việc theo trình tự nào?
 
 ### 2. Skill có trigger và hard gate rõ
 
-Các skill không chỉ nói "nên brainstorm".
-
-Chúng mô tả:
+Các skill không chỉ nói "nên brainstorm". Chúng mô tả:
 
 - khi nào skill phải chạy,
 - khi nào phải dừng,
 - user phải approve ở đâu,
 - evidence nào cần có trước khi đi tiếp.
 
-Điều này giúp giảm ambiguity cho agent.
+Nhờ đó, agent ít phải tự đoán xem bước nào là bắt buộc và khi nào được phép đi tiếp.
 
 ### 3. Context được chia theo vai trò
 
-Subagent-driven development không đưa toàn bộ session history cho mọi worker.
-
-Planner, implementer và reviewer nhận context khác nhau.
-
-Đây là một cách thực dụng để giảm việc model bị nhiễu bởi lịch sử không liên quan.
+Subagent-driven development không đưa toàn bộ session history cho mọi worker. Planner, implementer và reviewer nhận context khác nhau. Việc chia context theo vai trò giúp mỗi agent chỉ mang theo phần lịch sử cần cho công việc của mình.
 
 ### 4. Git và test được coi là source of truth
 
-Worktree, commit, diff, ledger và test output tạo ra state bên ngoài model.
-
-Điều này quan trọng vì conversation context có thể bị compact hoặc mất.
+Worktree, commit, diff, ledger và test output tạo ra state bên ngoài model. Git và test output còn tồn tại ngay cả khi conversation context bị compact hoặc mất.
 
 ### 5. Verification được tách khỏi confidence
 
-Một model có thể rất tự tin nhưng sai.
-
-Superpowers cố biến:
+Một model có thể rất tự tin nhưng sai. Superpowers cố biến:
 
 ~~~text
 "I think this works"
@@ -1011,21 +909,15 @@ Repo hiện đã xử lý phần nào bằng cách phân loại <code>spike</cod
 
 ### TDD rất nghiêm
 
-Rule "test fail trước code" được áp dụng rất mạnh.
-
-Nếu team của bạn chủ yếu làm prototype, generated code hoặc exploratory work, bạn có thể thấy workflow này cứng hơn thói quen hiện tại.
+Rule "test fail trước code" được áp dụng rất mạnh. Nếu team của bạn chủ yếu làm prototype, generated code hoặc exploratory work, bạn có thể thấy workflow này cứng hơn thói quen hiện tại.
 
 ### Subagent review tốn thêm compute
 
-Fresh implementer + reviewer cho từng task giúp context sạch hơn, nhưng chắc chắn tốn nhiều agent turns hơn.
-
-Repo vì vậy cũng có <code>executing-plans</code> cho trường hợp muốn giảm chi phí.
+Fresh implementer + reviewer cho từng task giúp context sạch hơn, nhưng chắc chắn tốn nhiều agent turns hơn. Repo vì vậy cũng có <code>executing-plans</code> cho trường hợp muốn giảm chi phí.
 
 ### Khả năng phụ thuộc vào harness
 
-Cùng một skill library nhưng mỗi coding harness có tool và lifecycle khác nhau.
-
-Repository phải duy trì integration riêng cho Claude Code, Codex, Gemini, Cursor, Pi và các runtime khác.
+Cùng một skill library nhưng mỗi coding harness có tool và lifecycle khác nhau. Repository phải duy trì integration riêng cho Claude Code, Codex, Gemini, Cursor, Pi và các runtime khác.
 
 Do đó khi debug một behavior lạ, cần phân biệt:
 
@@ -1041,7 +933,7 @@ model behavior
 
 ## Superpowers phù hợp với ai?
 
-Tôi nghĩ project này đáng thử nếu bạn:
+Superpowers hợp với bạn hơn nếu bạn:
 
 - dùng coding agent trên repository thật,
 - làm feature kéo dài qua nhiều task,
@@ -1059,19 +951,13 @@ giải thích một function
 tạo một script throwaway
 ~~~
 
-thì toàn bộ workflow có thể không cần thiết.
-
-Nhưng khi coding agent bắt đầu sửa nhiều file, tạo branch, chạy test và làm việc hàng giờ, một methodology rõ ràng bắt đầu có giá trị hơn rất nhiều.
+thì toàn bộ workflow có thể không cần thiết. Nhưng khi coding agent bắt đầu sửa nhiều file, tạo branch, chạy test và làm việc hàng giờ, một methodology rõ ràng bắt đầu có giá trị hơn rất nhiều.
 
 ---
 
 ## Kết luận
 
-Điều thú vị nhất của Superpowers không nằm ở một skill riêng lẻ.
-
-Brainstorming, TDD, worktree, code review hay systematic debugging đều là những khái niệm đã tồn tại từ lâu.
-
-Điểm khác biệt là project **đóng gói chúng thành một state machine cho coding agent**:
+Superpowers không phát minh ra brainstorming, TDD, worktree hay code review. Phần đáng xem là cách project **ghép những thực hành quen thuộc đó thành một state machine cho coding agent**:
 
 ~~~text
 understand
@@ -1091,15 +977,11 @@ verify
 integrate
 ~~~
 
-Coding agent vẫn có quyền reasoning và viết code.
-
-Nhưng nó không được tự do bỏ qua những checkpoint quan trọng chỉ vì "có vẻ task này đơn giản".
-
-Đó là lý do tôi xem Superpowers không chỉ là một bộ prompt, mà là một thử nghiệm khá nghiêm túc về câu hỏi:
+Agent vẫn tự reasoning và viết code, nhưng các checkpoint như design approval, test và verification không còn là những bước tùy hứng. Vì vậy, tôi xem Superpowers như một cách trả lời khá cụ thể cho câu hỏi:
 
 > **Nếu AI trở thành developer trong team, chúng ta nên đưa cho nó quy trình làm việc như thế nào?**
 
-Nếu bạn đang dùng Claude Code, Codex, Antigravity hoặc một coding agent khác trên project thật, repo này đáng để đọc source và thử trên một project nhỏ trước.
+Nếu đang dùng Claude Code, Codex, Antigravity hoặc một coding agent khác trên project thật, tôi nghĩ nên thử Superpowers trên một repo nhỏ trước để xem mức process này có hợp với cách làm việc của bạn hay không.
 
 **Repository:** [https://github.com/obra/superpowers](https://github.com/obra/superpowers)
 

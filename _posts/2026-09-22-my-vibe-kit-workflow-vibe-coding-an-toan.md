@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "My Vibe Kit: Workflow vibe coding an toàn cho codebase thật"
+title: "My Vibe Kit: Workflow gọn cho vibe coding trên codebase thật"
 date: 2026-09-22
 author: Cuong Vuong
-description: "Giới thiệu My Vibe Kit — workflow và runtime giúp Codex, Claude Code và Antigravity làm việc theo flow plan → build → verify, giới hạn context theo dependency và chỉ kết luận khi có verification evidence."
+description: "My Vibe Kit là bộ workflow tôi dùng với Codex, Claude Code và Antigravity để giữ context vừa đủ, theo dõi dependency và chỉ báo hoàn thành khi có kết quả kiểm chứng thật."
 image: /assets/images/my-vibe-kit-workflow-cover.svg
 cover_image: /assets/images/my-vibe-kit-workflow-cover.svg
 image_width: 1200
@@ -17,12 +17,7 @@ tags:
   - fastapi
   - developer-tools
 ---
-
-Vibe coding rất thú vị khi bắt đầu một project mới. Chỉ cần mô tả thứ mình muốn, AI có thể tạo file, viết API, sửa bug hay refactor code rất nhanh.
-
-Nhưng khi project bắt đầu lớn lên, vấn đề không còn nằm ở chuyện **AI có viết được code hay không**.
-
-Vấn đề thật sự là:
+Vibe coding cho cảm giác rất nhanh: mô tả yêu cầu, để agent tạo file, viết API, sửa bug hoặc refactor. Với project nhỏ, cách này thường đủ tốt. Khi codebase lớn dần, câu hỏi không còn là **AI có viết được code hay không**. Tôi quan tâm nhiều hơn đến việc nó đang đọc gì, sửa gì và dựa vào đâu để kết luận task đã xong:
 
 - AI có đang đọc đúng phần code cần thiết không?
 - Nó có quét cả repository và đốt context không cần thiết không?
@@ -32,21 +27,17 @@ Vấn đề thật sự là:
 - Sau khi sửa xong, nó có thực sự chạy test hay chỉ nhìn code rồi nói “done”?
 - Nếu test command chưa được cấu hình, AI có vô tình coi task là hoàn thành không?
 
-Đó là lý do tôi xây dựng **My Vibe Kit**.
+**My Vibe Kit** ra đời từ đúng những vấn đề đó.
 
 **Repository:** [github.com/cuongtobi/my-vibe-kit](https://github.com/cuongtobi/my-vibe-kit)
 
-Hiện tại kit được thiết kế như một workflow cá nhân để dùng chung với **Codex, Claude Code và Google Antigravity**, nhưng phần runtime vẫn độc lập với từng agent cụ thể.
+Hiện tôi dùng kit như một workflow chung cho **Codex, Claude Code và Google Antigravity**. Phần runtime được tách khỏi từng agent, nên logic kiểm tra project không phụ thuộc vào một công cụ cụ thể.
 
 ---
 
 ## My Vibe Kit là gì?
 
-My Vibe Kit không cố biến AI coding thành một framework khổng lồ.
-
-Triết lý của nó ngược lại: giữ phần tương tác với agent càng nhỏ càng tốt.
-
-Toàn bộ workflow công khai chỉ có 4 skill:
+Tôi cố tình giữ My Vibe Kit nhỏ. Phần agent nhìn thấy chỉ nên đủ để biết phải làm gì; những việc có thể xác định bằng code thì đẩy xuống runtime. Toàn bộ workflow công khai chỉ có 4 skill:
 
 ```text
 vibe
@@ -62,7 +53,7 @@ Trong đó:
 - `build` thực hiện thay đổi trong đúng scope.
 - `verify` kiểm chứng kết quả bằng runtime evidence.
 
-Flow chính:
+Luồng cơ bản:
 
 ```text
 vibe
@@ -74,7 +65,7 @@ build
 verify
 ```
 
-Hay chi tiết hơn:
+Nếu bung chi tiết hơn:
 
 ```text
 User request
@@ -103,9 +94,7 @@ VERIFY
 PASS_VERIFIED
 ```
 
-Điểm quan trọng là **AI không tự suy luận rằng code trông có vẻ đúng đồng nghĩa với task đã hoàn thành**.
-
-`PASS_VERIFIED` chỉ có ý nghĩa khi các verification command thực sự được chạy và pass.
+Ở bước cuối, code trông hợp lý vẫn chưa đủ. **Task chỉ được coi là đã kiểm chứng khi các verification command thực sự chạy và pass.** Vì vậy, `PASS_VERIFIED` là trạng thái có bằng chứng đi kèm, không phải kết luận theo cảm giác của agent.
 
 Nếu project chưa có command kiểm chứng đáng tin cậy, runtime trả về:
 
@@ -113,15 +102,11 @@ Nếu project chưa có command kiểm chứng đáng tin cậy, runtime trả v
 NEEDS_VERIFICATION_CONFIG
 ```
 
-thay vì giả vờ rằng mọi thứ đều ổn.
-
----
+Nếu chưa có cách kiểm chứng đáng tin cậy, kit dừng ở trạng thái này thay vì tự coi task là xong. ---
 
 ## Vì sao tôi không muốn agent đọc toàn bộ project mỗi session?
 
-Một trong những vấn đề lớn khi dùng coding agent trên project dài hạn là context.
-
-Cách đơn giản nhất là mỗi session mới:
+Với project sống lâu, context nhanh chóng trở thành vấn đề thực tế. Cách đơn giản nhất là mỗi session mới:
 
 ```text
 scan toàn repository
@@ -131,11 +116,7 @@ scan toàn repository
 → bắt đầu làm
 ```
 
-Cách này hoạt động với project nhỏ, nhưng càng lớn càng tốn token và càng dễ đưa những thông tin không liên quan vào context.
-
-My Vibe Kit dùng một cách khác.
-
-Nó chia thông tin thành bốn lớp:
+Cách này hoạt động với project nhỏ, nhưng càng lớn càng tốn token và càng dễ đưa những thông tin không liên quan vào context. My Vibe Kit không làm vậy. Nó chia thông tin thành bốn lớp:
 
 ```text
 durable project truth
@@ -146,7 +127,7 @@ cold task history
 
 ### Durable project truth
 
-Đây là dữ liệu thật của project:
+Lớp này chứa những gì tôi coi là nguồn sự thật của project:
 
 ```text
 AGENTS.md
@@ -157,9 +138,7 @@ package manifests
 architecture docs
 ```
 
-Source code hiện tại luôn quan trọng hơn lịch sử chat.
-
----
+Nếu lịch sử chat mâu thuẫn với source hiện tại, source luôn được ưu tiên. ---
 
 ### Persistent state
 
@@ -176,9 +155,7 @@ Context và dependency đã tính toán được cache tại:
 └── last-architecture.json
 ```
 
-Đây là cache hiệu năng, không phải verification evidence.
-
-Runtime kiểm tra Git state, file hash, config hash và checksum trước khi tái sử dụng cache.
+Phần này chỉ là cache để tiết kiệm thời gian và token; nó không được dùng làm bằng chứng kiểm chứng. Runtime kiểm tra Git state, file hash, config hash và checksum trước khi tái sử dụng cache.
 
 Có ba trạng thái chính:
 
@@ -190,15 +167,11 @@ FULL_REBUILD
 
 ### CACHE_HIT
 
-Repository không thay đổi.
-
-Runtime tái sử dụng context/dependency cũ.
+Repository không thay đổi. Runtime tái sử dụng context/dependency cũ.
 
 ### INCREMENTAL_REFRESH
 
-Git phát hiện một số file thay đổi.
-
-Runtime chỉ refresh phần bị ảnh hưởng thay vì quét lại toàn project.
+Git phát hiện một số file thay đổi. Runtime chỉ refresh phần bị ảnh hưởng thay vì quét lại toàn project.
 
 ### FULL_REBUILD
 
@@ -210,23 +183,17 @@ Dùng khi:
 - Git delta không đáng tin cậy,
 - hoặc user yêu cầu rebuild.
 
-Mục tiêu là để session mới **không cần đọc lại mọi thứ chỉ để biết project đang ở đâu**.
-
----
+Nhờ vậy, session mới không phải đọc lại cả repository chỉ để khôi phục bối cảnh cơ bản. ---
 
 ## Bounded context: chỉ đưa phần cần thiết cho AI
 
-Dependency graph có thể rất lớn, nhưng model không cần nhìn toàn bộ graph.
-
-My Vibe Kit tạo:
+Dependency graph có thể rất lớn, nhưng model không cần nhìn toàn bộ graph. My Vibe Kit tạo:
 
 ```text
 .vibe/runtime/relevant-context.json
 ```
 
-với context được giới hạn.
-
-Mặc định first-pass:
+với context được giới hạn. Mặc định first-pass:
 
 ```text
 20 source files
@@ -235,11 +202,7 @@ Mặc định first-pass:
 dependency depth = 2
 ```
 
-Agent đọc neighborhood này trước.
-
-Nếu một dependency, consumer, failing test hoặc contract cho thấy cần mở rộng scope thì mới đọc thêm.
-
-Điều này giúp workflow gần với:
+Agent đọc neighborhood này trước. Nếu một dependency, consumer, failing test hoặc contract cho thấy cần mở rộng scope thì mới đọc thêm. Cách đọc context vì thế gần với:
 
 ```text
 find the relevant neighborhood
@@ -261,9 +224,7 @@ hope the important part is somewhere inside
 
 ## Adapter: cùng một workflow nhưng hiểu từng stack
 
-Bốn skill cốt lõi không được viết riêng cho từng framework.
-
-Thay vào đó runtime detect:
+Bốn skill cốt lõi không được viết riêng cho từng framework. Thay vào đó runtime detect:
 
 ```text
 language
@@ -305,9 +266,7 @@ language adapter: python
 framework adapter: fastapi
 ```
 
-Python dùng AST để xây local import graph.
-
-FastAPI adapter bổ sung context cho:
+Python dùng AST để xây local import graph. FastAPI adapter bổ sung context cho:
 
 ```text
 routes
@@ -326,9 +285,7 @@ và architecture guidance như:
 
 ## Architecture policy: không ép Clean Architecture vào mọi project
 
-Một vấn đề khác của coding agent là rất dễ over-engineer.
-
-Một feature nhỏ đôi khi bị biến thành:
+Coding agent cũng rất dễ over-engineer nếu prompt không đặt ranh giới rõ. Một feature nhỏ đôi khi bị biến thành:
 
 ```text
 interface
@@ -342,9 +299,7 @@ mapper
 use case
 ```
 
-trong khi project thực tế chỉ cần vài function rõ ràng.
-
-My Vibe Kit mặc định dùng:
+trong khi project thực tế chỉ cần vài function rõ ràng. My Vibe Kit mặc định dùng:
 
 ```text
 feature-first
@@ -374,23 +329,13 @@ domain / business rules
 data / infrastructure boundary
 ```
 
-Nhưng không bắt buộc phải tạo mọi layer.
-
-Rule quan trọng là:
+Nhưng không bắt buộc phải tạo mọi layer. Rule quan trọng là:
 
 > Chỉ thêm abstraction khi có boundary, variation, reuse hoặc testing need thực sự.
 
-Khi project lớn hơn hoặc được cấu hình `strict`, kit có thể chuyển sang dependency rule kiểu Clean/Hexagonal.
+Khi project lớn hơn hoặc được cấu hình `strict`, kit có thể chuyển sang dependency rule kiểu Clean/Hexagonal. Framework convention vẫn được ưu tiên. FastAPI nên vẫn trông giống FastAPI.
 
-Framework convention vẫn được ưu tiên.
-
-FastAPI nên vẫn trông giống FastAPI.
-
-Rails nên vẫn giống Rails.
-
-Laravel vẫn nên dùng convention của Laravel.
-
----
+Rails nên vẫn giống Rails. Laravel vẫn nên dùng convention của Laravel. ---
 
 ## Ví dụ: dùng My Vibe Kit với một project FastAPI nhỏ
 
@@ -435,7 +380,6 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -448,9 +392,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 
-
 client = TestClient(app)
-
 
 def test_health() -> None:
     response = client.get("/health")
@@ -498,9 +440,7 @@ python .\install.py `
   --agents codex claude antigravity
 ```
 
-Installer sẽ materialize workflow vào project.
-
-Sau đó project có thêm các phần như:
+Installer sẽ materialize workflow vào project. Sau đó project có thêm các phần như:
 
 ```text
 vibe-sample-fastapi/
@@ -539,9 +479,7 @@ pytest
 
 ## 3. Giao một task cho agent
 
-Giả sử tôi muốn thêm Todo API.
-
-Thay vì viết prompt rất dài mô tả từng bước, tôi chỉ cần yêu cầu:
+Giả sử tôi muốn thêm Todo API. Thay vì viết prompt rất dài mô tả từng bước, tôi chỉ cần yêu cầu:
 
 ```text
 Use vibe to add POST /tasks.
@@ -558,9 +496,7 @@ Keep storage in memory for now.
 Add tests.
 ```
 
-Từ đây `vibe` điều phối toàn bộ workflow.
-
----
+Từ đây `vibe` điều phối toàn bộ workflow. ---
 
 ## 4. PLAN — trước khi sửa code
 
@@ -570,9 +506,7 @@ Từ đây `vibe` điều phối toàn bộ workflow.
 mode = feature
 ```
 
-Runtime tạo task record mới.
-
-Về logic, agent sẽ chạy các bước tương đương:
+Runtime tạo task record mới. Về logic, agent sẽ chạy các bước tương đương:
 
 ```bash
 python .vibe/tools/vibe.py task start \
@@ -595,13 +529,7 @@ primary language: python
 framework: fastapi
 ```
 
-Dependency scanner Python dùng AST để nhìn local import graph.
-
-FastAPI framework context tìm route và router liên quan.
-
-Architecture policy cũng được materialize.
-
-Các artifact có thể xuất hiện tại:
+Dependency scanner Python dùng AST để nhìn local import graph. FastAPI framework context tìm route và router liên quan. Architecture policy cũng được materialize. Các artifact có thể xuất hiện tại:
 
 ```text
 .vibe/runtime/
@@ -614,9 +542,7 @@ Các artifact có thể xuất hiện tại:
 └── relevant-context.json
 ```
 
-Agent không cần đọc toàn repository.
-
-Với project nhỏ này context có thể rất ít, ví dụ:
+Agent không cần đọc toàn repository. Với project nhỏ này context có thể rất ít, ví dụ:
 
 ```text
 app/main.py
@@ -634,11 +560,7 @@ Trước khi implementation bắt đầu:
 python .vibe/tools/vibe.py snapshot before
 ```
 
-Dependency baseline ban đầu được giữ lại.
-
-Nếu workflow phải re-plan hoặc session bị ngắt, baseline này không được âm thầm thay thế bằng state mới.
-
-Đây là điểm quan trọng vì nếu lấy “before” sau khi code đã bị sửa thì dependency diff không còn ý nghĩa.
+Dependency baseline ban đầu được giữ lại. Nếu workflow phải re-plan hoặc session bị ngắt, baseline này không được âm thầm thay thế bằng state mới. Đây là điểm quan trọng vì nếu lấy “before” sau khi code đã bị sửa thì dependency diff không còn ý nghĩa.
 
 ---
 
@@ -674,9 +596,7 @@ routes
   GET /health
 ```
 
-Nếu project lớn hơn và route import service khác, reverse dependency graph có thể chỉ ra thêm consumers cần kiểm tra.
-
----
+Nếu project lớn hơn và route import service khác, reverse dependency graph có thể chỉ ra thêm consumers cần kiểm tra. ---
 
 ## 6. Plan có acceptance criteria cụ thể
 
@@ -688,9 +608,7 @@ Thay vì plan kiểu:
 3. chạy test
 ```
 
-kit khuyến khích acceptance criteria có thể kiểm chứng.
-
-Ví dụ:
+kit khuyến khích acceptance criteria có thể kiểm chứng. Ví dụ:
 
 ```text
 AC1
@@ -728,15 +646,11 @@ AC5 → verification commands
 tests pass
 ```
 
-nhưng phần user thực sự yêu cầu lại chưa được test.
-
----
+nhưng phần user thực sự yêu cầu lại chưa được test. ---
 
 ## 7. BUILD — thay đổi nhỏ nhất có thể
 
-Sau plan, `build` triển khai trong đúng scope.
-
-Với demo nhỏ, agent có thể tạo code tương tự:
+Sau plan, `build` triển khai trong đúng scope. Với demo nhỏ, agent có thể tạo code tương tự:
 
 ```python
 from fastapi import FastAPI
@@ -744,24 +658,19 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-
 class CreateTask(BaseModel):
     title: str
-
 
 class Task(BaseModel):
     id: int
     title: str
     done: bool = False
 
-
 tasks: list[Task] = []
-
 
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
-
 
 @app.post("/tasks")
 def create_task(payload: CreateTask) -> Task:
@@ -790,17 +699,9 @@ def test_create_task() -> None:
     }
 ```
 
-Điểm đáng chú ý là kit **không bắt project demo này phải có repository interface, service layer hay database adapter**.
+Ở ví dụ này, kit **không ép project phải có repository interface, service layer hay database adapter**. In-memory storage là yêu cầu hiện tại. Project còn nhỏ. Không có lý do để thêm abstraction chỉ để trông “enterprise”.
 
-In-memory storage là yêu cầu hiện tại.
-
-Project còn nhỏ.
-
-Không có lý do để thêm abstraction chỉ để trông “enterprise”.
-
-Nếu sau này task đổi thành PostgreSQL, lúc đó boundary dữ liệu mới trở nên có ý nghĩa.
-
----
+Nếu sau này task đổi thành PostgreSQL, lúc đó boundary dữ liệu mới trở nên có ý nghĩa. ---
 
 ## 8. VERIFY — code viết xong chưa có nghĩa là task đã xong
 
@@ -857,7 +758,7 @@ Nếu chưa có command nào được cấu hình:
 NEEDS_VERIFICATION_CONFIG
 ```
 
-Đây là một rule tôi đặc biệt muốn giữ trong kit:
+Đây là nguyên tắc tôi muốn giữ xuyên suốt kit:
 
 > Không có test evidence thì không gọi đó là verified.
 
@@ -865,9 +766,7 @@ NEEDS_VERIFICATION_CONFIG
 
 ## Nếu verification command tự sửa source thì sao?
 
-Một edge case khá nguy hiểm là formatter hoặc generator chạy trong verification nhưng lại thay đổi source code.
-
-Ví dụ:
+Một edge case khá nguy hiểm là formatter hoặc generator chạy trong verification nhưng lại thay đổi source code. Ví dụ:
 
 ```text
 verify command
@@ -877,19 +776,13 @@ formatter thay file
 test cũ đã chạy trên state trước
 ```
 
-Nếu vẫn báo pass thì evidence đã stale.
-
-My Vibe Kit bind verification với source fingerprint.
-
-Nếu input thay đổi trong quá trình verify:
+Nếu vẫn báo pass thì evidence đã stale. My Vibe Kit bind verification với source fingerprint. Nếu input thay đổi trong quá trình verify:
 
 ```text
 rerun_required = true
 ```
 
-Các command liên quan phải chạy lại trên final tree.
-
----
+Các command liên quan phải chạy lại trên final tree. ---
 
 ## Workflow sửa bug khác gì feature?
 
@@ -920,46 +813,34 @@ thấy exception
 → done
 ```
 
-Agent phải cố xác định root cause từ evidence và giữ regression test nếu có thể.
-
----
+Agent phải cố xác định root cause từ evidence và giữ regression test nếu có thể. ---
 
 ## Current task và task history
 
-Một điều tôi không muốn là mỗi session mới lại đọc hàng chục task cũ.
-
-Do đó:
+Một điều tôi không muốn là mỗi session mới lại đọc hàng chục task cũ. Do đó:
 
 ```text
 .vibe/tasks/
 ```
 
-được coi là **cold history**.
-
-Agent chỉ tập trung vào current task:
+được coi là **cold history**. Agent chỉ tập trung vào current task:
 
 ```text
 .vibe/runtime/current-task.json
 ```
 
-Nếu user tiếp tục cùng mục tiêu ở session sau, workflow tái sử dụng task hiện tại và baseline gốc.
-
-Không tạo task mới chỉ vì:
+Nếu user tiếp tục cùng mục tiêu ở session sau, workflow tái sử dụng task hiện tại và baseline gốc. Không tạo task mới chỉ vì:
 
 - mở session mới,
 - verification fail,
 - prompt được diễn đạt lại,
 - phải re-plan.
 
-Điều này giữ lịch sử task sạch hơn và tránh làm mất baseline thật.
-
----
+Nhờ vậy, lịch sử task không bị phình ra chỉ vì đổi session và baseline ban đầu vẫn được giữ đúng. ---
 
 ## Bảo vệ code đang làm dở của user
 
-Một coding agent không nên giả định working tree luôn sạch.
-
-Trước khi build, workflow ghi nhận:
+Một coding agent không nên giả định working tree luôn sạch. Trước khi build, workflow ghi nhận:
 
 ```bash
 git status --short --untracked-files=all
@@ -979,19 +860,11 @@ với:
 thay đổi do task hiện tại tạo ra
 ```
 
-Build không được reset hoặc discard code của user chỉ để làm diff “đẹp”.
-
-Điều này rất quan trọng khi dùng agent trên repository thật thay vì sandbox demo.
-
----
+Build không được reset hoặc discard code của user chỉ để làm diff “đẹp”. Trên repository thật, việc này quan trọng hơn nhiều so với một sandbox demo. ---
 
 ## Tại sao runtime chỉ dùng Python standard library?
 
-Một trong những mục tiêu của My Vibe Kit là dễ mang sang project khác.
-
-Bản thân runtime không yêu cầu một dependency stack lớn.
-
-Nó dùng Python standard library để làm baseline cho:
+Tôi cũng muốn kit có thể mang sang project khác mà không kéo theo một stack runtime nặng. Bản thân runtime không yêu cầu một dependency stack lớn. Nó dùng Python standard library để làm baseline cho:
 
 - repository inspection,
 - cache,
@@ -1001,9 +874,7 @@ Nó dùng Python standard library để làm baseline cho:
 - task state,
 - verification orchestration.
 
-Khi ecosystem có tool mạnh hơn, kit có thể tận dụng chúng như verification/native tooling.
-
-Ví dụ:
+Khi ecosystem có tool mạnh hơn, kit có thể tận dụng chúng như verification/native tooling. Ví dụ:
 
 ```text
 Python → Ruff / Pyright / mypy / pytest
@@ -1014,19 +885,11 @@ Go → go test
 Rust → cargo check / cargo test
 ```
 
-Runtime baseline không cố thay thế compiler, framework hay test runner.
-
-Nó điều phối chúng.
-
----
+Runtime baseline không cố thay thế compiler, framework hay test runner. Nó điều phối chúng. ---
 
 ## My Vibe Kit không cố giải quyết điều gì?
 
-Tôi không xây kit này để biến AI thành một hệ thống tự động hoàn hảo.
-
-Static analysis luôn có giới hạn.
-
-Ví dụ:
+My Vibe Kit không nhằm biến coding agent thành một hệ thống tự động hoàn hảo. Static analysis vẫn có giới hạn, nhất là với những cơ chế động của framework. Ví dụ:
 
 - dependency injection động,
 - reflection,
@@ -1037,17 +900,13 @@ Ví dụ:
 - Rails Zeitwerk autoload,
 - macro hoặc metaprogramming,
 
-có thể cần native tooling hoặc kiểm tra sâu hơn.
-
-Runtime coi dependency scanner là **baseline deterministic**, không phải sự thật tuyệt đối về mọi runtime behavior.
-
-Điều quan trọng hơn là workflow biết giới hạn đó và không biến inference thành “verified fact”.
+có thể cần native tooling hoặc kiểm tra sâu hơn. Runtime coi dependency scanner là **baseline deterministic**, không phải sự thật tuyệt đối về mọi runtime behavior. Quan trọng là workflow biết giới hạn của scanner và không biến một suy đoán thành “verified fact”.
 
 ---
 
 ## Khi nào My Vibe Kit hữu ích nhất?
 
-Theo tôi, kit có giá trị nhất khi bạn:
+Kit hữu ích nhất khi bạn:
 
 - dùng coding agent hàng ngày,
 - làm việc trên repository tồn tại lâu dài,
@@ -1058,11 +917,7 @@ Theo tôi, kit có giá trị nhất khi bạn:
 - muốn dùng cùng workflow trên nhiều agent,
 - và không muốn câu “looks good” được coi là bằng chứng hoàn thành.
 
-Với project nhỏ, workflow vẫn nhẹ.
-
-Với project lớn hơn, persistent context và incremental dependency refresh bắt đầu mang lại lợi ích rõ hơn.
-
----
+Với project nhỏ, workflow vẫn nhẹ. Với project lớn hơn, persistent context và incremental dependency refresh bắt đầu mang lại lợi ích rõ hơn. ---
 
 ## Cách sử dụng hằng ngày
 
@@ -1085,19 +940,15 @@ Use plan to analyze migrating SQLite to PostgreSQL.
 Do not edit code yet.
 ```
 
-Phần phức tạp nằm bên dưới workflow, không nằm trong prompt của user.
-
-Đó cũng là mục tiêu chính của project.
-
----
+Phần phức tạp nằm dưới workflow, không nằm trong prompt hằng ngày. Tôi muốn câu lệnh gửi cho agent ngắn, còn việc giữ state, dependency và verification do kit lo. ---
 
 ## Kết luận
 
-My Vibe Kit bắt đầu từ một nhu cầu rất cá nhân:
+My Vibe Kit bắt đầu từ một nhu cầu khá đơn giản của chính tôi:
 
-> Tôi muốn vibe code nhanh, nhưng không muốn đánh đổi khả năng kiểm soát codebase.
+> Tôi muốn vibe code nhanh, nhưng vẫn biết agent đã đọc gì, sửa gì và kiểm chứng bằng cách nào.
 
-Thay vì tăng số lượng prompt và instruction, tôi chọn giữ một workflow nhỏ:
+Vì vậy, thay vì tiếp tục thêm prompt và instruction, tôi giữ workflow ở bốn bước:
 
 ```text
 vibe
@@ -1128,9 +979,7 @@ Agent vẫn làm phần nó mạnh nhất:
 - viết code,
 - xử lý lỗi.
 
-Runtime đảm nhiệm những việc không nên chỉ dựa vào trí nhớ hoặc phỏng đoán của model.
-
-Kết quả tôi hướng tới không phải là “AI viết nhiều code hơn”, mà là:
+Runtime giữ những phần không nên phụ thuộc vào trí nhớ của model: state, dependency, fingerprint và kết quả kiểm chứng. Mục tiêu cuối cùng không phải để AI viết nhiều code hơn, mà để mỗi thay đổi dễ kiểm soát hơn:
 
 ```text
 đọc ít context hơn
@@ -1144,6 +993,6 @@ biết dependency bị ảnh hưởng
 có evidence trước khi nói task hoàn thành
 ```
 
-Nếu bạn cũng đang dùng Codex, Claude Code hoặc Antigravity trên các project thật, bạn có thể xem source và thử My Vibe Kit tại:
+Nếu bạn đang dùng Codex, Claude Code hoặc Antigravity trên một codebase thật, source của My Vibe Kit nằm ở:
 
 [https://github.com/cuongtobi/my-vibe-kit](https://github.com/cuongtobi/my-vibe-kit)
