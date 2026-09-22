@@ -1,0 +1,95 @@
+---
+layout: page
+title: Categories
+permalink: /categories.html
+description: Khám phá bài viết theo từng chuyên mục.
+---
+
+<section class="page-hero page-hero-split">
+  <div>
+    <p class="section-kicker">EXPLORE BY CATEGORY</p>
+    <h1>Categories</h1>
+    <h2 class="gradient-text hero-subtitle">Browse projects, notes, and ideas by category.</h2>
+    <p>Duyệt các chuyên mục chính trên blog. Chọn một category để xem những bài viết liên quan trong cùng nhóm nội dung.</p>
+  </div>
+  <div class="page-hero-visual tags-visual">
+    <span>&gt;_</span>
+    <strong>BUILD<br>LEARN<br>ORGANIZE</strong>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="tag-search-row">
+    <label class="search-field tag-search-field">
+      <span>⌕</span>
+      <input type="search" placeholder="Search categories..." data-tag-search>
+    </label>
+    <span>{{ site.categories.size }} categories</span>
+  </div>
+
+  <div class="section-heading"><h2>// ALL CATEGORIES</h2></div>
+  <div class="tag-index" data-tag-index>
+    {% for category in site.categories %}
+      {% assign category_label = category[0] | replace: '-', ' ' %}
+      {% if category[0] == 'ai-projects' %}{% assign category_label = 'AI Projects' %}{% endif %}
+      {% if category[0] == 'today-i-learned' %}{% assign category_label = 'Today I Learned' %}{% endif %}
+      <a id="{{ category[0] | slugify }}" href="#posts-{{ category[0] | slugify }}" data-tag-item data-tag-name="{{ category_label | downcase }}">
+        <strong>{{ category_label }}</strong>
+        <span>{{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if site.categories.size == 0 %}
+  <div class="empty-state">Chưa có category. Hãy thêm trường <code>categories</code> vào front matter của bài viết.</div>
+  {% endif %}
+</section>
+
+{% if site.categories.size > 0 %}
+<section class="content-section">
+  <div class="section-heading"><h2>// FEATURED CATEGORIES</h2></div>
+  <div class="tag-feature-grid">
+    {% for category in site.categories limit:4 %}
+      {% assign category_label = category[0] | replace: '-', ' ' %}
+      {% if category[0] == 'ai-projects' %}{% assign category_label = 'AI Projects' %}{% endif %}
+      {% if category[0] == 'today-i-learned' %}{% assign category_label = 'Today I Learned' %}{% endif %}
+      <a class="tag-feature-card" href="#posts-{{ category[0] | slugify }}">
+        <span class="project-icon">{{ category_label | slice: 0, 2 | upcase }}</span>
+        <div>
+          <h3>{{ category_label }}</h3>
+          <p>{{ category[1].size }} related post{% if category[1].size != 1 %}s{% endif %}</p>
+          <span class="text-link">View posts →</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-heading"><h2>// POSTS BY CATEGORY</h2></div>
+  <div class="tag-post-groups">
+    {% for category in site.categories %}
+      {% assign category_label = category[0] | replace: '-', ' ' %}
+      {% if category[0] == 'ai-projects' %}{% assign category_label = 'AI Projects' %}{% endif %}
+      {% if category[0] == 'today-i-learned' %}{% assign category_label = 'Today I Learned' %}{% endif %}
+      <section class="tag-post-group" id="posts-{{ category[0] | slugify }}">
+        <div class="tag-post-group-head">
+          <h3>{{ category_label }}</h3>
+          <span>{{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %}</span>
+        </div>
+        {% for post in category[1] limit:4 %}
+          <a class="compact-post tag-post-row" href="{{ post.url | relative_url }}">
+            <span class="compact-thumb"></span>
+            <span>
+              <strong>{{ post.title }}</strong>
+              <small>{{ post.description | strip_html | truncate: 110 }}</small>
+            </span>
+            <span class="tag-row-meta">{{ post.date | date: "%d/%m/%Y" }}</span>
+          </a>
+        {% endfor %}
+        <a class="text-link" href="{{ '/categories/' | append: category[0] | append: '.html' | relative_url }}">View all {{ category_label }} posts →</a>
+      </section>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
