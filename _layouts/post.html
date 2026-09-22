@@ -30,6 +30,17 @@
       </div>
     </div>
 
+    {% if page.cover_image %}
+    <div class="article-cover" style="min-height:0;padding:0;overflow:hidden;background:none;">
+      <img
+        src="{{ page.cover_image | relative_url }}"
+        alt="{{ page.title | escape }}"
+        width="{{ page.image_width | default: 1200 }}"
+        height="{{ page.image_height | default: 630 }}"
+        style="display:block;width:100%;height:auto;"
+      >
+    </div>
+    {% else %}
     <div class="article-cover">
       <div>
         <span>Ideas</span>
@@ -41,6 +52,7 @@
       </div>
       <em>A brighter web, one useful thing at a time.</em>
     </div>
+    {% endif %}
   </header>
 
   <div class="post-layout">
