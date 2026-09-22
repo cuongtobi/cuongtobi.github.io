@@ -1,9 +1,10 @@
 {% include header.html %}
 
+{% assign category_title = page.title | default: page.category | replace: '-', ' ' %}
 <section class="page-hero compact-page-hero">
   <p class="section-kicker">// CATEGORY</p>
-  <h1>{{ page.category | replace: '-', ' ' | capitalize }}</h1>
-  <p>Các bài viết thuộc chủ đề <strong>{{ page.category | replace: '-', ' ' }}</strong>.</p>
+  <h1>{{ category_title }}</h1>
+  <p>Các bài viết thuộc chủ đề <strong>{{ category_title }}</strong>.</p>
 </section>
 
 <section class="content-section">
