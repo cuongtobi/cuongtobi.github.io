@@ -1,0 +1,85 @@
+---
+layout: page
+title: Tags
+permalink: /tags.html
+description: Khám phá bài viết theo chủ đề.
+---
+
+<section class="page-hero page-hero-split">
+  <div>
+    <p class="section-kicker">EXPLORE BY TOPIC</p>
+    <h1>Tags</h1>
+    <h2 class="gradient-text hero-subtitle">Find ideas, dive deeper, and explore.</h2>
+    <p>Duyệt các chủ đề tôi viết — từ web development và scraping đến AI workflow. Chọn tag để xem các bài viết liên quan.</p>
+  </div>
+  <div class="page-hero-visual tags-visual">
+    <span>&gt;_</span>
+    <strong>A CLEAN<br>MIND BUILDS<br>BETTER THINGS</strong>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="tag-search-row">
+    <label class="search-field tag-search-field">
+      <span>⌕</span>
+      <input type="search" placeholder="Search tags..." data-tag-search>
+    </label>
+    <span>{{ site.tags.size }} tags</span>
+  </div>
+
+  <div class="section-heading"><h2>// ALL TAGS</h2></div>
+  <div class="tag-index" data-tag-index>
+    {% for tag in site.tags %}
+      <a id="{{ tag[0] | slugify }}" href="#posts-{{ tag[0] | slugify }}" data-tag-item data-tag-name="{{ tag[0] | downcase }}">
+        <strong>{{ tag[0] | replace: '-', ' ' }}</strong>
+        <span>{{ tag[1].size }} post{% if tag[1].size != 1 %}s{% endif %}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if site.tags.size == 0 %}
+  <div class="empty-state">Chưa có tag. Hãy thêm trường <code>tags</code> vào front matter của bài viết.</div>
+  {% endif %}
+</section>
+
+{% if site.tags.size > 0 %}
+<section class="content-section">
+  <div class="section-heading"><h2>// FEATURED TAGS</h2></div>
+  <div class="tag-feature-grid">
+    {% for tag in site.tags limit:4 %}
+      <a class="tag-feature-card" href="#posts-{{ tag[0] | slugify }}">
+        <span class="project-icon">{{ tag[0] | slice: 0, 2 | upcase }}</span>
+        <div>
+          <h3>{{ tag[0] | replace: '-', ' ' }}</h3>
+          <p>{{ tag[1].size }} related post{% if tag[1].size != 1 %}s{% endif %}</p>
+          <span class="text-link">View posts →</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-heading"><h2>// POSTS BY TAG</h2></div>
+  <div class="tag-post-groups">
+    {% for tag in site.tags %}
+      <section class="tag-post-group" id="posts-{{ tag[0] | slugify }}">
+        <div class="tag-post-group-head">
+          <h3># {{ tag[0] | replace: '-', ' ' }}</h3>
+          <span>{{ tag[1].size }} post{% if tag[1].size != 1 %}s{% endif %}</span>
+        </div>
+        {% for post in tag[1] limit:4 %}
+          <a class="compact-post tag-post-row" href="{{ post.url | relative_url }}">
+            <span class="compact-thumb"></span>
+            <span>
+              <strong>{{ post.title }}</strong>
+              <small>{{ post.description | strip_html | truncate: 110 }}</small>
+            </span>
+            <span class="tag-row-meta">{{ post.date | date: "%d/%m/%Y" }}</span>
+          </a>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
