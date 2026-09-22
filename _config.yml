@@ -1,14 +1,20 @@
-title: cuongtobi - blog công nghệ
+title: cuongtobi — Developer Blog
 email: cuongvuong299@gmail.com
 description: >-
-  cuongtobi - blog công nghệ, chia sẻ kiến thức lập trình, blockchain, cryptocurrency.
+  Blog cá nhân của cuongtobi về lập trình, công cụ, workflow, web development và những thứ tôi học được trong quá trình xây dựng sản phẩm.
 baseurl: ""
 url: "https://cuongtobi.github.io"
+lang: vi
+author:
+  name: Cuong
+  handle: cuongtobi
+  role: Developer · Writer · Builder
 github_username: cuongtobi
 paginate: 10
 paginate_path: "/page/:num"
 permalink: "/:title.html"
 markdown: kramdown
+highlighter: rouge
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
