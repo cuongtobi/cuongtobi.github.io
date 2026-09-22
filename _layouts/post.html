@@ -1,19 +1,110 @@
 {% include header.html %}
 
-<article>
-  <div class="article-header text-center">
-    <h1>{{ page.title }}</h1>
-    <div class="article-metas">
-      <span class="article-date">{{ page.date | date: "%d/%m/%Y" }}</span>
-      <a class="category" href="{{ site.baseurl }}/categories/{{ page.categories | first | downcase }}">
-        {{ page.categories | first | replace: '-', ' ' | upcase }}
-      </a>
+<article class="post-page">
+  <header class="post-hero">
+    <div class="post-meta">
+      {% if page.tags and page.tags.size > 0 %}
+        <a class="pill" href="{{ '/tags.html' | relative_url }}#{{ page.tags | first | slugify }}">{{ page.tags | first | replace: '-', ' ' }}</a>
+      {% else %}
+        <span class="pill">{{ page.categories | first | replace: '-', ' ' }}</span>
+      {% endif %}
+      <span>{{ page.date | date: "%d/%m/%Y" }}</span>
+      <span>◷ {{ content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
     </div>
-  </div>
-  <div class="article-content">
-    {{ page.content }}
+
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="post-deck">{{ page.description }}</p>{% endif %}
+
+    <div class="post-author-row">
+      <div class="post-author">
+        <img src="{{ '/apple-touch-icon.png' | relative_url }}" alt="Cuong" class="avatar avatar-small">
+        <div>
+          <strong>{{ page.author | default: site.author.name }}</strong>
+          <span>{{ site.author.role }}</span>
+        </div>
+      </div>
+      <div class="share-row">
+        <span>Share</span>
+        <a href="mailto:?subject={{ page.title | uri_escape }}&body={{ page.url | absolute_url | uri_escape }}" aria-label="Share by email">✉</a>
+        <button type="button" data-copy-url aria-label="Copy link">↗</button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div>
+        <span>Ideas</span>
+        <span>Build</span>
+        <span>Ship</span>
+        <span>Improve</span>
+        <span>Repeat</span>
+        <b>&gt;_</b>
+      </div>
+      <em>A brighter web, one useful thing at a time.</em>
+    </div>
+  </header>
+
+  <div class="post-layout">
+    <div class="article-content">
+      {{ content }}
+
+      <div class="article-end-card">
+        <img src="{{ '/apple-touch-icon.png' | relative_url }}" alt="Cuong" class="avatar">
+        <div>
+          <span class="eyebrow">ABOUT THE AUTHOR</span>
+          <h3>Cuong · Developer, Writer, Builder</h3>
+          <p>Tôi viết về những thứ đã thử, đã xây dựng và những bài học có thể dùng lại trong dự án tiếp theo.</p>
+          <a class="text-link" href="{{ '/about.html' | relative_url }}">More about me →</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="article-sidebar">
+      <div class="sticky-stack">
+        <section class="side-card toc-card">
+          <h2>▣ Table of Contents</h2>
+          <ol id="toc-list">
+            <li class="muted">Đang tạo mục lục…</li>
+          </ol>
+        </section>
+
+        <section class="side-card newsletter-card">
+          <div class="mail-icon">☼</div>
+          <h3>Enjoying this post?</h3>
+          <p>Nhận bài viết mới về code, công cụ và workflow.</p>
+          <a class="button button-primary button-full" href="mailto:{{ site.email }}?subject=Subscribe%20to%20cuongtobi">Subscribe</a>
+        </section>
+
+        <section class="sidebar-list">
+          <div class="section-heading">
+            <h2>// POPULAR POSTS</h2>
+            <a href="{{ '/posts.html' | relative_url }}">View all →</a>
+          </div>
+          {% for post in site.posts limit:3 %}
+            {% unless post.url == page.url %}
+            <a class="compact-post" href="{{ post.url | relative_url }}">
+              <span class="compact-thumb"></span>
+              <span>
+                <strong>{{ post.title | truncate: 54 }}</strong>
+                <small>{{ post.date | date: "%d/%m/%Y" }}</small>
+              </span>
+            </a>
+            {% endunless %}
+          {% endfor %}
+        </section>
+
+        {% if page.tags %}
+        <section class="sidebar-list">
+          <div class="section-heading"><h2>// TAGS</h2></div>
+          <div class="tag-cloud">
+            {% for tag in page.tags %}
+              <a href="{{ '/tags.html' | relative_url }}#{{ tag | slugify }}">{{ tag | replace: '-', ' ' }}</a>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+      </div>
+    </aside>
   </div>
 </article>
 
 {% include footer.html %}
-
