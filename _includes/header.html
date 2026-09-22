@@ -9,8 +9,8 @@
   <meta name="robots" content="{{ page.robots | default: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
   <meta name="theme-color" content="#f6f8fc">
 
-  {% if site.google_site_verification and site.google_site_verification != "" %}
-  <meta name="google-site-verification" content="{{ site.google_site_verification | escape }}">
+  {% if site.google_search_console_verification and site.google_search_console_verification != "" %}
+  <meta name="google-site-verification" content="{{ site.google_search_console_verification | escape }}">
   {% endif %}
 
   {% assign seo_image = page.image | default: site.image %}
