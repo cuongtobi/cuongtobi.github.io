@@ -2,13 +2,14 @@
 layout: post
 title: Scraping đơn giản trong PHP bằng cURL
 date: 2022-04-25
-author: cuongtobi
+author: Cuong Vuong
 categories: today-i-learned
 tags:
   - php
   - scraping
   - curl
-description: Trong PHP có rất nhiều cách để scraping một trang web. Trong bài viết này sẽ giới thiệu một cách scraping đơn giản trong PHP bằng cURL...
+description: Hướng dẫn scraping website bằng PHP cURL: khởi tạo request, cấu hình options, lấy HTML và trích xuất dữ liệu cơ bản bằng regex.
+image: /assets/images/og-default.png
 ---
 Trong **PHP** có rất nhiều cách để scraping một trang web. Trong bài viết này sẽ giới thiệu một cách **scraping** đơn giản trong PHP bằng **cURL**.
 
