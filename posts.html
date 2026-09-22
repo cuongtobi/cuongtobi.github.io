@@ -75,7 +75,9 @@ description: Tất cả bài viết về lập trình, web development, công c�
       <div class="side-card category-list">
         <a class="active" href="{{ '/posts.html' | relative_url }}"><span>All Posts</span><b>{{ site.posts.size }}</b></a>
         {% for category in site.categories %}
-          <a href="{{ '/categories/' | append: category[0] | downcase | relative_url }}"><span>{{ category[0] | replace: '-', ' ' }}</span><b>{{ category[1].size }}</b></a>
+          {% assign category_label = category[0] | replace: '-', ' ' %}
+          {% if category[0] == 'ai-projects' %}{% assign category_label = 'AI Projects' %}{% endif %}
+          <a href="{{ '/categories/' | append: category[0] | downcase | append: '.html' | relative_url }}"><span>{{ category_label }}</span><b>{{ category[1].size }}</b></a>
         {% endfor %}
       </div>
     </section>
