@@ -1,0 +1,43 @@
+{% assign current_name = page.title | default: site.title %}
+
+{% unless page.url == "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ "/" | absolute_url | jsonify }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ current_name | jsonify }},
+      "item": {{ page.url | absolute_url | jsonify }}
+    }
+  ]
+}
+</script>
+{% endunless %}
+
+{% if page.url == "/about.html" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": {{ page.url | absolute_url | jsonify }},
+  "name": {{ page.title | jsonify }},
+  "mainEntity": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }},
+    "url": {{ site.author.url | jsonify }},
+    "image": {{ "/apple-touch-icon.png" | absolute_url | jsonify }},
+    "jobTitle": "Developer",
+    "sameAs": {{ site.social.links | jsonify }}
+  }
+}
+</script>
+{% endif %}
