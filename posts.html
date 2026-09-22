@@ -1,0 +1,102 @@
+---
+layout: page
+title: Posts
+permalink: /posts.html
+description: Tất cả bài viết về lập trình, web development, công cụ và workflow.
+---
+
+<section class="page-hero page-hero-split">
+  <div>
+    <p class="section-kicker">// BLOG</p>
+    <h1>All <span class="gradient-text">Posts</span></h1>
+    <p>Ghi chú, tutorial và những bài học thực tế về lập trình, productivity và cách xây dựng web tốt hơn.</p>
+    <div class="filter-row">
+      <button class="filter-chip active" type="button" data-post-filter="all">All Posts</button>
+      {% for tag in site.tags limit:5 %}
+        <button class="filter-chip" type="button" data-post-filter="{{ tag[0] | downcase | escape }}">{{ tag[0] | replace: '-', ' ' }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="page-hero-visual">
+    <span>&gt;_</span>
+    <strong>Good Code<br>Better Tools<br>Clearer Thinking</strong>
+  </div>
+</section>
+
+{% assign featured = site.posts.first %}
+{% if featured %}
+<section class="content-section">
+  <div class="section-heading"><h2>// FEATURED POST</h2></div>
+  <article class="featured-card">
+    <a class="featured-visual" href="{{ featured.url | relative_url }}"><span>Build<br>Deploy<br>Iterate<br>Repeat<br>&gt;_</span></a>
+    <div class="featured-copy">
+      <div class="post-meta">
+        {% if featured.tags and featured.tags.size > 0 %}<span class="pill">{{ featured.tags | first }}</span>{% endif %}
+        <span>{{ featured.date | date: "%d/%m/%Y" }}</span>
+        <span>◷ {{ featured.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+      </div>
+      <h2><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h2>
+      <p>{{ featured.description | strip_html | truncate: 220 }}</p>
+      <a class="text-link" href="{{ featured.url | relative_url }}">Read article →</a>
+    </div>
+  </article>
+</section>
+{% endif %}
+
+<div class="content-grid posts-layout">
+  <div class="main-column">
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>// ALL POSTS</h2>
+        <span>{{ site.posts.size }} posts</span>
+      </div>
+      <div class="post-card-grid" data-post-grid>
+        {% for post in site.posts %}
+          {% include article.html %}
+        {% endfor %}
+      </div>
+      <div class="empty-state" data-post-empty hidden>Không tìm thấy bài viết phù hợp.</div>
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <section class="side-section" id="search">
+      <div class="section-heading"><h2>// SEARCH POSTS</h2></div>
+      <div class="side-card">
+        <label class="search-field">
+          <span>⌕</span>
+          <input type="search" placeholder="Search posts..." data-post-search>
+        </label>
+      </div>
+    </section>
+
+    <section class="side-section">
+      <div class="section-heading"><h2>// CATEGORIES</h2></div>
+      <div class="side-card category-list">
+        <a class="active" href="{{ '/posts.html' | relative_url }}"><span>All Posts</span><b>{{ site.posts.size }}</b></a>
+        {% for category in site.categories %}
+          <a href="{{ '/categories/' | append: category[0] | downcase | relative_url }}"><span>{{ category[0] | replace: '-', ' ' }}</span><b>{{ category[1].size }}</b></a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="side-section">
+      <div class="section-heading"><h2>// POPULAR TAGS</h2></div>
+      <div class="tag-cloud">
+        {% for tag in site.tags limit:12 %}
+          <a href="{{ '/tags.html' | relative_url }}#{{ tag[0] | slugify }}">{{ tag[0] | replace: '-', ' ' }}</a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="side-section">
+      <div class="section-heading"><h2>// NEWSLETTER</h2></div>
+      <div class="side-card newsletter-card">
+        <div class="mail-icon">✉</div>
+        <h3>Get new posts in your inbox</h3>
+        <p>Practical ideas, tools and notes — no spam.</p>
+        <a class="button button-primary button-full" href="mailto:{{ site.email }}?subject=Subscribe%20to%20cuongtobi">Subscribe</a>
+      </div>
+    </section>
+  </aside>
+</div>
