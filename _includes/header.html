@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      {% if page.title %}
-        {{ page.title }}
-      {% else %}
-        {{ site.title }}
-      {% endif%}
-    </title>
-    {% if page.description %}
-      <meta name="description" content="{{ page.description }}"/>
-    {% endif %}
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="icon" href="/favicon.ico"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="{{ site.baseurl }}/resources/css/main.css?v=1.0.0"/>
-  </head>
-<body>
-  <div class="wrapper">
-    <header>
-      <div id="header">
-        <a href="/" class="site-title">cuongtobi@do9<span class="ubuntu-path-white">:</span><span class="ubuntu-path">~/home$</span></a>
+<html lang="{{ site.lang | default: 'vi' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
+  <meta name="theme-color" content="#070d14">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/resources/css/main.css' | relative_url }}?v=2.0.0">
+  <script defer src="{{ '/resources/js/main.js' | relative_url }}?v=2.0.0"></script>
+</head>
+<body class="layout-{{ page.layout | default: 'page' }}">
+  <div class="site-shell">
+    <header class="site-header">
+      <a href="{{ '/' | relative_url }}" class="brand" aria-label="Trang chủ">
+        <span class="brand-prompt">&gt;_</span>
+        <span class="brand-name">Personal Blog</span>
+      </a>
+
+      <button class="mobile-menu-button" type="button" aria-label="Mở menu" aria-expanded="false" data-menu-button>
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" data-site-nav aria-label="Điều hướng chính">
+        <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' or page.url contains '/page/' %}active{% endif %}">Home</a>
+        <a href="{{ '/posts.html' | relative_url }}" class="{% if page.layout == 'post' or page.layout == 'category' or page.url contains '/posts' %}active{% endif %}">Posts</a>
+        <a href="{{ '/projects.html' | relative_url }}" class="{% if page.url contains '/projects' %}active{% endif %}">Projects</a>
+        <a href="{{ '/about.html' | relative_url }}" class="{% if page.url contains '/about' %}active{% endif %}">About</a>
+        <a href="{{ '/tags.html' | relative_url }}" class="{% if page.url contains '/tags' %}active{% endif %}">Tags</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="icon-button" href="{{ '/posts.html#search' | relative_url }}" aria-label="Tìm kiếm">
+          <span aria-hidden="true">⌕</span>
+        </a>
+        <button class="icon-button theme-toggle" type="button" aria-label="Đổi độ sáng giao diện" data-theme-toggle>
+          <span aria-hidden="true">☾</span>
+        </button>
+        <a class="button button-small button-outline" href="mailto:{{ site.email }}?subject=Subscribe%20to%20cuongtobi">Subscribe</a>
       </div>
     </header>
+    <main class="site-main">
