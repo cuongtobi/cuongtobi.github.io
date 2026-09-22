@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">OmniVoice — 600+ language zero-shot TTS</title>
+  <desc id="desc">Cover mô tả flow text, reference voice, masked diffusion audio tokens và waveform output.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06131d"/>
+      <stop offset=".55" stop-color="#0b2130"/>
+      <stop offset="1" stop-color="#15112d"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1060" cy="90" r="260" fill="#38bdf8" opacity=".08"/>
+  <circle cx="140" cy="610" r="280" fill="#7c3aed" opacity=".1"/>
+
+  <g transform="translate(64 70)">
+    <text x="0" y="0" fill="#7990a4" font-family="Inter,Segoe UI,sans-serif" font-size="17" font-weight="700">CUONG VUONG · DEVELOPER BLOG</text>
+    <text x="0" y="78" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="72" font-weight="850" letter-spacing="-3">Omni</text>
+    <text x="165" y="78" fill="url(#cyan)" font-family="Inter,Segoe UI,sans-serif" font-size="72" font-weight="850" letter-spacing="-3">Voice</text>
+    <text x="0" y="128" fill="#d7e2ec" font-family="Inter,Segoe UI,sans-serif" font-size="29" font-weight="650">Zero-shot TTS cho hơn 600 ngôn ngữ</text>
+    <text x="0" y="167" fill="#879bad" font-family="Inter,Segoe UI,sans-serif" font-size="17">Voice cloning · Voice design · Diffusion-style decoding</text>
+
+    <g transform="translate(0 224)">
+      <rect width="420" height="247" rx="20" fill="#091823" stroke="#2a4557"/>
+      <text x="24" y="39" fill="#8ddff0" font-family="JetBrains Mono,monospace" font-size="14">INPUT MODES</text>
+      <rect x="24" y="61" width="372" height="46" rx="10" fill="#102532" stroke="#226c76"/>
+      <text x="43" y="90" fill="#66e4d6" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700">AUTO VOICE</text>
+      <text x="174" y="90" fill="#8fa3b4" font-family="Inter,Segoe UI,sans-serif" font-size="13">text only</text>
+
+      <rect x="24" y="117" width="372" height="46" rx="10" fill="#151d37" stroke="#514f94"/>
+      <text x="43" y="146" fill="#b4a8ff" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700">VOICE CLONING</text>
+      <text x="192" y="146" fill="#8fa3b4" font-family="Inter,Segoe UI,sans-serif" font-size="13">text + reference audio</text>
+
+      <rect x="24" y="173" width="372" height="46" rx="10" fill="#24192d" stroke="#76508d"/>
+      <text x="43" y="202" fill="#d9a5f2" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700">VOICE DESIGN</text>
+      <text x="180" y="202" fill="#8fa3b4" font-family="Inter,Segoe UI,sans-serif" font-size="13">text + instruct</text>
+    </g>
+
+    <g transform="translate(0 505)">
+      <rect width="128" height="32" rx="16" fill="#0d2830" stroke="#2da6a0"/>
+      <text x="64" y="21" text-anchor="middle" fill="#70e8db" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">600+ LANGUAGES</text>
+      <rect x="140" width="123" height="32" rx="16" fill="#181c36" stroke="#5c5bd0"/>
+      <text x="201.5" y="21" text-anchor="middle" fill="#b0aaff" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">ZERO-SHOT</text>
+      <rect x="275" width="135" height="32" rx="16" fill="#101c29" stroke="#3c637b"/>
+      <text x="342.5" y="21" text-anchor="middle" fill="#9cc9dd" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">APACHE-2.0</text>
+    </g>
+  </g>
+
+  <g transform="translate(535 75)">
+    <rect width="600" height="466" rx="24" fill="#07131d" stroke="#2d4658" stroke-width="2"/>
+    <text x="28" y="44" fill="#eef7fb" font-family="Inter,Segoe UI,sans-serif" font-size="21" font-weight="750">Inference flow</text>
+
+    <g transform="translate(30 80)" font-family="Inter,Segoe UI,sans-serif">
+      <rect x="0" y="0" width="150" height="60" rx="13" fill="#10232e" stroke="#397383"/>
+      <text x="75" y="25" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Text + prompt</text>
+      <text x="75" y="44" text-anchor="middle" fill="#8198aa" font-size="11">lang / voice / ref</text>
+
+      <path d="M153 30 H191" stroke="#43d9d1" stroke-width="2"/>
+      <path d="M184 24 l8 6 -8 6" fill="none" stroke="#43d9d1" stroke-width="2"/>
+
+      <rect x="194" y="0" width="150" height="60" rx="13" fill="#121d31" stroke="#4f67a0"/>
+      <text x="269" y="25" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Conditioning</text>
+      <text x="269" y="44" text-anchor="middle" fill="#8198aa" font-size="11">text + audio tokens</text>
+
+      <path d="M347 30 H385" stroke="#43d9d1" stroke-width="2"/>
+      <path d="M378 24 l8 6 -8 6" fill="none" stroke="#43d9d1" stroke-width="2"/>
+
+      <rect x="388" y="0" width="150" height="60" rx="13" fill="#18182e" stroke="#6456aa"/>
+      <text x="463" y="25" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Masked tokens</text>
+      <text x="463" y="44" text-anchor="middle" fill="#8198aa" font-size="11">8 codebooks</text>
+
+      <path d="M463 64 V101" stroke="#43d9d1" stroke-width="2"/>
+      <path d="M457 94 l6 8 6 -8" fill="none" stroke="#43d9d1" stroke-width="2"/>
+
+      <rect x="194" y="106" width="344" height="112" rx="18" fill="#15172b" stroke="#7564df" stroke-width="2"/>
+      <text x="366" y="140" text-anchor="middle" fill="#c9c1ff" font-size="13" font-weight="700">DIFFUSION-STYLE ITERATIVE UNMASKING</text>
+      <g transform="translate(222 159)">
+        <rect width="31" height="31" rx="6" fill="#3c326e"/>
+        <rect x="42" width="31" height="31" rx="6" fill="#216c75"/>
+        <rect x="84" width="31" height="31" rx="6" fill="#3c326e"/>
+        <rect x="126" width="31" height="31" rx="6" fill="#216c75"/>
+        <rect x="168" width="31" height="31" rx="6" fill="#3c326e"/>
+        <rect x="210" width="31" height="31" rx="6" fill="#216c75"/>
+        <rect x="252" width="31" height="31" rx="6" fill="#3c326e"/>
+        <text x="15" y="21" text-anchor="middle" fill="#c8bfff" font-size="11">M</text>
+        <text x="57" y="21" text-anchor="middle" fill="#88f4ea" font-size="11">A</text>
+        <text x="99" y="21" text-anchor="middle" fill="#c8bfff" font-size="11">M</text>
+        <text x="141" y="21" text-anchor="middle" fill="#88f4ea" font-size="11">B</text>
+        <text x="183" y="21" text-anchor="middle" fill="#c8bfff" font-size="11">M</text>
+        <text x="225" y="21" text-anchor="middle" fill="#88f4ea" font-size="11">C</text>
+        <text x="267" y="21" text-anchor="middle" fill="#c8bfff" font-size="11">M</text>
+      </g>
+
+      <path d="M366 222 V260" stroke="#43d9d1" stroke-width="2"/>
+      <path d="M360 253 l6 8 6 -8" fill="none" stroke="#43d9d1" stroke-width="2"/>
+
+      <rect x="194" y="265" width="160" height="62" rx="13" fill="#10252c" stroke="#2f7f7b"/>
+      <text x="274" y="291" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Audio decoder</text>
+      <text x="274" y="311" text-anchor="middle" fill="#809aab" font-size="11">Higgs Audio V2</text>
+
+      <path d="M358 296 H395" stroke="#43d9d1" stroke-width="2"/>
+      <path d="M388 290 l8 6 -8 6" fill="none" stroke="#43d9d1" stroke-width="2"/>
+
+      <rect x="398" y="265" width="140" height="62" rx="13" fill="#10232e" stroke="#397383"/>
+      <text x="468" y="291" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Waveform</text>
+      <text x="468" y="311" text-anchor="middle" fill="#809aab" font-size="11">post-process</text>
+
+      <g transform="translate(194 355)">
+        <path d="M0 24 H18 L29 7 L42 42 L56 12 L70 34 L84 18 L99 28 L112 5 L128 43 L143 17 L159 31 L175 13 L190 37 L207 21 L224 27 L240 10 L255 38 L270 23 L288 24 H344"
+              fill="none" stroke="url(#cyan)" stroke-width="3" filter="url(#glow)"/>
+      </g>
+    </g>
+  </g>
+
+  <text x="1135" y="590" text-anchor="end" fill="#657b8c" font-family="Inter,Segoe UI,sans-serif" font-size="14">22 · 09 · 2026</text>
+</svg>
