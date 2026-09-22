@@ -3,6 +3,8 @@ layout: post
 title: "My Vibe Kit: Workflow gọn cho vibe coding trên codebase thật"
 date: 2026-09-22
 author: Cuong Vuong
+categories:
+  - ai-projects
 description: "My Vibe Kit là bộ workflow tôi dùng với Codex, Claude Code và Antigravity để giữ context vừa đủ, theo dõi dependency và chỉ báo hoàn thành khi có kết quả kiểm chứng thật."
 image: /assets/images/my-vibe-kit-workflow-cover.svg
 cover_image: /assets/images/my-vibe-kit-workflow-cover.svg
