@@ -1,0 +1,95 @@
+---
+layout: page
+title: About
+permalink: /about.html
+description: Về cuongtobi — developer, builder và người thích ghi lại những gì đã học.
+---
+
+<section class="about-hero">
+  <div class="about-intro">
+    <p class="section-kicker">// ABOUT ME</p>
+    <h1>Hi, I'm Cuong 👋<br>A builder, writer, and <span class="gradient-text">lifelong learner.</span></h1>
+    <p>Tôi là developer thích biến ý tưởng thành những thứ chạy được, thử workflow mới và ghi lại các bài học có thể tái sử dụng.</p>
+    <div class="hero-actions">
+      {% assign latest = site.posts.first %}
+      {% if latest %}<a class="button button-primary" href="{{ latest.url | relative_url }}">Read my latest post →</a>{% endif %}
+      <a class="button button-ghost" href="mailto:{{ site.email }}">Let's connect</a>
+    </div>
+  </div>
+  <div class="about-photo">
+    <img src="{{ '/apple-touch-icon.png' | relative_url }}" alt="Cuong">
+    <div class="about-photo-copy">
+      <span>Build</span><span>Good</span><span>Things</span><b>&gt;_</b>
+    </div>
+  </div>
+</section>
+
+<div class="about-grid">
+  <section class="content-section story-card">
+    <div class="section-heading"><h2>// MY STORY</h2></div>
+    <div class="side-card story-content">
+      <div class="story-visual"><span>Better<br>Ideas<br>Brighter<br>Days</span></div>
+      <div>
+        <h2>From curiosity to better systems</h2>
+        <p>Tôi bắt đầu với việc mày mò website, sửa những thứ nhỏ, phá chúng rồi học cách làm chúng hoạt động lại. Sự tò mò đó dần trở thành cách tôi học công nghệ: xây một thứ thật, dùng nó, nhìn ra điểm yếu và lặp lại.</p>
+        <p>Blog này là nơi tôi lưu lại các snippet, workflow, công cụ và những kinh nghiệm đủ hữu ích để dùng lần nữa.</p>
+        <blockquote>“A little progress each day adds up to useful things.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <aside class="side-section">
+    <div class="section-heading"><h2>// QUICK FACTS</h2></div>
+    <div class="side-card fact-list">
+      <div><span>⌂</span><p><strong>Based in Vietnam</strong><small>Building for the open web.</small></p></div>
+      <div><span>⌘</span><p><strong>Work</strong><small>Developer · Writer · Builder</small></p></div>
+      <div><span>♥</span><p><strong>Interests</strong><small>Web development, automation, AI workflows.</small></p></div>
+      <div><span>△</span><p><strong>Always learning</strong><small>New tools, better habits, simpler systems.</small></p></div>
+    </div>
+  </aside>
+</div>
+
+<section class="content-section">
+  <div class="three-column-info">
+    <div>
+      <div class="section-heading"><h2>// TECH STACK</h2></div>
+      <div class="side-card icon-grid">
+        <span><b>JS</b>JavaScript</span>
+        <span><b>PHP</b>PHP</span>
+        <span><b>PY</b>Python</span>
+        <span><b>HTML</b>HTML</span>
+        <span><b>CSS</b>CSS</span>
+        <span><b>SQL</b>Databases</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-heading"><h2>// GUIDING PRINCIPLES</h2></div>
+      <div class="side-card principles">
+        <p><span>⚡</span><strong>Build useful things</strong><small>Ưu tiên vấn đề thật và output chạy được.</small></p>
+        <p><span>◎</span><strong>Share what I learn</strong><small>Ghi lại để lần sau không phải học lại từ đầu.</small></p>
+        <p><span>↻</span><strong>Stay curious</strong><small>Thử nghiệm nhỏ trước khi thiết kế lớn.</small></p>
+        <p><span>♥</span><strong>Keep it simple</strong><small>Tránh over-engineering khi chưa cần thiết.</small></p>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-heading"><h2>// WRITING</h2></div>
+      <div class="side-card stat-card">
+        <strong>{{ site.posts.size }}+</strong>
+        <span>published posts</span>
+        <p>Về web development, coding workflow, scraping, AI và những thứ tôi đang học.</p>
+        <a class="text-link" href="{{ '/posts.html' | relative_url }}">View all posts →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collab-card">
+  <div>
+    <p class="section-kicker">// LET'S BUILD TOGETHER</p>
+    <h2>Want to collaborate?</h2>
+    <p>Nếu bạn có một project thú vị, ý tưởng cần trao đổi hoặc đơn giản muốn nói chuyện về tech, cứ gửi email.</p>
+  </div>
+  <a class="button button-primary" href="mailto:{{ site.email }}">Get in touch →</a>
+</section>
