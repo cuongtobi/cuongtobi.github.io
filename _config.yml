@@ -59,6 +59,8 @@ defaults:
 
 exclude:
   - SEO.md
+  - vendor
+  - .bundle
 
 plugins:
   - jekyll-paginate
