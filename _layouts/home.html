@@ -1,23 +1,155 @@
 {% include header.html %}
 
-<div class="author-box">
-  <img src="apple-touch-icon.png" class="author-avatar" alt="Avatar">
-  <div class="description">
-    Hello! I'm Cuong. Welcome to my Blog. <br>
-    Hope you find it interesting and useful. If you like these posts, you might also like to subscribe to my <a href="/feed.xml">RSS</a>
+<section class="home-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Hi, I'm Cuong <span aria-hidden="true">👋</span></p>
+    <h1>Turning ideas into code and sharing <span class="gradient-text">the journey.</span></h1>
+    <p class="hero-lead">Tôi viết về lập trình, công cụ, workflow và những bài học thực tế trong quá trình xây dựng sản phẩm.</p>
+    <div class="hero-actions">
+      {% assign latest = site.posts.first %}
+      {% if latest %}<a class="button button-primary" href="{{ latest.url | relative_url }}">Read the latest post →</a>{% endif %}
+      <a class="button button-ghost" href="{{ '/about.html' | relative_url }}">About me</a>
+    </div>
+    <div class="social-row">
+      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <a href="mailto:{{ site.email }}">Email</a>
+    </div>
   </div>
-</div>
 
-<section>
-  <h2>new posts</h2>
-  <div class="articles">
-    {% for post in paginator.posts %}
-      {% include article.html %}
-    {% endfor %}
+  <div class="hero-visual" role="img" aria-label="Developer workspace">
+    <div class="hero-terminal">
+      <span>A BETTER</span>
+      <span>WEB</span>
+      <span>TOGETHER</span>
+      <b>&gt;_</b>
+    </div>
+    <div class="hero-note">Code<br>Learn<br>Share<br>Repeat</div>
   </div>
 </section>
 
-{% include pagination.html %}
+<div class="content-grid">
+  <div class="main-column">
+    {% assign featured = site.posts.first %}
+    {% if featured %}
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>// FEATURED ARTICLE</h2>
+      </div>
+      <article class="featured-card">
+        <a class="featured-visual" href="{{ featured.url | relative_url }}">
+          <span>Ship<br>Learn<br>Improve<br>Repeat<br>&gt;_</span>
+        </a>
+        <div class="featured-copy">
+          <div class="post-meta">
+            {% if featured.tags and featured.tags.size > 0 %}
+              <span class="pill">{{ featured.tags | first | replace: '-', ' ' }}</span>
+            {% else %}
+              <span class="pill">{{ featured.categories | first | replace: '-', ' ' }}</span>
+            {% endif %}
+            <span>{{ featured.date | date: "%d/%m/%Y" }}</span>
+            <span>◷ {{ featured.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+          </div>
+          <h3><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h3>
+          <p>{{ featured.description | default: featured.excerpt | strip_html | truncate: 220 }}</p>
+          <a class="text-link" href="{{ featured.url | relative_url }}">Read article →</a>
+        </div>
+      </article>
+    </section>
+    {% endif %}
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>// RECENT POSTS</h2>
+        <a href="{{ '/posts.html' | relative_url }}">View all posts →</a>
+      </div>
+      <div class="post-list">
+        {% for post in site.posts offset:1 limit:3 %}
+        <article class="post-list-row">
+          <a class="mini-visual visual-{{ forloop.index }}" href="{{ post.url | relative_url }}"><span>&gt;_</span></a>
+          <div class="post-list-copy">
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.description | strip_html | truncate: 120 }}</p>
+          </div>
+          <div class="post-list-meta">
+            <span>{{ post.date | date: "%d/%m/%Y" }}</span>
+            <span>◷ {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>// PROJECT HIGHLIGHTS</h2>
+        <a href="{{ '/projects.html' | relative_url }}">View all projects →</a>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <span class="project-icon">⌘</span>
+          <h3>Personal Blog</h3>
+          <p>Jekyll blog tối giản, nhanh và được host trực tiếp trên GitHub Pages.</p>
+          <a class="text-link" href="{{ '/projects/personal-blog.html' | relative_url }}">View project →</a>
+        </article>
+        <article class="project-card">
+          <span class="project-icon project-icon-green">ƒ</span>
+          <h3>Forex Lot Calculator</h3>
+          <p>Công cụ nhỏ tính lot, stop loss và take profit theo mức rủi ro.</p>
+          <a class="text-link" href="{{ '/forex-lot-calculator.html' | relative_url }}">Open tool →</a>
+        </article>
+        <article class="project-card">
+          <span class="project-icon project-icon-pink">#</span>
+          <h3>Vibe Code Notes</h3>
+          <p>Cheat sheet và workflow thực dụng cho coding với AI.</p>
+          <a class="text-link" href="{{ '/vibe-code-cheat-sheet-chatgpt.html' | relative_url }}">Read notes →</a>
+        </article>
+      </div>
+    </section>
+
+    {% include pagination.html %}
+  </div>
+
+  <aside class="sidebar">
+    <section class="side-section">
+      <div class="section-heading"><h2>// ABOUT ME</h2></div>
+      <div class="side-card about-card">
+        <div class="about-head">
+          <img src="{{ '/apple-touch-icon.png' | relative_url }}" alt="Cuong" class="avatar">
+          <div>
+            <h3>Cuong</h3>
+            <p>{{ site.author.role }}</p>
+          </div>
+        </div>
+        <p>Tôi thích biến ý tưởng thành sản phẩm nhỏ, tìm workflow tốt hơn và chia sẻ những gì đã học được.</p>
+        <blockquote>“Better tools. Clearer thinking. A brighter web.”</blockquote>
+      </div>
+    </section>
+
+    <section class="side-section">
+      <div class="section-heading"><h2>// POPULAR TAGS</h2></div>
+      <div class="tag-cloud">
+        {% for tag in site.tags limit:9 %}
+          <a href="{{ '/tags.html' | relative_url }}#{{ tag[0] | slugify }}">{{ tag[0] | replace: '-', ' ' }}</a>
+        {% endfor %}
+        {% if site.tags.size == 0 %}
+          <a href="{{ '/tags.html' | relative_url }}">JavaScript</a>
+          <a href="{{ '/tags.html' | relative_url }}">PHP</a>
+          <a href="{{ '/tags.html' | relative_url }}">Python</a>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="side-section">
+      <div class="section-heading"><h2>// NEWSLETTER</h2></div>
+      <div class="side-card newsletter-card">
+        <div class="mail-icon">✉</div>
+        <h3>Get new posts in your inbox</h3>
+        <p>Bài viết mới về code, công cụ và workflow. Không spam.</p>
+        <a class="button button-primary button-full" href="mailto:{{ site.email }}?subject=Subscribe%20to%20cuongtobi">Subscribe</a>
+      </div>
+    </section>
+  </aside>
+</div>
 
 {% include footer.html %}
-
