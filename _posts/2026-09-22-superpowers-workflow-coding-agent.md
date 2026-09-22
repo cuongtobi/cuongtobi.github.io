@@ -3,6 +3,8 @@ layout: post
 title: "Superpowers: Bộ skill giúp coding agent làm việc có quy trình hơn"
 date: 2026-09-22
 author: Cuong Vuong
+categories:
+  - ai-projects
 description: "Tìm hiểu obra/superpowers: bộ skill đưa coding agent qua các bước brainstorm, lập kế hoạch, worktree, TDD, review và verification; kèm cách cài đặt và ví dụ sử dụng."
 image: /assets/images/superpowers-coding-agent-workflow.svg
 cover_image: /assets/images/superpowers-coding-agent-workflow.svg
