@@ -3,6 +3,8 @@ layout: post
 title: "OmniVoice: TTS zero-shot hơn 600 ngôn ngữ, có voice cloning và voice design"
 date: 2026-09-22
 author: Cuong Vuong
+categories:
+  - ai-projects
 description: "Tìm hiểu k2-fsa/OmniVoice: mô hình TTS zero-shot hỗ trợ hơn 600 ngôn ngữ, voice cloning, voice design và diffusion-style decoding; kèm cách cài đặt và ví dụ Python/CLI."
 image: /assets/images/omnivoice-tts-workflow-cover.svg
 cover_image: /assets/images/omnivoice-tts-workflow-cover.svg
