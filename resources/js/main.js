@@ -17,13 +17,46 @@
     }
 
     var themeToggle = document.querySelector("[data-theme-toggle]");
-    var savedTheme = localStorage.getItem("cuongtobi-theme");
-    if (savedTheme === "soft") document.body.classList.add("theme-soft");
+    var themeIcon = document.querySelector("[data-theme-icon]");
+    var themeMeta = document.querySelector('meta[name="theme-color"]');
+    var storageKey = "cuongtobi-theme-v2";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    }
+
+    function applyTheme(theme, persist) {
+      var nextTheme = theme === "dark" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+
+      if (themeIcon) {
+        themeIcon.textContent = nextTheme === "dark" ? "☀" : "☾";
+      }
+
+      if (themeToggle) {
+        var label = nextTheme === "dark"
+          ? "Chuyển sang giao diện ban ngày"
+          : "Chuyển sang giao diện đêm";
+        themeToggle.setAttribute("aria-label", label);
+        themeToggle.setAttribute("title", label);
+      }
+
+      if (themeMeta) {
+        themeMeta.setAttribute("content", nextTheme === "dark" ? "#070d14" : "#f6f8fc");
+      }
+
+      if (persist) {
+        try {
+          localStorage.setItem(storageKey, nextTheme);
+        } catch (e) {}
+      }
+    }
+
+    applyTheme(getTheme(), false);
 
     if (themeToggle) {
       themeToggle.addEventListener("click", function () {
-        var soft = document.body.classList.toggle("theme-soft");
-        localStorage.setItem("cuongtobi-theme", soft ? "soft" : "dark");
+        applyTheme(getTheme() === "dark" ? "light" : "dark", true);
       });
     }
 
