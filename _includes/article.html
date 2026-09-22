@@ -1,12 +1,21 @@
-<div class="article">
-  <a href="{{ post.url }}">{{ post.title }}</a>
-  <div class="date">
-    {{ post.date | date: "%d/%m/%Y" }}
-    <a class="category" href="{{ site.baseurl }}/categories/{{ post.categories | first | downcase }}">
-      {{ post.categories | first | replace: '-', ' ' | capitalize }}
-    </a>
+<article class="post-card" data-post-card data-search="{{ post.title | append: ' ' | append: post.description | append: ' ' | append: post.categories | append: ' ' | append: post.tags | downcase | escape }}">
+  <a class="post-card-visual visual-{{ forloop.index | default: 1 }}" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
+    <span class="visual-code">&gt;_</span>
+  </a>
+  <div class="post-card-body">
+    <div class="post-meta">
+      {% if post.tags and post.tags.size > 0 %}
+        <span class="pill">{{ post.tags | first | replace: '-', ' ' }}</span>
+      {% elsif post.categories %}
+        <span class="pill">{{ post.categories | first | replace: '-', ' ' }}</span>
+      {% endif %}
+      <span>{{ post.date | date: "%d/%m/%Y" }}</span>
+    </div>
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.description %}<p>{{ post.description | strip_html | truncate: 132 }}</p>{% endif %}
+    <div class="post-card-footer">
+      <span>☷ {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+      <a class="text-link" href="{{ post.url | relative_url }}">Read more →</a>
+    </div>
   </div>
-  <div class="description">
-    {{ post.description }}
-  </div>
-</div>
+</article>
