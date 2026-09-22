@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'vi' }}">
+<html lang="{{ site.lang | default: 'vi' }}" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
-  <meta name="theme-color" content="#070d14">
+  <meta name="theme-color" content="#f6f8fc">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}">
   <meta property="og:description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
@@ -15,18 +15,28 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("cuongtobi-theme-v2");
+        document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/resources/css/main.css' | relative_url }}?v=2.0.0">
-  <script defer src="{{ '/resources/js/main.js' | relative_url }}?v=2.0.0"></script>
+  <link rel="stylesheet" href="{{ '/resources/css/main.css' | relative_url }}?v=2.1.0">
+  <script defer src="{{ '/resources/js/main.js' | relative_url }}?v=2.1.0"></script>
 </head>
 <body class="layout-{{ page.layout | default: 'page' }}">
   <div class="site-shell">
     <header class="site-header">
       <a href="{{ '/' | relative_url }}" class="brand" aria-label="Trang chủ">
         <span class="brand-prompt">&gt;_</span>
-        <span class="brand-name">Personal Blog</span>
+        <span class="brand-name">Cuong Vuong</span>
       </a>
 
       <button class="mobile-menu-button" type="button" aria-label="Mở menu" aria-expanded="false" data-menu-button>
@@ -45,8 +55,8 @@
         <a class="icon-button" href="{{ '/posts.html#search' | relative_url }}" aria-label="Tìm kiếm">
           <span aria-hidden="true">⌕</span>
         </a>
-        <button class="icon-button theme-toggle" type="button" aria-label="Đổi độ sáng giao diện" data-theme-toggle>
-          <span aria-hidden="true">☾</span>
+        <button class="icon-button theme-toggle" type="button" aria-label="Chuyển sang giao diện đêm" title="Chuyển sang giao diện đêm" data-theme-toggle>
+          <span aria-hidden="true" data-theme-icon>☾</span>
         </button>
         <a class="button button-small button-outline" href="mailto:{{ site.email }}?subject=Subscribe%20to%20cuongtobi">Subscribe</a>
       </div>
