@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">My Vibe Kit — Workflow vibe coding an toàn</title>
+  <desc id="desc">Cover bài viết về My Vibe Kit với flow vibe, plan, build, verify và PASS_VERIFIED.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#0a1830"/>
+      <stop offset="1" stop-color="#101a35"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#7c6cff"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10233c"/>
+      <stop offset="1" stop-color="#091525"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1000" cy="100" r="250" fill="#6558ff" opacity=".10"/>
+  <circle cx="120" cy="560" r="250" fill="#1ed8d0" opacity=".08"/>
+  <path d="M0 535 C220 475 420 610 640 545 S1030 500 1200 555 V630 H0Z" fill="#06101d" opacity=".7"/>
+  <g transform="translate(66 72)">
+    <text x="0" y="0" fill="#8294aa" font-family="Inter,Segoe UI,sans-serif" font-size="18" font-weight="600">CUONG VUONG · DEVELOPER BLOG</text>
+    <text x="0" y="76" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="70" font-weight="800" letter-spacing="-3">My </text>
+    <text x="105" y="76" fill="url(#brand)" font-family="Inter,Segoe UI,sans-serif" font-size="70" font-weight="800" letter-spacing="-3">Vibe Kit</text>
+    <text x="0" y="126" fill="#c7d3e3" font-family="Inter,Segoe UI,sans-serif" font-size="28" font-weight="600">Workflow vibe coding an toàn cho codebase thật</text>
+    <text x="0" y="169" fill="#8da0b8" font-family="Inter,Segoe UI,sans-serif" font-size="18">Context vừa đủ · dependency-aware · evidence-based verification</text>
+    <g transform="translate(0 225)">
+      <rect x="0" y="0" width="390" height="205" rx="18" fill="url(#panel)" stroke="#2c4664"/>
+      <circle cx="28" cy="25" r="5" fill="#fb7185"/><circle cx="46" cy="25" r="5" fill="#fbbf24"/><circle cx="64" cy="25" r="5" fill="#34d399"/>
+      <text x="24" y="64" fill="#6ee7f2" font-family="JetBrains Mono,monospace" font-size="16">my-vibe-kit/</text>
+      <text x="38" y="95" fill="#a9b8cc" font-family="JetBrains Mono,monospace" font-size="15">├── .vibe/</text>
+      <text x="38" y="123" fill="#a9b8cc" font-family="JetBrains Mono,monospace" font-size="15">├── adapters/</text>
+      <text x="38" y="151" fill="#a9b8cc" font-family="JetBrains Mono,monospace" font-size="15">├── runtime/</text>
+      <text x="38" y="179" fill="#a9b8cc" font-family="JetBrains Mono,monospace" font-size="15">└── AGENTS.md</text>
+    </g>
+    <g transform="translate(0 455)">
+      <rect x="0" y="0" width="150" height="34" rx="17" fill="#0d2431" stroke="#1ed8d0"/>
+      <text x="75" y="22" text-anchor="middle" fill="#77fff7" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="700">BOUNDED CONTEXT</text>
+      <rect x="162" y="0" width="158" height="34" rx="17" fill="#151d38" stroke="#7769ff"/>
+      <text x="241" y="22" text-anchor="middle" fill="#b8b0ff" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="700">DEPENDENCY-AWARE</text>
+      <rect x="332" y="0" width="150" height="34" rx="17" fill="#102b25" stroke="#34d399"/>
+      <text x="407" y="22" text-anchor="middle" fill="#72f0c4" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="700">REAL EVIDENCE</text>
+    </g>
+  </g>
+  <g transform="translate(635 72)">
+    <rect width="500" height="455" rx="22" fill="#071321" stroke="#29405d" stroke-width="2"/>
+    <text x="28" y="45" fill="#eef5ff" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700">Workflow</text>
+    <text x="28" y="72" fill="#6f829a" font-family="Inter,Segoe UI,sans-serif" font-size="14">same flow · any coding agent</text>
+    <g transform="translate(28 98)" font-family="Inter,Segoe UI,sans-serif">
+      <rect width="444" height="63" rx="13" fill="#0d2238" stroke="#1f7bc5"/><circle cx="34" cy="31.5" r="17" fill="#133a5c"/>
+      <text x="34" y="37" text-anchor="middle" fill="#7dd3fc" font-size="18">◆</text><text x="67" y="28" fill="#ffffff" font-size="19" font-weight="700">vibe</text><text x="67" y="48" fill="#8da0b8" font-size="13">orchestrate the task</text>
+      <path d="M222 67v18" stroke="#22d3ee" stroke-width="3"/><path d="M216 79l6 7 6-7" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <rect y="88" width="444" height="63" rx="13" fill="#0d2238" stroke="#4f64e9"/><circle cx="34" cy="119.5" r="17" fill="#222b59"/>
+      <text x="34" y="125" text-anchor="middle" fill="#a9a2ff" font-size="18">≡</text><text x="67" y="116" fill="#ffffff" font-size="19" font-weight="700">plan</text><text x="67" y="136" fill="#8da0b8" font-size="13">context · dependencies · impact</text>
+      <path d="M222 155v18" stroke="#22d3ee" stroke-width="3"/><path d="M216 167l6 7 6-7" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <rect y="176" width="444" height="63" rx="13" fill="#0d2238" stroke="#6759ef"/><circle cx="34" cy="207.5" r="17" fill="#29255b"/>
+      <text x="34" y="213" text-anchor="middle" fill="#c4b5fd" font-size="18">&lt;/&gt;</text><text x="67" y="204" fill="#ffffff" font-size="19" font-weight="700">build</text><text x="67" y="224" fill="#8da0b8" font-size="13">minimal, focused changes</text>
+      <path d="M222 243v18" stroke="#22d3ee" stroke-width="3"/><path d="M216 255l6 7 6-7" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <rect y="264" width="444" height="63" rx="13" fill="#0d2238" stroke="#16a9a3"/><circle cx="34" cy="295.5" r="17" fill="#103a3c"/>
+      <text x="34" y="301" text-anchor="middle" fill="#5eead4" font-size="18">✓</text><text x="67" y="292" fill="#ffffff" font-size="19" font-weight="700">verify</text><text x="67" y="312" fill="#8da0b8" font-size="13">run tests · collect evidence</text>
+      <path d="M222 331v16" stroke="#22d3ee" stroke-width="3"/><path d="M216 341l6 7 6-7" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <rect y="352" width="444" height="58" rx="13" fill="#072c2b" stroke="#21d6c7" stroke-width="2" filter="url(#glow)"/>
+      <text x="222" y="388" text-anchor="middle" fill="#78fff3" font-size="20" font-weight="800">PASS_VERIFIED</text>
+    </g>
+  </g>
+  <g transform="translate(67 583)"><text fill="#6f829a" font-family="JetBrains Mono,monospace" font-size="14">github.com/cuongtobi/my-vibe-kit</text></g>
+  <g transform="translate(1135 583)"><text text-anchor="end" fill="#6f829a" font-family="Inter,Segoe UI,sans-serif" font-size="14">22 · 09 · 2026</text></g>
+</svg>
