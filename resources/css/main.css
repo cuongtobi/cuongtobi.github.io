@@ -1750,6 +1750,57 @@ html[data-theme="light"] .article-content .highlight {
 }
 
 
+/* Light theme: Tags page */
+html[data-theme="light"] .tag-feature-card {
+  color: #172033;
+  border-color: #cbd6e4;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(45, 61, 82, .07);
+}
+
+html[data-theme="light"] .tag-feature-card:hover {
+  border-color: #9b91f6;
+  background: #fbfbff;
+  box-shadow: 0 12px 30px rgba(76, 72, 170, .12);
+}
+
+html[data-theme="light"] .tag-feature-card h3 {
+  color: #1b2740;
+}
+
+html[data-theme="light"] .tag-feature-card p {
+  color: #718096;
+}
+
+html[data-theme="light"] .tag-index a strong {
+  color: #26344a;
+}
+
+html[data-theme="light"] .tag-index a span {
+  color: #748399;
+}
+
+html[data-theme="light"] .tag-index a:hover,
+html[data-theme="light"] .tag-index a:target {
+  color: #172033;
+  border-color: #8f82f6;
+  background: #f7f6ff;
+  box-shadow: 0 6px 20px rgba(91, 77, 216, .10);
+}
+
+html[data-theme="light"] .tag-search-row > span,
+html[data-theme="light"] .tag-post-group-head span {
+  color: #66758a;
+}
+
+html[data-theme="light"] .tag-post-row strong {
+  color: #243147;
+}
+
+html[data-theme="light"] .tag-post-row small {
+  color: #69798e;
+}
+
 /* Light theme readability refinements v2.2 */
 html[data-theme="light"] .eyebrow,
 html[data-theme="light"] .section-kicker,
