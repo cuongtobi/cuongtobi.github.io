@@ -4,6 +4,10 @@ title: Iframe click event trong Javascript
 date: 2022-04-25
 author: cuongtobi
 categories: today-i-learned
+tags:
+  - javascript
+  - iframe
+  - frontend
 description: Do không thể trực tiếp đọc iframe content(DOM) từ trang mẹ nên phải dựa vào blur event để theo dõi hành động trên iframe....
 ---
 Do không thể trực tiếp đọc **iframe** content(**DOM**) từ trang mẹ nên phải dựa vào **blur event** để theo dõi hành động trên **iframe**.
