@@ -72,7 +72,7 @@
 
       <nav class="site-nav" data-site-nav aria-label="Điều hướng chính">
         <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' or page.url contains '/page/' %}active{% endif %}">Home</a>
-        <a href="{{ '/posts.html' | relative_url }}" class="{% if page.layout == 'post' or page.layout == 'category' or page.url contains '/posts' %}active{% endif %}">Posts</a>
+        <a href="{{ '/posts.html' | relative_url }}" class="{% if page.layout == 'post' or page.layout == 'category' or page.url contains '/posts' or page.url contains '/categories' %}active{% endif %}">Posts</a>
         <a href="{{ '/about.html' | relative_url }}" class="{% if page.url contains '/about' %}active{% endif %}">About</a>
         <a href="{{ '/tags.html' | relative_url }}" class="{% if page.url contains '/tags' %}active{% endif %}">Tags</a>
       </nav>
