@@ -2,14 +2,13 @@
 layout: post
 title: Scraping trong PHP bằng DOMXpath
 date: 2022-04-25
-author: Cuong Vuong
 categories: today-i-learned
 tags:
   - php
   - scraping
   - domxpath
   - curl
-description: Hướng dẫn scraping HTML bằng PHP cURL kết hợp DOMDocument và DOMXPath để truy vấn title, meta và các phần tử trong trang.
+description: "Hướng dẫn scraping HTML bằng PHP cURL kết hợp DOMDocument và DOMXPath để truy vấn title, meta và các phần tử trong trang."
 image: /assets/images/og-default.png
 ---
 Trong bài viết này sẽ giới thiệu một cách **scraping** trong PHP bằng **DOMXpath** và **cURL**. Nếu bạn muốn **scraping** một cách đơn giản chỉ cần sử dụng **cURL** hãy đọc [bài viết này](https://cuongtobi.github.io/scraping-don-gian-trong-php-bang-curl.html).
