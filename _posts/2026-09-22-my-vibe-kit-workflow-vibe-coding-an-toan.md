@@ -102,7 +102,9 @@ Nếu project chưa có command kiểm chứng đáng tin cậy, runtime trả v
 NEEDS_VERIFICATION_CONFIG
 ```
 
-Nếu chưa có cách kiểm chứng đáng tin cậy, kit dừng ở trạng thái này thay vì tự coi task là xong. ---
+Nếu chưa có cách kiểm chứng đáng tin cậy, kit dừng ở trạng thái này thay vì tự coi task là xong.
+
+---
 
 ## Vì sao tôi không muốn agent đọc toàn bộ project mỗi session?
 
@@ -138,7 +140,9 @@ package manifests
 architecture docs
 ```
 
-Nếu lịch sử chat mâu thuẫn với source hiện tại, source luôn được ưu tiên. ---
+Nếu lịch sử chat mâu thuẫn với source hiện tại, source luôn được ưu tiên.
+
+---
 
 ### Persistent state
 
@@ -183,7 +187,9 @@ Dùng khi:
 - Git delta không đáng tin cậy,
 - hoặc user yêu cầu rebuild.
 
-Nhờ vậy, session mới không phải đọc lại cả repository chỉ để khôi phục bối cảnh cơ bản. ---
+Nhờ vậy, session mới không phải đọc lại cả repository chỉ để khôi phục bối cảnh cơ bản.
+
+---
 
 ## Bounded context: chỉ đưa phần cần thiết cho AI
 
@@ -335,7 +341,9 @@ Nhưng không bắt buộc phải tạo mọi layer. Rule quan trọng là:
 
 Khi project lớn hơn hoặc được cấu hình `strict`, kit có thể chuyển sang dependency rule kiểu Clean/Hexagonal. Framework convention vẫn được ưu tiên. FastAPI nên vẫn trông giống FastAPI.
 
-Rails nên vẫn giống Rails. Laravel vẫn nên dùng convention của Laravel. ---
+Rails nên vẫn giống Rails. Laravel vẫn nên dùng convention của Laravel.
+
+---
 
 ## Ví dụ: dùng My Vibe Kit với một project FastAPI nhỏ
 
@@ -496,7 +504,9 @@ Keep storage in memory for now.
 Add tests.
 ```
 
-Từ đây `vibe` điều phối toàn bộ workflow. ---
+Từ đây `vibe` điều phối toàn bộ workflow.
+
+---
 
 ## 4. PLAN — trước khi sửa code
 
@@ -560,7 +570,7 @@ Trước khi implementation bắt đầu:
 python .vibe/tools/vibe.py snapshot before
 ```
 
-Dependency baseline ban đầu được giữ lại. Nếu workflow phải re-plan hoặc session bị ngắt, baseline này không được âm thầm thay thế bằng state mới. Đây là điểm quan trọng vì nếu lấy “before” sau khi code đã bị sửa thì dependency diff không còn ý nghĩa.
+Dependency baseline ban đầu được giữ lại. Nếu workflow phải re-plan hoặc session bị ngắt, baseline này không được âm thầm thay thế bằng state mới. Lấy snapshot “before” sau khi code đã bị sửa sẽ khiến dependency diff mất ý nghĩa.
 
 ---
 
@@ -596,7 +606,9 @@ routes
   GET /health
 ```
 
-Nếu project lớn hơn và route import service khác, reverse dependency graph có thể chỉ ra thêm consumers cần kiểm tra. ---
+Nếu project lớn hơn và route import service khác, reverse dependency graph có thể chỉ ra thêm consumers cần kiểm tra.
+
+---
 
 ## 6. Plan có acceptance criteria cụ thể
 
@@ -640,13 +652,15 @@ AC4 → existing regression test
 AC5 → verification commands
 ```
 
-Điều này giúp tránh trường hợp:
+Mục đích là tránh trường hợp:
 
 ```text
 tests pass
 ```
 
-nhưng phần user thực sự yêu cầu lại chưa được test. ---
+nhưng phần user thực sự yêu cầu lại chưa được test.
+
+---
 
 ## 7. BUILD — thay đổi nhỏ nhất có thể
 
@@ -701,7 +715,9 @@ def test_create_task() -> None:
 
 Ở ví dụ này, kit **không ép project phải có repository interface, service layer hay database adapter**. In-memory storage là yêu cầu hiện tại. Project còn nhỏ. Không có lý do để thêm abstraction chỉ để trông “enterprise”.
 
-Nếu sau này task đổi thành PostgreSQL, lúc đó boundary dữ liệu mới trở nên có ý nghĩa. ---
+Nếu sau này task đổi thành PostgreSQL, lúc đó boundary dữ liệu mới trở nên có ý nghĩa.
+
+---
 
 ## 8. VERIFY — code viết xong chưa có nghĩa là task đã xong
 
@@ -782,7 +798,9 @@ Nếu vẫn báo pass thì evidence đã stale. My Vibe Kit bind verification v�
 rerun_required = true
 ```
 
-Các command liên quan phải chạy lại trên final tree. ---
+Các command liên quan phải chạy lại trên final tree.
+
+---
 
 ## Workflow sửa bug khác gì feature?
 
@@ -813,7 +831,9 @@ thấy exception
 → done
 ```
 
-Agent phải cố xác định root cause từ evidence và giữ regression test nếu có thể. ---
+Agent phải cố xác định root cause từ evidence và giữ regression test nếu có thể.
+
+---
 
 ## Current task và task history
 
@@ -836,7 +856,9 @@ Nếu user tiếp tục cùng mục tiêu ở session sau, workflow tái sử d�
 - prompt được diễn đạt lại,
 - phải re-plan.
 
-Nhờ vậy, lịch sử task không bị phình ra chỉ vì đổi session và baseline ban đầu vẫn được giữ đúng. ---
+Nhờ vậy, lịch sử task không bị phình ra chỉ vì đổi session và baseline ban đầu vẫn được giữ đúng.
+
+---
 
 ## Bảo vệ code đang làm dở của user
 
@@ -860,7 +882,9 @@ với:
 thay đổi do task hiện tại tạo ra
 ```
 
-Build không được reset hoặc discard code của user chỉ để làm diff “đẹp”. Trên repository thật, việc này quan trọng hơn nhiều so với một sandbox demo. ---
+Build không được reset hoặc discard code của user chỉ để làm diff “đẹp”. Trên repository thật, việc này quan trọng hơn nhiều so với một sandbox demo.
+
+---
 
 ## Tại sao runtime chỉ dùng Python standard library?
 
@@ -885,7 +909,9 @@ Go → go test
 Rust → cargo check / cargo test
 ```
 
-Runtime baseline không cố thay thế compiler, framework hay test runner. Nó điều phối chúng. ---
+Runtime baseline không cố thay thế compiler, framework hay test runner. Nó điều phối chúng.
+
+---
 
 ## My Vibe Kit không cố giải quyết điều gì?
 
@@ -917,7 +943,9 @@ Kit hữu ích nhất khi bạn:
 - muốn dùng cùng workflow trên nhiều agent,
 - và không muốn câu “looks good” được coi là bằng chứng hoàn thành.
 
-Với project nhỏ, workflow vẫn nhẹ. Với project lớn hơn, persistent context và incremental dependency refresh bắt đầu mang lại lợi ích rõ hơn. ---
+Với project nhỏ, workflow vẫn nhẹ. Với project lớn hơn, persistent context và incremental dependency refresh bắt đầu mang lại lợi ích rõ hơn.
+
+---
 
 ## Cách sử dụng hằng ngày
 
@@ -940,7 +968,9 @@ Use plan to analyze migrating SQLite to PostgreSQL.
 Do not edit code yet.
 ```
 
-Phần phức tạp nằm dưới workflow, không nằm trong prompt hằng ngày. Tôi muốn câu lệnh gửi cho agent ngắn, còn việc giữ state, dependency và verification do kit lo. ---
+Phần phức tạp nằm dưới workflow, không nằm trong prompt hằng ngày. Tôi muốn câu lệnh gửi cho agent ngắn, còn việc giữ state, dependency và verification do kit lo.
+
+---
 
 ## Kết luận
 

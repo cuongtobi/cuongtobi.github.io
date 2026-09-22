@@ -62,7 +62,9 @@ text + instruct       → Voice Design
 text only             → Auto Voice
 ~~~
 
-Nhờ vậy, có thể thử model ở mức ứng dụng trước rồi mới cần đọc sâu phần training. ---
+Nhờ vậy, có thể thử model ở mức ứng dụng trước rồi mới cần đọc sâu phần training.
+
+---
 
 ## Cấu trúc repository
 
@@ -157,7 +159,9 @@ Reference audio ───────┐    │
                          waveform
 ~~~
 
-Các bước bên dưới bám theo implementation trong <code>omnivoice/models/omnivoice.py</code>. ---
+Các bước bên dưới bám theo implementation trong <code>omnivoice/models/omnivoice.py</code>.
+
+---
 
 ## 1. Load model, text tokenizer và audio tokenizer
 
@@ -201,7 +205,9 @@ generated audio tokens
 waveform
 ~~~
 
-Model chính không dự đoán trực tiếp từng sample PCM. Thay vào đó, nó làm việc với **discrete audio token**. ---
+Model chính không dự đoán trực tiếp từng sample PCM. Thay vào đó, nó làm việc với **discrete audio token**.
+
+---
 
 ## 2. Chọn mode generation
 
@@ -242,7 +248,9 @@ Chỉ cần:
 text
 ~~~
 
-Không có reference audio và cũng không có <code>instruct</code>. ---
+Không có reference audio và cũng không có <code>instruct</code>.
+
+---
 
 ## 3. Voice cloning: reference audio được biến thành prompt như thế nào?
 
@@ -310,7 +318,9 @@ Kết quả được lưu cùng:
 - RMS volume,
 - audio tokens.
 
-Đó chính là <code>VoiceClonePrompt</code>. ---
+Đó chính là <code>VoiceClonePrompt</code>.
+
+---
 
 ## 4. Có thể cache giọng clone để tái sử dụng
 
@@ -350,7 +360,9 @@ my_voice.pt
 generation
 ~~~
 
-Với ứng dụng có một tập giọng cố định, lưu prompt sẵn sẽ hợp lý hơn việc encode lại reference audio ở từng request. ---
+Với ứng dụng có một tập giọng cố định, lưu prompt sẵn sẽ hợp lý hơn việc encode lại reference audio ở từng request.
+
+---
 
 ## 5. Text, language và voice instruction được đóng gói thành conditioning
 
@@ -384,7 +396,9 @@ optional reference audio tokens
 masked target audio tokens
 ~~~
 
-Target audio lúc đầu **chưa có token thật**. Nó được fill bằng <code>audio_mask_id</code>. ---
+Target audio lúc đầu **chưa có token thật**. Nó được fill bằng <code>audio_mask_id</code>.
+
+---
 
 ## 6. Diffusion-style iterative unmasking
 
@@ -451,7 +465,9 @@ Cùng với đó còn có:
 - layer penalty,
 - time-step schedule.
 
-Cơ chế mở mask theo nhiều bước này là phần gắn với cách gọi **diffusion language model-style** của project. ---
+Cơ chế mở mask theo nhiều bước này là phần gắn với cách gọi **diffusion language model-style** của project.
+
+---
 
 ## 7. OmniVoice dùng nhiều audio codebook
 
@@ -530,7 +546,9 @@ Nếu có cả hai:
 duration > speed
 ~~~
 
-tức <code>duration</code> được ưu tiên. ---
+tức <code>duration</code> được ưu tiên.
+
+---
 
 ## 9. Long-form generation
 
@@ -583,7 +601,9 @@ Nếu là long-form, các chunk waveform được cross-fade trước khi ghép.
 - fade in/out,
 - padding đầu/cuối.
 
-Kết quả từ <code>generate()</code> là một list NumPy array, với sampling rate theo audio tokenizer; README hiện dùng **24 kHz** trong ví dụ. ---
+Kết quả từ <code>generate()</code> là một list NumPy array, với sampling rate theo audio tokenizer; README hiện dùng **24 kHz** trong ví dụ.
+
+---
 
 ## Cài đặt OmniVoice
 
@@ -595,7 +615,9 @@ hoặc
 uv
 ~~~
 
-Nên dùng environment mới để tránh xung đột giữa PyTorch, CUDA và các dependency audio. ---
+Nên dùng environment mới để tránh xung đột giữa PyTorch, CUDA và các dependency audio.
+
+---
 
 ### Cách 1 — pip
 
@@ -695,7 +717,9 @@ cd OmniVoice
 uv sync
 ~~~
 
-Repo hiện pin PyTorch/Torchaudio 2.8.0 trong phần constraint của uv và cấu hình CUDA index cho Linux/Windows. ---
+Repo hiện pin PyTorch/Torchaudio 2.8.0 trong phần constraint của uv và cấu hình CUDA index cho Linux/Windows.
+
+---
 
 ## Chạy nhanh bằng giao diện web
 
@@ -711,7 +735,9 @@ Sau đó mở:
 http://localhost:8001
 ~~~
 
-Gradio demo cho phép thử các mode mà không phải viết Python trước. README cũng cung cấp Hugging Face Space và Google Colab. ---
+Gradio demo cho phép thử các mode mà không phải viết Python trước. README cũng cung cấp Hugging Face Space và Google Colab.
+
+---
 
 ## Ví dụ 1 — Auto Voice đơn giản
 
@@ -795,7 +821,9 @@ sf.write(
 )
 ~~~
 
-README khuyến nghị reference khoảng **3–10 giây**. ---
+README khuyến nghị reference khoảng **3–10 giây**.
+
+---
 
 ### Không muốn tự nhập transcript?
 
@@ -853,7 +881,9 @@ audio = model.generate(
 )
 ~~~
 
-Cách này bỏ qua việc load reference audio, silence preprocessing, ASR và audio encoding ở các lần generate sau. ---
+Cách này bỏ qua việc load reference audio, silence preprocessing, ASR và audio encoding ở các lần generate sau.
+
+---
 
 ## Ví dụ 4 — Voice Design
 
@@ -915,7 +945,9 @@ README hiện liệt kê các tag như:
 ...
 ~~~
 
-Các tag này hữu ích khi cần thêm tiếng cười, tiếng thở dài hoặc phản ứng ngắn thay vì chỉ đọc plain text. ---
+Các tag này hữu ích khi cần thêm tiếng cười, tiếng thở dài hoặc phản ứng ngắn thay vì chỉ đọc plain text.
+
+---
 
 ## Ví dụ 6 — Pronunciation control
 
@@ -933,7 +965,9 @@ Hai từ "bass" được ép phát âm khác nhau.
 
 ### Chinese
 
-Repo hỗ trợ pinyin tone number inline để sửa pronunciation cho một ký tự cụ thể. ---
+Repo hỗ trợ pinyin tone number inline để sửa pronunciation cho một ký tự cụ thể.
+
+---
 
 ## Ví dụ 7 — Text normalization
 
@@ -952,13 +986,15 @@ audio = model.generate(
 )
 ~~~
 
-Chinese và English dùng WeTextProcessing. Các language khác fallback về <code>num2words</code> cho integer khi dependency có sẵn. ---
+Chinese và English dùng WeTextProcessing. Các language khác fallback về <code>num2words</code> cho integer khi dependency có sẵn.
+
+---
 
 ## Sử dụng bằng CLI
 
 Nếu không muốn viết Python, <code>omnivoice-infer</code> là cách nhanh nhất.
 
-## Voice Cloning
+### Voice Cloning
 
 ~~~bash
 omnivoice-infer \
@@ -969,7 +1005,7 @@ omnivoice-infer \
   --output hello.wav
 ~~~
 
-## Voice Design
+### Voice Design
 
 ~~~bash
 omnivoice-infer \
@@ -979,7 +1015,7 @@ omnivoice-infer \
   --output hello.wav
 ~~~
 
-## Auto Voice
+### Auto Voice
 
 ~~~bash
 omnivoice-infer \
@@ -1013,7 +1049,9 @@ omnivoice-infer-batch \
   --res_dir results/
 ~~~
 
-Chỉ <code>id</code> và <code>text</code> là bắt buộc. Các field khác dùng để chuyển mode hoặc control generation. ---
+Chỉ <code>id</code> và <code>text</code> là bắt buộc. Các field khác dùng để chuyển mode hoặc control generation.
+
+---
 
 ## FlashInfer acceleration
 
@@ -1060,7 +1098,9 @@ xuống:
 0.0115
 ~~~
 
-tương đương khoảng **2.6x** trong benchmark đó. Đây là benchmark trong đúng cấu hình trên; GPU, batch size và workload khác có thể cho kết quả khác. ---
+tương đương khoảng **2.6x** trong benchmark đó. Đây là benchmark trong đúng cấu hình trên; GPU, batch size và workload khác có thể cho kết quả khác.
+
+---
 
 ## Training và fine-tuning
 
@@ -1092,7 +1132,9 @@ Fine-tuning custom data dùng JSONL kiểu:
 {"id":"sample_001","audio_path":"/data/audio/001.wav","text":"Hello world","language_id":"en"}
 ~~~
 
-Repo cũng có LoRA để giảm chi phí fine-tune so với update toàn bộ model. ---
+Repo cũng có LoRA để giảm chi phí fine-tune so với update toàn bộ model.
+
+---
 
 ## Một số giới hạn nên biết trước khi dùng
 
@@ -1127,7 +1169,9 @@ Docs ghi rằng output khoảng **1–2 giây**, đặc biệt khi không có re
 
 ### Min Nan / Hokkien có format input riêng
 
-Ở model version hiện tại, docs nói Min Nan Chinese chỉ support input bằng **Tai-lo romanization**, không phải Chinese character. ---
+Ở model version hiện tại, docs nói Min Nan Chinese chỉ support input bằng **Tai-lo romanization**, không phải Chinese character.
+
+---
 
 ## So sánh ba mode để chọn nhanh
 
@@ -1149,7 +1193,9 @@ Voice Design
 batch / optimization
 ~~~
 
-như vậy dễ tách lỗi environment khỏi lỗi prompt/voice conditioning. ---
+như vậy dễ tách lỗi environment khỏi lỗi prompt/voice conditioning.
+
+---
 
 ## Một cách triển khai OmniVoice vào ứng dụng
 
@@ -1202,7 +1248,9 @@ OmniVoice phù hợp để thử nếu bạn đang làm:
 - ứng dụng cần voice cloning hợp pháp,
 - batch speech synthesis.
 
-Độ phủ hơn 600 ngôn ngữ đặc biệt hữu ích với những bài toán mà các dịch vụ TTS phổ biến chỉ hỗ trợ một nhóm ngôn ngữ lớn. ---
+Độ phủ hơn 600 ngôn ngữ đặc biệt hữu ích với những bài toán mà các dịch vụ TTS phổ biến chỉ hỗ trợ một nhóm ngôn ngữ lớn.
+
+---
 
 ## Lưu ý về voice cloning và sử dụng có trách nhiệm
 
@@ -1217,7 +1265,9 @@ Nếu đưa vào sản phẩm thật, ít nhất nên có:
 - policy chống impersonation,
 - quy trình xóa voice data khi được yêu cầu.
 
-Các biện pháp kỹ thuật không thay thế được phần consent và governance. ---
+Các biện pháp kỹ thuật không thay thế được phần consent và governance.
+
+---
 
 ## Kết luận
 

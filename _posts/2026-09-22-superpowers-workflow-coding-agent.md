@@ -254,7 +254,9 @@ Spec mặc định được lưu tại:
 docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md
 ~~~
 
-Ranh giới ở đây khá rõ: **đồng ý với ý tưởng chưa có nghĩa là đã đồng ý cho agent bắt đầu implementation**. ---
+Ranh giới ở đây khá rõ: **đồng ý với ý tưởng chưa có nghĩa là đã đồng ý cho agent bắt đầu implementation**.
+
+---
 
 ## 2. Writing Plans: biến design thành các task có thể thực thi
 
@@ -386,7 +388,9 @@ Mode này rẻ và đơn giản hơn. Một agent thực thi các task trong cù
 | Subagent-driven | context sạch theo task, review từng task | nhiều lượt agent hơn |
 | Native / executing-plans | ít overhead, nhanh và rẻ hơn | ít isolation và review độc lập hơn |
 
-Superpowers không giả định mọi task đều cần mode đắt nhất. ---
+Superpowers không giả định mọi task đều cần mode đắt nhất.
+
+---
 
 ## 5. TDD là rule cứng, không phải gợi ý
 
@@ -429,7 +433,9 @@ fix root cause
 confirm test passes
 ~~~
 
-Cách làm này chậm hơn việc patch ngay vài dòng, nhưng giảm khả năng agent tự thuyết phục rằng một thay đổi "có vẻ đúng". ---
+Cách làm này chậm hơn việc patch ngay vài dòng, nhưng giảm khả năng agent tự thuyết phục rằng một thay đổi "có vẻ đúng".
+
+---
 
 ## 6. Review không chỉ diễn ra ở cuối
 
@@ -446,7 +452,9 @@ implementer
 reviewer
 ~~~
 
-thay vì để một model vừa quyết định requirement, vừa viết code, vừa tự tuyên bố code của mình đúng. ---
+thay vì để một model vừa quyết định requirement, vừa viết code, vừa tự tuyên bố code của mình đúng.
+
+---
 
 ## 7. Verification trước khi nói "done"
 
@@ -626,7 +634,9 @@ Update:
 gemini extensions update superpowers
 ~~~
 
-Ngoài ra project còn có hướng dẫn cho Devin CLI, Factory Droid, GitHub Copilot CLI, Grok Build CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent và Muse. ---
+Ngoài ra project còn có hướng dẫn cho Devin CLI, Factory Droid, GitHub Copilot CLI, Grok Build CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent và Muse.
+
+---
 
 ## Cài xong thì sử dụng như thế nào?
 
@@ -806,7 +816,9 @@ Trước khi nói feature hoàn tất, agent chạy command thật, ví dụ:
 pytest -q
 ~~~
 
-Nếu output xác nhận toàn bộ test pass, lúc đó mới được báo success. ---
+Nếu output xác nhận toàn bộ test pass, lúc đó mới được báo success.
+
+---
 
 ## Ví dụ với bug fix
 
@@ -817,7 +829,7 @@ The checkout API sometimes creates two orders when the client retries after a ti
 Find the root cause and fix it.
 ~~~
 
-Superpowers nên ưu tiên <code>systematic-debugging</code> thay vì patch ngay. Flow mong muốn:
+Superpowers nên ưu tiên <code>systematic-debugging</code> thay vì patch ngay. Luồng xử lý nên đi như sau:
 
 ~~~text
 reproduce duplicate order
