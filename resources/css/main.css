@@ -1748,3 +1748,52 @@ html[data-theme="light"] .article-content pre,
 html[data-theme="light"] .article-content .highlight {
   color-scheme: dark;
 }
+
+
+/* Light theme readability refinements v2.2 */
+html[data-theme="light"] .eyebrow,
+html[data-theme="light"] .section-kicker,
+html[data-theme="light"] .section-heading h2,
+html[data-theme="light"] .text-link,
+html[data-theme="light"] .article-content a,
+html[data-theme="light"] .tag-post-group-head h3,
+html[data-theme="light"] .principles p > span {
+  color: #007b77;
+}
+
+html[data-theme="light"] .text-link:hover,
+html[data-theme="light"] .article-content a:hover {
+  color: #005f5c;
+}
+
+html[data-theme="light"] .section-heading > a,
+html[data-theme="light"] .section-heading > span {
+  color: #5a4bd8;
+}
+
+html[data-theme="light"] .section-heading > a:hover {
+  color: #3f32b7;
+}
+
+@media (min-width: 981px) {
+  html[data-theme="light"] .site-nav {
+    gap: 12px;
+  }
+
+  html[data-theme="light"] .site-nav a {
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  html[data-theme="light"] .site-nav a::after {
+    left: calc(50% + 14px);
+    right: calc(50% + 14px);
+  }
+
+  html[data-theme="light"] .site-nav a.active::after,
+  html[data-theme="light"] .site-nav a:hover::after {
+    left: 14px;
+    right: 14px;
+  }
+}
