@@ -1,22 +1,33 @@
-    <section>
-      <h2>categories</h2>
-      <div class="categories">
-        {% for link in site.categories %}
-          <a class="category" href="{{ site.baseurl }}/categories/{{ link | first | downcase }}">
-            {{ link | first | replace: '-', ' ' | capitalize }}
-          </a>
-        {% endfor %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <a href="{{ '/' | relative_url }}" class="brand brand-footer">
+          <span class="brand-prompt">&gt;_</span>
+          <span>
+            <strong>Personal Blog</strong>
+            <small>Write. Build. Share. Repeat.</small>
+          </span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/posts.html' | relative_url }}">Posts</a>
+          <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+          <a href="{{ '/about.html' | relative_url }}">About</a>
+          <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+        </nav>
+
+        <div class="footer-social">
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+          <a href="mailto:{{ site.email }}" aria-label="Email">@</a>
+        </div>
       </div>
-    </section>
-    <footer>
-      <div class="social">
-        <a href="https://github.com/cuongtobi/" title="Github" target="_blank" rel="nofollow noopener noreferrer">Github</a> |
-        <a href="https://www.linkedin.com/in/cuong-vuong-66b419208/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">LinkedIn</a> |
-        <a href="https://www.facebook.com/cuong1996/" title="Facebook" target="_blank" rel="nofollow noopener noreferrer">Facebook</a> |
-        <a href="https://twitter.com/cuongtobi29/" title="Twitter" target="_blank" rel="nofollow noopener noreferrer">Twitter</a> |
-        <a href="https://www.instagram.com/cuongtobi/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">Instagram</a>
+
+      <div class="footer-bottom">
+        <span>© {{ site.time | date: '%Y' }} {{ site.author.handle | default: 'cuongtobi' }}. All rights reserved.</span>
+        <span>Built with <span class="accent">♥</span> and curiosity.</span>
       </div>
-      <span class="copyright">@2022 by <a href="/">cuongtobi</a></span>
     </footer>
   </div>
 </body>
