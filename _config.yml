@@ -14,6 +14,7 @@ author:
   name: Cuong Vuong
   handle: cuongtobi
   role: Developer · Writer · Builder
+  twitter: cuongtobi29
   url: "https://cuongtobi.github.io/about.html"
 
 logo: /apple-touch-icon.png
@@ -34,8 +35,8 @@ social:
 
 # Google Search Console:
 # Paste only the verification token from the HTML meta-tag method here.
-# Example: google_site_verification: "abc123..."
-google_site_verification: ""
+# Example: google_search_console_verification: "abc123..."
+google_search_console_verification: ""
 
 paginate: 10
 paginate_path: "/page/:num"
@@ -54,8 +55,10 @@ defaults:
       path: ""
       type: posts
     values:
-      author: Cuong Vuong
       image: /assets/images/og-default.png
+
+exclude:
+  - SEO.md
 
 plugins:
   - jekyll-paginate
