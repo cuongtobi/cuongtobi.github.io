@@ -1,20 +1,63 @@
-title: Cuong Vuong — Developer Blog
+title: Cuong Vuong
+tagline: Developer Blog
 email: cuongvuong299@gmail.com
 description: >-
-  Blog cá nhân của cuongtobi về lập trình, công cụ, workflow, web development và những thứ tôi học được trong quá trình xây dựng sản phẩm.
+  Blog cá nhân của Cuong Vuong về lập trình, công cụ, AI workflow, web development
+  và những bài học thực tế trong quá trình xây dựng sản phẩm.
 baseurl: ""
 url: "https://cuongtobi.github.io"
 lang: vi
+locale: vi_VN
+timezone: Asia/Ho_Chi_Minh
+
 author:
-  name: Cuong
+  name: Cuong Vuong
   handle: cuongtobi
   role: Developer · Writer · Builder
+  url: "https://cuongtobi.github.io/about.html"
+
+logo: /apple-touch-icon.png
+image: /assets/images/og-default.png
+
 github_username: cuongtobi
+
+twitter:
+  username: cuongtobi29
+  card: summary_large_image
+
+social:
+  name: Cuong Vuong
+  links:
+    - https://github.com/cuongtobi
+    - https://www.linkedin.com/in/cuong-vuong-66b419208/
+    - https://twitter.com/cuongtobi29/
+
+# Google Search Console:
+# Paste only the verification token from the HTML meta-tag method here.
+# Example: google_site_verification: "abc123..."
+google_site_verification: ""
+
 paginate: 10
 paginate_path: "/page/:num"
 permalink: "/:title.html"
+
 markdown: kramdown
 highlighter: rouge
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.png
+      robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+  - scope:
+      path: ""
+      type: posts
+    values:
+      author: Cuong Vuong
+      image: /assets/images/og-default.png
+
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-seo-tag
