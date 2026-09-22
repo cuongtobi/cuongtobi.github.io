@@ -1,9 +1,11 @@
 {% include header.html %}
-<section>
-  <div class="text-center">
+<section class="error-page">
+  <div>
+    <p class="section-kicker">// 404</p>
     <h1>404</h1>
-    <p><strong>Page not found :(</strong></p>
-    <p>The requested page could not be found.</p>
+    <h2>Page not found.</h2>
+    <p>Trang bạn đang tìm không tồn tại hoặc đã được di chuyển.</p>
+    <a class="button button-primary" href="{{ '/' | relative_url }}">Back home →</a>
   </div>
 </section>
 {% include footer.html %}
