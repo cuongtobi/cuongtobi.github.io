@@ -4,6 +4,12 @@ title: 🚀 Vibe Code Cheat Sheet (ChatGPT Client)
 date: 2026-04-17
 author: cuongtobi
 categories: today-i-learned
+tags:
+  - chatgpt
+  - vibe-coding
+  - javascript
+  - php
+  - python
 description: Dành cho stack JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite
 ---
 > Dành cho stack: **JavaScript, PHP, Python, HTML, MySQL, MongoDB, SQLite**
@@ -193,7 +199,7 @@ Hãy:
 4. Giải thích ngắn
 5. Cách tránh lỗi
 
-````
+```
 
 ---
 
@@ -204,7 +210,7 @@ Hãy refactor đoạn code sau:
 
 ```[language]
 [paste code]
-````
+```
 
 Mục tiêu:
 
@@ -218,7 +224,7 @@ Yêu cầu:
 * không thêm thư viện
 * trả code hoàn chỉnh
 
-````
+```
 
 ---
 
@@ -229,7 +235,7 @@ Hãy review đoạn code sau:
 
 ```[language]
 [paste code]
-````
+```
 
 Đánh giá:
 
@@ -245,7 +251,7 @@ Trả:
 * mức độ (cao/trung bình/thấp)
 * đề xuất sửa
 
-````
+```
 
 ---
 
@@ -256,7 +262,7 @@ Hãy viết test cho module sau:
 
 ```[language]
 [paste code]
-````
+```
 
 Yêu cầu:
 
@@ -265,7 +271,7 @@ Yêu cầu:
 * error cases
 * code test hoàn chỉnh
 
-````
+```
 
 ---
 
@@ -285,7 +291,7 @@ Trả:
 5. Response
 6. Validation
 7. Error cases
-````
+```
 
 ---
 
@@ -412,4 +418,3 @@ Tạo CRUD sản phẩm bằng PHP + MySQL, validate name + price, dùng PDO.
 ---
 
 **Use daily. Ship fast. Save money.** 🚀
-
