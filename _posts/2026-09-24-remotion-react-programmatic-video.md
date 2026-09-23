@@ -21,21 +21,16 @@ tags:
   - developer-tools
 ---
 
-Nếu đã quen React, **Remotion** là một trong những cách dễ hiểu nhất để bước từ web development sang video generation: video được viết bằng component React, thời gian được biểu diễn bằng **frame**, còn animation là kết quả của code chạy tại frame hiện tại.
+Nếu đã làm React lâu, Remotion có cảm giác khá quen ngay từ lần mở project đầu tiên: video vẫn là component, props vẫn là props, chỉ có thêm một biến rất quan trọng — **frame hiện tại**.
 
-[Remotion](https://github.com/remotion-dev/remotion) mô tả chính mình là bộ **video tools for the agent era**. Project hỗ trợ ba cách làm việc cùng một codebase:
+[Remotion](https://github.com/remotion-dev/remotion) tự gọi mình là bộ “video tools for the agent era”, nhưng trước khi nói tới agent thì nền tảng của nó vẫn rất rõ: **React code là source of truth**. Scene có thể dùng JSX, CSS, SVG, canvas, Three.js hay component tự viết; Studio lo preview, còn CLI/renderer lo biến composition thành file video.
 
-- tạo video bằng coding agent,
-- chỉnh và preview tương tác,
-- tạo video programmatically từ dữ liệu.
+Vì vậy Remotion không giống một video editor được bọc bằng code. Nó giống một codebase frontend mà đầu ra cuối cùng là MP4, WebM, GIF, still hoặc media khác. Đây cũng là lý do project đặc biệt hợp với template, dữ liệu động và những hệ thống cần render lặp lại nhiều phiên bản.
 
-Điểm cốt lõi là **React code vẫn là source of truth**. Bạn có thể tạo scene bằng JSX, CSS, SVG, canvas, Three.js hoặc các component riêng; sau đó preview bằng Remotion Studio và render thành video bằng CLI, Node.js API hoặc hạ tầng serverless.
-
-Tại thời điểm tôi đọc repository cho bài viết này, package chính đang ở phiên bản **4.0.527**.
+Ở thời điểm tôi đọc repo, package chính đang ở phiên bản **4.0.527**.
 
 **Repository:** [github.com/remotion-dev/remotion](https://github.com/remotion-dev/remotion)
 
----
 
 ## Remotion thực chất là gì?
 
@@ -87,7 +82,6 @@ Cách tư duy này rất quan trọng: animation không phải một hiệu ứn
 
 Điều đó khiến một composition có thể render lại một cách có kiểm soát.
 
----
 
 ## Composition: đơn vị video cơ bản
 
@@ -137,7 +131,6 @@ frame 60   → 2.00s
 frame 180  → 6.00s
 ~~~
 
----
 
 ## Cách Remotion xử lý animation
 
@@ -208,7 +201,6 @@ const y = interpolate(progress, [0, 1], [80, 0]);
 
 Remotion không ép developer dùng một timeline GUI. Timeline chính là code.
 
----
 
 ## Kiến trúc repository
 
@@ -268,7 +260,6 @@ renderer
 MP4 / WebM / GIF / audio / still
 ~~~
 
----
 
 ## <code>remotion</code> core
 
@@ -299,7 +290,6 @@ Nó cung cấp các primitive để:
 
 Nếu làm video bằng Remotion, phần lớn code creative sẽ nằm quanh layer này.
 
----
 
 ## Remotion Studio
 
@@ -335,7 +325,6 @@ render
 
 Đối với developer, workflow này khá gần với frontend development.
 
----
 
 ## <code>@remotion/player</code>
 
@@ -369,7 +358,6 @@ MP4
 
 Đây là điểm mạnh lớn nếu đang xây sản phẩm video generation chứ không chỉ render một video riêng lẻ.
 
----
 
 ## <code>@remotion/renderer</code>
 
@@ -421,7 +409,6 @@ customer-video.mp4
 
 Đây là nền tảng cho video personalization và batch rendering.
 
----
 
 ## AWS Lambda và batch rendering
 
@@ -451,7 +438,6 @@ CDN / application
 
 README hiện nhấn mạnh use case **batch rendering**, bao gồm việc render khối lượng video rất lớn trên hạ tầng của chính bạn.
 
----
 
 ## Cài đặt Remotion
 
@@ -483,7 +469,6 @@ npm run dev
 
 Remotion Studio sẽ mở để bạn preview composition.
 
----
 
 ## Tạo project bằng coding agent
 
@@ -526,7 +511,6 @@ Agent có thể tạo component React, đăng ký composition và chạy Studio 
 
 Điểm này khiến Remotion rất phù hợp với workflow AI coding: thay vì sinh một file video trực tiếp, agent sinh **source code video** mà developer vẫn kiểm soát được.
 
----
 
 ## Ví dụ cơ bản: video title 6 giây
 
@@ -630,7 +614,6 @@ Video này có:
 → 6 giây
 ~~~
 
----
 
 ## Preview video
 
@@ -649,7 +632,6 @@ Trong Studio:
 
 Vì animation dựa trên frame nên bạn có thể nhảy trực tiếp tới bất kỳ frame nào.
 
----
 
 ## Render video
 
@@ -676,7 +658,6 @@ Ví dụ:
 
 Đây là bước đầu để biến template video thành generator.
 
----
 
 ## Ví dụ video generation theo dữ liệu
 
@@ -725,7 +706,6 @@ Ví dụ:
 - personalized sales video,
 - automatic podcast clips.
 
----
 
 ## Timeline bằng <code>Sequence</code>
 
@@ -767,7 +747,6 @@ Component trong Sequence nhận frame tương đối với thời điểm bắt 
 
 Điều này giúp scene có thể tái sử dụng mà không cần sửa logic animation bên trong.
 
----
 
 ## Media, caption, transition và 3D
 
@@ -800,107 +779,24 @@ Có thể kết hợp:
 
 Về mặt creative, giới hạn phần lớn nằm ở khả năng của browser và code bạn viết.
 
----
 
-## Điểm mạnh của Remotion
+## Remotion làm tốt ở đâu?
 
-### 1. React là authoring model
+Lợi thế lớn nhất là nó không bắt một team React phải đổi cách tổ chức code. Scene có thể tách thành component, nhận props, dùng TypeScript, chia package, test và refactor như phần còn lại của frontend. Với project có nhiều template, điều này đáng giá hơn một demo render đẹp nhưng khó maintain.
 
-Nếu team đã dùng React/TypeScript, learning curve tương đối thấp.
+Frame-based animation cũng làm logic khá minh bạch. Khi opacity, position hay scale là hàm của frame, việc scrub tới một thời điểm cụ thể và render lại trở nên dễ kiểm soát hơn. `Sequence`, `interpolate()` và `spring()` đều đi theo cùng một cách nghĩ này.
 
-Bạn không cần học một DSL video hoàn toàn mới.
+Một điểm mạnh khác là data đi thẳng vào composition. JSON, database, API, CMS hay một AI pipeline đều có thể trở thành input props. Từ đó Remotion không chỉ dùng để làm “một video”, mà có thể trở thành template engine hoặc backend tạo hàng nghìn biến thể.
 
-### 2. Animation deterministic theo frame
+Cuối cùng là hệ sinh thái render: local CLI, Node.js/Bun renderer, Player, Studio, Lambda và nhiều package media đã có sẵn. Với một project nhỏ bạn chỉ cần Studio + CLI; khi nhu cầu lớn lên vẫn còn đường để mở rộng mà không phải thay framework.
 
-Animation có thể được biểu diễn trực tiếp theo frame.
+## Những chỗ cần tính trước
 
-Điều này phù hợp với rendering và automation.
+React là lợi thế nếu hệ thống của bạn vốn đã dùng React, nhưng cũng là một dependency kiến trúc. Với một composition rất nhỏ hoặc một pipeline chỉ cần HTML thuần, Remotion có thể nhiều lớp hơn mức cần thiết.
 
-### 3. Component hóa video
+Video lớn lên cũng kéo theo đúng những vấn đề quen thuộc của software project: component reuse, asset management, font, timing, caching, render cost và error handling. Remotion cung cấp primitive tốt, chứ không tự giải quyết phần tổ chức code thay cho team.
 
-Các phần như:
-
-~~~text
-Title
-LowerThird
-ProductCard
-Chart
-Subtitle
-CTA
-~~~
-
-có thể trở thành component dùng lại.
-
-Video template nhờ đó có thể được maintain giống frontend codebase.
-
-### 4. Dữ liệu đi thẳng vào video
-
-Props có thể đến từ:
-
-- JSON,
-- database,
-- API,
-- CMS,
-- spreadsheet,
-- AI pipeline.
-
-Đây là lợi thế lớn của programmatic video.
-
-### 5. Ecosystem render khá đầy đủ
-
-Có nhiều hướng:
-
-~~~text
-local CLI
-Node.js renderer
-AWS Lambda
-client-side render
-server-side render
-~~~
-
-Nên có thể bắt đầu local rồi nâng dần lên production.
-
-### 6. Hợp với coding agent
-
-Repository hiện có Agent Skills và tài liệu riêng cho coding agent.
-
-Vì source là React, agent có thể đọc, sửa và refactor video giống code web.
-
----
-
-## Những điểm cần lưu ý
-
-### Remotion phụ thuộc vào React
-
-Đây vừa là ưu điểm vừa là trade-off.
-
-Nếu chỉ muốn HTML thuần hoặc một format timeline không phụ thuộc React, Remotion có thể nặng hơn cần thiết.
-
-### Video project vẫn là software project
-
-Khi video lớn dần, bạn vẫn cần xử lý:
-
-- architecture,
-- component reuse,
-- asset management,
-- timing,
-- font,
-- audio,
-- caching,
-- rendering cost,
-- error handling.
-
-Code video không tự động đơn giản chỉ vì dùng React.
-
-### Render nhiều video cần hạ tầng
-
-Render vài video local khá đơn giản.
-
-Render hàng nghìn video đòi hỏi queue, storage, retry, concurrency và observability.
-
-Remotion cung cấp Lambda và renderer API, nhưng production architecture vẫn cần được thiết kế.
-
----
+Render ở quy mô lớn là một câu chuyện riêng. Vài video local thì đơn giản; hàng nghìn render cần queue, storage, retry, concurrency và observability. Lambda và renderer API giúp phần execution, nhưng production architecture vẫn phải tự thiết kế.
 
 ## Lưu ý về license
 
@@ -923,7 +819,6 @@ Repository cũng ghi rằng license dự kiến có điều chỉnh ở Remotion
 
 Vì vậy nếu đưa Remotion vào sản phẩm công ty, nên kiểm tra license hiện hành trước khi triển khai production.
 
----
 
 ## Remotion phù hợp với bài toán nào?
 
@@ -959,84 +854,20 @@ Ví dụ:
 
 Nó cũng phù hợp khi team muốn xây **video editor riêng** hoặc **video SaaS**, vì Player và renderer có thể được nhúng vào application.
 
----
 
-## Remotion và AI coding
+## Remotion và coding agent
 
-Một điểm làm Remotion đáng chú ý trong năm 2026 là video generation bằng coding agent.
+Remotion hợp với coding agent đơn giản vì source vẫn là code mà agent đã quen đọc và sửa. Sau vòng đầu, những yêu cầu kiểu “scene 2 nhanh quá”, “subtitle lớn hơn” hay “cho chart xuất hiện từng cột” đều trở thành thay đổi cụ thể trong component thay vì một lần generate lại từ đầu.
 
-Agent đã viết React khá tốt.
-
-Nếu video cũng được biểu diễn bằng React, workflow có thể trở thành:
-
-~~~text
-prompt
-  ↓
-coding agent
-  ↓
-Remotion components
-  ↓
-Studio preview
-  ↓
-human review
-  ↓
-render
-~~~
-
-Sau vòng đầu, có thể yêu cầu:
-
-~~~text
-scene 2 nhanh quá
-subtitle lớn hơn
-đổi transition
-cho chart xuất hiện từng cột
-~~~
-
-Agent chỉ cần sửa code.
-
-Đây là một khác biệt lớn so với pipeline text-to-video dạng black box: source của video vẫn tồn tại, version control được, diff được và có thể tái sử dụng.
-
----
+Điểm tôi thích ở workflow này là video vẫn có source để review, diff và version control. Agent chỉ là người thao tác code nhanh hơn; nó không biến pipeline thành một black box.
 
 ## Kết luận
 
-Remotion biến việc tạo video thành một bài toán lập trình quen thuộc:
+Remotion hợp nhất khi bạn muốn coi video như một phần của hệ thống phần mềm, chứ không phải một file media làm xong rồi bỏ đó. Component, props, frame và renderer ghép lại thành một workflow mà developer React có thể hiểu khá nhanh.
 
-~~~text
-React
-+ components
-+ props
-+ frame
-+ animation
-+ media
-+ renderer
-= video
-~~~
+Với project nhỏ, chỉ cần `create-video`, Studio và một lệnh render là đủ để nắm cách hoạt động. Khi project lớn hơn, cùng codebase đó có thể tiến thành template engine, batch renderer, video API hoặc một công cụ nội bộ cho team content.
 
-Điểm mạnh nhất của project không chỉ là "React có thể render thành MP4".
-
-Giá trị thực nằm ở việc video trở thành **code có thể component hóa, truyền dữ liệu, version control và render tự động**.
-
-Nếu chỉ muốn thử nhanh:
-
-~~~bash
-npx create-video@latest --yes --blank my-video
-cd my-video
-npm i
-npm run dev
-~~~
-
-Sau đó tạo một composition, preview trong Studio và render:
-
-~~~bash
-npx remotion render MyVideo out/video.mp4
-~~~
-
-Với một project nhỏ, đó đã là đủ để hiểu triết lý của Remotion.
-
-Với project lớn hơn, cùng nền tảng này có thể mở rộng thành template engine, batch renderer, video API hoặc một hệ thống tạo video bằng AI agent.
-
----
+Điểm cần quyết định sớm nhất không phải “Remotion có làm được hiệu ứng này không?”, mà là: **mình có muốn video sống lâu dài trong một codebase React hay không?** Nếu câu trả lời là có, Remotion là một lựa chọn rất tự nhiên.
 
 ## Tài liệu tham khảo
 
