@@ -139,15 +139,18 @@ Có thể hiểu chúng theo luồng sau:
 ~~~text
 CLI / Studio / Agent
         ↓
-@hyperframes/core
-        ↓
-@hyperframes/engine
+composition HTML
         ↓
 @hyperframes/producer
+        ↓
+@hyperframes/engine
         ↓
 Chrome + FFmpeg
         ↓
 MP4 / WebM / MOV / ...
+
+@hyperframes/core = contract/runtime/parser dùng chung
+                    cho composition, engine và producer
 ~~~
 
 ### <code>hyperframes</code> CLI
