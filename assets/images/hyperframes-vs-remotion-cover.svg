@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">HyperFrames vs Remotion</title>
+  <desc id="desc">So sánh HTML-native HyperFrames với React-based Remotion cho programmatic video và AI coding agents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3f1eb"/>
+      <stop offset=".49" stop-color="#ebe9e2"/>
+      <stop offset=".5" stop-color="#0c1020"/>
+      <stop offset="1" stop-color="#151a32"/>
+    </linearGradient>
+    <linearGradient id="hf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111111"/>
+      <stop offset="1" stop-color="#3b3b38"/>
+    </linearGradient>
+    <linearGradient id="rem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4f9a"/>
+      <stop offset="1" stop-color="#616cff"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <g opacity=".16" stroke="#918f87">
+    <path d="M0 126H590M0 252H590M0 378H590M0 504H590"/>
+    <path d="M148 0V630M296 0V630M444 0V630"/>
+  </g>
+  <g opacity=".14" stroke="#6f789b">
+    <path d="M610 126H1200M610 252H1200M610 378H1200M610 504H1200"/>
+    <path d="M758 0V630M906 0V630M1054 0V630"/>
+  </g>
+
+  <rect x="589" width="22" height="630" fill="#ffffff" opacity=".7"/>
+  <text x="600" y="332" text-anchor="middle" fill="#555" font-family="Inter,Segoe UI,sans-serif" font-size="23" font-weight="900">VS</text>
+
+  <g transform="translate(65 60)">
+    <text x="0" y="0" fill="#77756f" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700">CUONG VUONG · AI PROJECTS</text>
+
+    <rect x="0" y="58" width="70" height="70" rx="16" fill="url(#hf)"/>
+    <text x="35" y="103" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono,monospace" font-size="24" font-weight="800">&lt;/&gt;</text>
+
+    <text x="92" y="106" fill="#101010" font-family="Inter,Segoe UI,sans-serif" font-size="52" font-weight="850" letter-spacing="-2.5">HyperFrames</text>
+    <text x="0" y="162" fill="#575650" font-family="Inter,Segoe UI,sans-serif" font-size="23" font-weight="650">HTML-native video</text>
+
+    <g transform="translate(0 208)" filter="url(#shadow)">
+      <rect width="465" height="238" rx="18" fill="#fff" stroke="#d1cfc7"/>
+      <rect width="465" height="40" rx="18" fill="#efeee9"/>
+      <path d="M0 40H465" stroke="#d7d5ce"/>
+      <circle cx="22" cy="20" r="5" fill="#aaa79e"/>
+      <circle cx="40" cy="20" r="5" fill="#c4c1b8"/>
+      <circle cx="58" cy="20" r="5" fill="#d3d0c7"/>
+      <text x="85" y="26" fill="#77746d" font-family="IBM Plex Mono,monospace" font-size="12">index.html</text>
+
+      <text x="24" y="78" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&lt;div</text>
+      <text x="68" y="78" fill="#55544f" font-family="IBM Plex Mono,monospace" font-size="14">data-start=</text>
+      <text x="166" y="78" fill="#16803a" font-family="IBM Plex Mono,monospace" font-size="14">"0"</text>
+      <text x="190" y="78" fill="#55544f" font-family="IBM Plex Mono,monospace" font-size="14">data-duration=</text>
+      <text x="309" y="78" fill="#16803a" font-family="IBM Plex Mono,monospace" font-size="14">"6"</text>
+      <text x="333" y="78" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&gt;</text>
+
+      <text x="42" y="112" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&lt;h1&gt;</text>
+      <text x="94" y="112" fill="#111" font-family="IBM Plex Mono,monospace" font-size="14">Launch day</text>
+      <text x="184" y="112" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&lt;/h1&gt;</text>
+
+      <text x="42" y="147" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&lt;video /&gt;</text>
+      <text x="42" y="181" fill="#7c3aed" font-family="IBM Plex Mono,monospace" font-size="14">&lt;audio /&gt;</text>
+
+      <rect x="24" y="205" width="417" height="9" rx="4.5" fill="#e7e5de"/>
+      <rect x="79" y="205" width="276" height="9" rx="4.5" fill="#111"/>
+    </g>
+
+    <g transform="translate(0 474)" font-family="Inter,Segoe UI,sans-serif">
+      <rect width="109" height="30" rx="15" fill="#fff" stroke="#c9c6bd"/>
+      <text x="54.5" y="20" text-anchor="middle" fill="#474640" font-size="11" font-weight="800">APACHE 2.0</text>
+      <rect x="120" width="121" height="30" rx="15" fill="#fff" stroke="#c9c6bd"/>
+      <text x="180.5" y="20" text-anchor="middle" fill="#474640" font-size="11" font-weight="800">AGENT-FIRST</text>
+    </g>
+  </g>
+
+  <g transform="translate(650 60)">
+    <text x="485" y="0" text-anchor="end" fill="#8790b2" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700">PROGRAMMATIC VIDEO</text>
+
+    <rect x="0" y="58" width="70" height="70" rx="16" fill="url(#rem)"/>
+    <path d="M21 75L53 93L21 111Z" fill="#fff"/>
+    <text x="92" y="106" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="52" font-weight="850" letter-spacing="-2.5">Remotion</text>
+    <text x="0" y="162" fill="#aeb6d4" font-family="Inter,Segoe UI,sans-serif" font-size="23" font-weight="650">React-based video</text>
+
+    <g transform="translate(0 208)" filter="url(#shadow)">
+      <rect width="485" height="238" rx="18" fill="#0b0f20" stroke="#39436d"/>
+      <rect width="485" height="40" rx="18" fill="#141a31"/>
+      <path d="M0 40H485" stroke="#30395e"/>
+      <circle cx="22" cy="20" r="5" fill="#ff4f9a"/>
+      <circle cx="40" cy="20" r="5" fill="#ffd166"/>
+      <circle cx="58" cy="20" r="5" fill="#64d98b"/>
+      <text x="85" y="26" fill="#929cbd" font-family="IBM Plex Mono,monospace" font-size="12">Video.tsx</text>
+
+      <text x="24" y="78" fill="#79def1" font-family="IBM Plex Mono,monospace" font-size="14">const</text>
+      <text x="72" y="78" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14"> frame = </text>
+      <text x="145" y="78" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">useCurrentFrame()</text>
+
+      <text x="24" y="113" fill="#79def1" font-family="IBM Plex Mono,monospace" font-size="14">const</text>
+      <text x="72" y="113" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14"> opacity = </text>
+      <text x="165" y="113" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">interpolate</text>
+      <text x="257" y="113" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14">(frame, ...)</text>
+
+      <text x="24" y="153" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">&lt;Composition</text>
+      <text x="42" y="181" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14">fps={30} durationInFrames={180}</text>
+      <text x="24" y="207" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">/&gt;</text>
+    </g>
+
+    <g transform="translate(0 474)" font-family="Inter,Segoe UI,sans-serif">
+      <rect width="124" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+      <text x="62" y="20" text-anchor="middle" fill="#dce3fb" font-size="11" font-weight="800">REACT</text>
+      <rect x="136" width="145" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+      <text x="208.5" y="20" text-anchor="middle" fill="#dce3fb" font-size="11" font-weight="800">MATURE ECOSYSTEM</text>
+    </g>
+  </g>
+
+  <g transform="translate(398 568)">
+    <rect width="404" height="36" rx="18" fill="#ffffff" stroke="#cbc9c2"/>
+    <text x="202" y="24" text-anchor="middle" fill="#222" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="800">HTML DOCUMENT  ←  VIDEO AS CODE  →  REACT APPLICATION</text>
+  </g>
+</svg>
