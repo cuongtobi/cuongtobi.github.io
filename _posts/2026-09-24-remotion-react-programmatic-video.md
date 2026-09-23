@@ -160,6 +160,7 @@ Sau đó có thể dùng một số primitive như:
 
 Một animation fade-in cơ bản:
 
+{% raw %}
 ~~~tsx
 import {interpolate, useCurrentFrame} from 'remotion';
 
@@ -173,6 +174,7 @@ export const Title = () => {
   return <h1 style={{opacity}}>Hello Remotion</h1>;
 };
 ~~~
+{% endraw %}
 
 Logic:
 
@@ -530,6 +532,7 @@ Agent có thể tạo component React, đăng ký composition và chạy Studio 
 
 Tạo component:
 
+{% raw %}
 ~~~tsx
 import {
   AbsoluteFill,
@@ -597,6 +600,7 @@ export const MyVideo = () => {
   );
 };
 ~~~
+{% endraw %}
 
 Đăng ký composition:
 
