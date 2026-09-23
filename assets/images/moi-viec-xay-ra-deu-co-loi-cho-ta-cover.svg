@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mọi Việc Xảy Ra Đều Có Lợi Cho Ta</title>
+  <desc id="desc">Ảnh bìa phong cách tĩnh lặng với con đường qua núi, mặt trời mọc và tiêu đề bài viết về trưởng thành sau nghịch cảnh.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5efe4"/>
+      <stop offset=".52" stop-color="#e9dfcd"/>
+      <stop offset="1" stop-color="#c9b89b"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2c26b"/>
+      <stop offset="1" stop-color="#dca04c"/>
+    </linearGradient>
+    <linearGradient id="mountain1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#66705f"/>
+      <stop offset="1" stop-color="#3f493e"/>
+    </linearGradient>
+    <linearGradient id="mountain2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9b9d85"/>
+      <stop offset="1" stop-color="#73765f"/>
+    </linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <circle cx="927" cy="150" r="94" fill="#f4d89d" opacity=".38" filter="url(#blur)"/>
+  <circle cx="927" cy="150" r="58" fill="url(#sun)" opacity=".96"/>
+
+  <path d="M0 360L145 254L262 326L390 205L525 338L666 236L810 348L960 250L1200 370V630H0Z" fill="url(#mountain2)" opacity=".58"/>
+  <path d="M0 432L181 306L318 396L492 284L640 418L807 308L963 405L1117 326L1200 382V630H0Z" fill="url(#mountain1)"/>
+
+  <path d="M530 630C555 555 598 503 657 462C712 424 764 397 817 353C769 423 737 479 724 530C714 570 716 602 728 630Z" fill="#d8c39d"/>
+  <path d="M552 630C574 562 611 514 662 478C707 446 749 421 790 385C752 437 727 481 716 524C706 565 708 601 719 630Z" fill="#f1e6d1" opacity=".76"/>
+
+  <g transform="translate(72 72)">
+    <text x="0" y="0" fill="#6b6358" font-family="Inter,Segoe UI,sans-serif" font-size="16" font-weight="700">CUONG VUONG · LIFE</text>
+
+    <rect x="0" y="48" width="92" height="4" rx="2" fill="#b88945"/>
+
+    <text x="0" y="126" fill="#22251f" font-family="Georgia,Times New Roman,serif" font-size="59" font-weight="700">
+      <tspan x="0" dy="0">Mọi Việc Xảy Ra</tspan>
+      <tspan x="0" dy="72">Đều Có Lợi Cho Ta</tspan>
+    </text>
+
+    <text x="0" y="307" fill="#615d55" font-family="Inter,Segoe UI,sans-serif" font-size="21">
+      <tspan x="0" dy="0">Thuận cảnh dưỡng người.</tspan>
+      <tspan x="0" dy="33">Nghịch cảnh cũng luyện người.</tspan>
+    </text>
+
+    <g transform="translate(0 406)">
+      <rect width="153" height="34" rx="17" fill="#ece4d5" stroke="#b9a98e"/>
+      <text x="76.5" y="22" text-anchor="middle" fill="#544d43" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">TRIẾT LÝ CUỘC SỐNG</text>
+      <rect x="166" width="104" height="34" rx="17" fill="#ece4d5" stroke="#b9a98e"/>
+      <text x="218" y="22" text-anchor="middle" fill="#544d43" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">TĨNH TÂM</text>
+    </g>
+  </g>
+
+  <g transform="translate(930 488)">
+    <circle cx="0" cy="0" r="42" fill="#1f241f" opacity=".78"/>
+    <path d="M0 -23C-9 -10 -14 4 -13 16C-5 9 4 5 14 4C8 -5 4 -14 0 -23Z" fill="#d9c08d"/>
+    <path d="M-18 18C-8 9 4 4 19 3" fill="none" stroke="#d9c08d" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <text x="1128" y="586" text-anchor="end" fill="#e8ddca" font-family="IBM Plex Mono,monospace" font-size="13">24 · 09 · 2026</text>
+</svg>
