@@ -92,44 +92,22 @@ Có những người rời đi khiến mình học được cách tự đứng. 
 
 Và cũng có những lần tưởng như vận đã xuống đáy, hóa ra chỉ là lúc cuộc đời buộc mình đổi hướng.
 
-Tôi không tin cuộc sống hứa với ai một con đường bằng phẳng. Có lúc mình sẽ gặp đúng người, đúng thời điểm và mọi thứ tiến rất nhanh. Cũng có lúc cố rất nhiều mà vẫn không được như ý.
+Tôi không nghĩ cuộc sống hứa với ai một con đường bằng phẳng. Có lúc gặp đúng người, đúng thời điểm, mọi thứ đi nhanh hơn mình tưởng. Cũng có lúc đã cố rất nhiều mà kết quả vẫn không như ý.
 
-Điều mình có thể mong không phải là “đừng bao giờ gặp chuyện xấu”, mà là khi chuyện xấu đến, mình vẫn còn đủ tỉnh táo để không tự phá phần còn lại của cuộc đời.
+Điều đáng giữ lúc ấy không phải một sự lạc quan gượng ép, mà là khả năng đừng để một chuyện xấu kéo theo thêm năm chuyện xấu khác. Buồn thì cứ buồn, nhưng đừng quyết định cả tương lai trong lúc đang giận hoặc tuyệt vọng. Khi cần làm lại thì vẫn còn sức để làm lại, và khi một thứ thật sự không thuộc về mình thì đủ tỉnh táo để buông.
 
-Có một cái đầu đủ sáng để nhìn sự việc cho rõ.
+Phúc hay họa vì thế không chỉ nằm ở bản thân sự việc. Nó còn nằm ở phần mình mang theo sau đó.
 
-Có một chút kiên nhẫn để không quyết định trong lúc nóng giận.
+Một cú vấp có thể khiến mình bớt chủ quan. Một lần tin nhầm người có thể dạy mình đặt ranh giới. Những năm tháng khó khăn có thể khiến mình biết quý tiền, quý thời gian và quý những người vẫn ở bên khi mọi thứ không thuận.
 
-Có đủ năng lực để làm lại khi cần.
+Có lẽ đó là cách tôi hiểu câu “mọi việc xảy ra đều có lợi cho ta” sau khi bỏ bớt phần màu hồng của nó.
 
-Và có đủ bản lĩnh để chấp nhận rằng không phải thứ gì mình muốn cũng nhất định thuộc về mình.
+Không phải mọi chuyện xảy ra đều tốt. Chỉ là chuyện đã xảy ra rồi thì mình vẫn có thể cố để nó không trở thành vô ích.
 
-Phúc hay họa nhiều khi không nằm hết trong bản thân sự việc. Nó còn nằm ở con người mình trở thành sau sự việc đó.
+Có lúc thuận lợi thì đi nhanh hơn một chút. Có lúc không thuận thì chậm lại, sửa thứ cần sửa rồi tiếp tục. Đến khi nhìn lại một quãng đủ dài, vài chuyện từng khiến mình mất ngủ có thể chỉ còn là một khúc rẽ.
 
-Nếu một lần vấp khiến mình bớt kiêu ngạo và làm việc chắc chắn hơn, nó không hoàn toàn vô ích.
+Không phải vì cuộc đời đã sắp sẵn mọi thứ cho mình.
 
-Nếu một lần bị phản bội khiến mình biết phân biệt tử tế với cả tin, cái giá ấy ít nhất đã để lại cho mình một sự tỉnh táo.
-
-Nếu những năm tháng khó khăn khiến mình biết quý tiền, quý thời gian, quý những người thật lòng ở bên cạnh, thì quãng đời ấy dù không dễ chịu vẫn không phải hoàn toàn bỏ phí.
-
-Có lẽ đó mới là ý nghĩa thực tế nhất của câu “mọi việc xảy ra đều có lợi cho ta”.
-
-Không phải vì mọi chuyện xảy ra đều tốt.
-
-Mà vì **mình có thể cố gắng để những gì đã xảy ra không trở thành vô ích.**
-
-Chuyện thuận lợi thì tận dụng nó để đi xa hơn.
-
-Chuyện không thuận thì dùng nó để nhìn lại, sửa mình và mạnh lên.
-
-Khi cơ hội đến, mình có đủ năng lực để nắm.
-
-Khi cơ hội chưa đến, mình vẫn có việc để làm.
-
-Và đến một lúc nào đó, khi nhìn lại một đoạn đường đủ dài, có thể mình sẽ nhận ra vài chuyện từng khiến mình mất ngủ hóa ra lại là điểm rẽ cần thiết.
-
-Không phải vì cuộc đời cố tình sắp đặt mọi thứ để chiều theo mình.
-
-Chỉ là mình đã đi qua nó, thay đổi từ nó, rồi tiếp tục sống.
+Chỉ vì mình đã đi qua nó, thay đổi một chút, rồi sống tiếp.
 
 Thế là đủ.
