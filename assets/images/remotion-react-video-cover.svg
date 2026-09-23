@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Remotion — React code to video</title>
+  <desc id="desc">Ảnh bìa minh họa React composition, frame timeline, Studio preview và video rendering trong Remotion.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080b16"/>
+      <stop offset="0.55" stop-color="#10152b"/>
+      <stop offset="1" stop-color="#151931"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4f9a"/>
+      <stop offset="1" stop-color="#ff1f6d"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#75e6ff"/>
+      <stop offset="1" stop-color="#5b77ff"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1065" cy="78" r="245" fill="#ff2878" opacity=".08"/>
+  <circle cx="135" cy="610" r="285" fill="#586cff" opacity=".10"/>
+
+  <g opacity=".15" stroke="#7780a8">
+    <path d="M0 126H1200M0 252H1200M0 378H1200M0 504H1200"/>
+    <path d="M200 0V630M400 0V630M600 0V630M800 0V630M1000 0V630"/>
+  </g>
+
+  <g transform="translate(68 66)">
+    <text x="0" y="0" fill="#8e97b9" font-family="Inter,Segoe UI,sans-serif" font-size="16" font-weight="700">CUONG VUONG · AI PROJECTS</text>
+
+    <g transform="translate(0 46)">
+      <path d="M16 4L58 29L16 54Z" fill="url(#pink)" filter="url(#glow)"/>
+      <path d="M36 16L70 36L36 56Z" fill="url(#blue)" opacity=".9"/>
+      <text x="92" y="58" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="75" font-weight="850" letter-spacing="-4">Remotion</text>
+    </g>
+
+    <text x="0" y="167" fill="#dbe1f7" font-family="Inter,Segoe UI,sans-serif" font-size="31" font-weight="650">React code → video</text>
+    <text x="0" y="207" fill="#8f99bb" font-family="IBM Plex Mono,monospace" font-size="15">components · frames · Studio · renderer · Lambda</text>
+
+    <g transform="translate(0 254)">
+      <rect width="475" height="232" rx="18" fill="#0d1122" stroke="#323b62"/>
+      <rect width="475" height="42" rx="18" fill="#151a31"/>
+      <path d="M0 42H475" stroke="#303959"/>
+      <circle cx="22" cy="21" r="5" fill="#ff4f9a"/>
+      <circle cx="41" cy="21" r="5" fill="#ffd166"/>
+      <circle cx="60" cy="21" r="5" fill="#64d98b"/>
+      <text x="87" y="27" fill="#929cbd" font-family="IBM Plex Mono,monospace" font-size="12">MyVideo.tsx</text>
+
+      <text x="24" y="78" fill="#7bdff2" font-family="IBM Plex Mono,monospace" font-size="14">const</text>
+      <text x="72" y="78" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14"> frame = </text>
+      <text x="145" y="78" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">useCurrentFrame()</text>
+      <text x="284" y="78" fill="#8892b0" font-family="IBM Plex Mono,monospace" font-size="14">;</text>
+
+      <text x="24" y="111" fill="#7bdff2" font-family="IBM Plex Mono,monospace" font-size="14">const</text>
+      <text x="72" y="111" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14"> opacity = </text>
+      <text x="164" y="111" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">interpolate</text>
+      <text x="256" y="111" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14">(frame,</text>
+      <text x="318" y="111" fill="#ffd166" font-family="IBM Plex Mono,monospace" font-size="14">[0,20]</text>
+      <text x="376" y="111" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14">,</text>
+
+      <text x="44" y="139" fill="#ffd166" font-family="IBM Plex Mono,monospace" font-size="14">[0,1]</text>
+      <text x="93" y="139" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14">);</text>
+
+      <text x="24" y="177" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">&lt;h1</text>
+      <text x="63" y="177" fill="#eef2ff" font-family="IBM Plex Mono,monospace" font-size="14"> style={{opacity}} </text>
+      <text x="205" y="177" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">&gt;</text>
+      <text x="220" y="177" fill="#ffffff" font-family="IBM Plex Mono,monospace" font-size="14">Hello</text>
+      <text x="264" y="177" fill="#ff79b0" font-family="IBM Plex Mono,monospace" font-size="14">&lt;/h1&gt;</text>
+
+      <rect x="24" y="202" width="427" height="9" rx="4.5" fill="#1e2541"/>
+      <rect x="24" y="202" width="292" height="9" rx="4.5" fill="url(#pink)"/>
+      <circle cx="316" cy="206.5" r="8" fill="#ffffff"/>
+      <text x="345" y="211" fill="#7f89aa" font-family="IBM Plex Mono,monospace" font-size="11">frame 124</text>
+    </g>
+  </g>
+
+  <g transform="translate(610 100)" font-family="Inter,Segoe UI,sans-serif">
+    <rect width="520" height="430" rx="24" fill="#0b0f20" stroke="#303a62" stroke-width="2"/>
+
+    <text x="32" y="45" fill="#ffffff" font-size="20" font-weight="750">PROGRAMMATIC VIDEO PIPELINE</text>
+    <text x="32" y="70" fill="#818bac" font-family="IBM Plex Mono,monospace" font-size="12">React is the source of truth</text>
+
+    <g transform="translate(32 99)">
+      <rect width="456" height="67" rx="13" fill="#141a32" stroke="#445078"/>
+      <circle cx="32" cy="33.5" r="17" fill="#20294a"/>
+      <text x="32" y="39" text-anchor="middle" fill="#7bdff2" font-size="18">R</text>
+      <text x="61" y="29" fill="#ffffff" font-size="17" font-weight="700">React Composition</text>
+      <text x="61" y="50" fill="#8b95b6" font-size="12">props · components · frame state</text>
+
+      <path d="M228 72V93" stroke="#657096" stroke-width="2"/>
+      <path d="M222 87L228 94L234 87" fill="none" stroke="#657096" stroke-width="2"/>
+
+      <g transform="translate(0 101)">
+        <rect width="456" height="67" rx="13" fill="#141a32" stroke="#445078"/>
+        <circle cx="32" cy="33.5" r="17" fill="#2e1b37"/>
+        <text x="32" y="39" text-anchor="middle" fill="#ff79b0" font-size="18">▶</text>
+        <text x="61" y="29" fill="#ffffff" font-size="17" font-weight="700">Studio / Player</text>
+        <text x="61" y="50" fill="#8b95b6" font-size="12">preview · scrub · interact</text>
+      </g>
+
+      <path d="M228 173V194" stroke="#657096" stroke-width="2"/>
+      <path d="M222 188L228 195L234 188" fill="none" stroke="#657096" stroke-width="2"/>
+
+      <g transform="translate(0 202)">
+        <rect width="456" height="67" rx="13" fill="#141a32" stroke="#445078"/>
+        <circle cx="32" cy="33.5" r="17" fill="#20294a"/>
+        <text x="32" y="39" text-anchor="middle" fill="#ffd166" font-size="17">⚙</text>
+        <text x="61" y="29" fill="#ffffff" font-size="17" font-weight="700">Renderer / Lambda</text>
+        <text x="61" y="50" fill="#8b95b6" font-size="12">CLI · Node.js · serverless</text>
+      </g>
+
+      <path d="M228 274V295" stroke="#657096" stroke-width="2"/>
+      <path d="M222 289L228 296L234 289" fill="none" stroke="#657096" stroke-width="2"/>
+
+      <g transform="translate(0 303)">
+        <rect width="456" height="67" rx="13" fill="url(#pink)" stroke="#ff79b0"/>
+        <text x="228" y="29" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="850">VIDEO OUTPUT</text>
+        <text x="228" y="51" text-anchor="middle" fill="#ffe3ee" font-size="12">MP4 · WebM · still · audio</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(68 570)" font-family="Inter,Segoe UI,sans-serif">
+    <rect width="105" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+    <text x="52.5" y="20" text-anchor="middle" fill="#dce3fb" font-size="12" font-weight="700">v4.0.527</text>
+    <rect x="118" width="101" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+    <text x="168.5" y="20" text-anchor="middle" fill="#dce3fb" font-size="12" font-weight="700">REACT</text>
+    <rect x="232" width="137" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+    <text x="300.5" y="20" text-anchor="middle" fill="#dce3fb" font-size="12" font-weight="700">FRAME-BASED</text>
+    <rect x="382" width="137" height="30" rx="15" fill="#11162a" stroke="#3a456d"/>
+    <text x="450.5" y="20" text-anchor="middle" fill="#dce3fb" font-size="12" font-weight="700">AGENT READY</text>
+  </g>
+
+  <text x="1130" y="594" text-anchor="end" fill="#7f88a8" font-family="IBM Plex Mono,monospace" font-size="13">24 · 09 · 2026</text>
+</svg>
