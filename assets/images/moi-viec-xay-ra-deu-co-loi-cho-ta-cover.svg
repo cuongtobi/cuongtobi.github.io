@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Mọi Việc Xảy Ra Đều Có Lợi Cho Ta</title>
-  <desc id="desc">Ảnh bìa phong cách tĩnh lặng với con đường qua núi, mặt trời mọc và tiêu đề bài viết về trưởng thành sau nghịch cảnh.</desc>
+  <title id="title">Có Những Chuyện, Sau Này Nhìn Lại Mới Thấy Là May</title>
+  <desc id="desc">Ảnh bìa phong cách tĩnh lặng với con đường qua núi, mặt trời mọc và tiêu đề bài viết về cách nhìn lại những biến cố trong cuộc sống.</desc>
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f5efe4"/>
@@ -39,21 +39,22 @@
 
     <rect x="0" y="48" width="92" height="4" rx="2" fill="#b88945"/>
 
-    <text x="0" y="126" fill="#22251f" font-family="Georgia,Times New Roman,serif" font-size="59" font-weight="700">
-      <tspan x="0" dy="0">Mọi Việc Xảy Ra</tspan>
-      <tspan x="0" dy="72">Đều Có Lợi Cho Ta</tspan>
+    <text x="0" y="122" fill="#22251f" font-family="Georgia,Times New Roman,serif" font-size="51" font-weight="700">
+      <tspan x="0" dy="0">Có Những Chuyện,</tspan>
+      <tspan x="0" dy="64">Sau Này Nhìn Lại</tspan>
+      <tspan x="0" dy="64">Mới Thấy Là May</tspan>
     </text>
 
-    <text x="0" y="307" fill="#615d55" font-family="Inter,Segoe UI,sans-serif" font-size="21">
-      <tspan x="0" dy="0">Thuận cảnh dưỡng người.</tspan>
-      <tspan x="0" dy="33">Nghịch cảnh cũng luyện người.</tspan>
+    <text x="0" y="360" fill="#615d55" font-family="Inter,Segoe UI,sans-serif" font-size="20">
+      <tspan x="0" dy="0">Không phải chuyện gì xảy ra cũng tốt.</tspan>
+      <tspan x="0" dy="32">Nhưng chuyện đã xảy ra không nhất thiết phải vô ích.</tspan>
     </text>
 
-    <g transform="translate(0 406)">
+    <g transform="translate(0 448)">
       <rect width="153" height="34" rx="17" fill="#ece4d5" stroke="#b9a98e"/>
       <text x="76.5" y="22" text-anchor="middle" fill="#544d43" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">TRIẾT LÝ CUỘC SỐNG</text>
       <rect x="166" width="104" height="34" rx="17" fill="#ece4d5" stroke="#b9a98e"/>
-      <text x="218" y="22" text-anchor="middle" fill="#544d43" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">TĨNH TÂM</text>
+      <text x="218" y="22" text-anchor="middle" fill="#544d43" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="700">TRƯỞNG THÀNH</text>
     </g>
   </g>
 
